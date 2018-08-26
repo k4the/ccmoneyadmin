@@ -1,0 +1,14 @@
+<div class="companyListContainer" *ngIf="!showDelete">
+  <div class="full right">
+      <button type="button" class="add" (click)="addProduct()">{{productLabels.addProduct}}</button>
+  </div>
+  <div *ngIf="products && products.length > 0">
+    <div *ngFor="let product of products" class="productHeader">
+      <span class="productItem title">{{product.name}}</span>
+      <a class="productItem link" *ngIf="isLoggedIn" [routerLink]="['/products/edit', product.id]"><i class="fas fa-pencil-alt"></i></a>
+      <a class="productItem link" *ngIf="isLoggedIn" (click)="openDeleteModal(product)"><i class="fas fa-trash-alt"></i></a>
+    </div>
+  </div>
+  <p *ngIf="products.length === 0">No products added yet</p>
+</div>
+<app-product-modal *ngIf="showDelete" (productModalResult)="deleteProduct($event)" [title]="title" [message]="message" [type]="type" [id]="productToDeleteId"></app-product-modal>

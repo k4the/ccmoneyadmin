@@ -1,0 +1,19 @@
+<div class="halfContainer">
+  <div class="half productSelect">
+    <button type="text" (click)="openSelect()">{{label}}
+      <span class="iconToggle">
+          <i class="linkIcon fas" [ngClass]="{ 'fa-chevron-down': !selectOpen, 'fa-chevron-up': selectOpen }"></i>
+      </span>
+    </button>
+    <div [hidden]="!selectOpen" *ngFor="let item of items" class="listItem" (click)="addSelectedItem(item)">
+      <span>{{item}}</span>
+      <span class="icon"><i class="fas fa-plus-circle"></i></span>
+    </div>
+  </div>
+  <div class="half productSelect selected">
+    <div *ngFor="let selectedItem of selectedItems" class="listItem" (click)="removeSelectedItem(selectedItem)">
+      <span>{{selectedItem}}</span>
+      <span class="icon"><i class="fas fa-trash-alt"></i></span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div id="overlay" (click)="cancel()"></div>
+<div class="productModal" [ngClass]="{ 'slideDown': modalOpen }">
+  <div class="{{type}}">
+    <div class="productModalHeader">
+      <span class="title">{{title}}</span>
+      <span class="right">
+        <i class="fas fa-exclamation-triangle" *ngIf="type === keys.danger"></i>
+        <i class="far fa-smile" *ngIf="type === keys.ok"></i>
+      </span>
+    </div>
+    <div class="productModalContent">
+      {{message}}
+    </div>
+    <div class="productModalFooter right">
+      <button type="button" class="delete right capitalize" *ngIf="type === keys.danger" (click)="ok()">{{keys.delete}}</button>
+      <button type="button" class="ok right upperCase" *ngIf="type === keys.ok" (click)="ok()">{{keys.ok}}</button>
+      <button type="button" class="cancel right capitalize" (click)="cancel()">{{keys.cancel}}</button>
+    </div>
+  </div>
+</div>

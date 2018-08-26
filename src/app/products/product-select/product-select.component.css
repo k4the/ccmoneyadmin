@@ -1,0 +1,75 @@
+.productSelect {
+  text-align: left;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #999;
+}
+
+.productSelect button {
+  background: none;
+  padding: 12px 10px;
+  border: 1px solid #ccc;
+  color: #7d7a7a;
+  height: auto;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  position: relative;
+}
+
+.productSelect .fa-chevron-down, .productSelect .fa-chevron-up {
+  color: #ccc;
+  font-size: 12px;
+  text-align: right;
+}
+
+.productSelect span {
+  display: inline-block;
+}
+
+.productSelect .icon,
+.productSelect .iconToggle {
+  width: 30px;
+  text-align: right;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}
+
+.productSelect .iconToggle {
+  top: 10px;
+}
+
+.productSelect .fa-plus-circle {
+  color: lightgreen;
+  font-size: 22px;
+}
+
+.productSelect .fa-trash-alt {
+  color: #F9C9C8;
+  font-size: 18px;
+}
+
+.productSelect .listItem {
+  padding: 10px;
+  border: 1px solid #ccc;
+  color: #999;
+  cursor: pointer;
+  border-bottom: none;
+  position: relative;
+}
+
+.productSelect .listItem:first-child {
+  border-top: none;
+}
+
+.productSelect .listItem:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.productSelect .listItem:hover, .productSelect button:hover {
+  background: aliceblue;
+}
+
+.productSelect.selected .listItem:first-child {
+  border-top: 1px solid #ccc;
+}

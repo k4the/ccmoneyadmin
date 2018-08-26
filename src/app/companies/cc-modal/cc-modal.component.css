@@ -1,0 +1,70 @@
+.ccModal {
+  width: 310px;
+  height: 200px;
+  top: -300px;
+  position: relative;
+  z-index: 10;
+  background: white;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+}
+
+.ccModal.slideDown {
+  /* transition: top 300ms; */
+  transition: top 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+  top: 30px;
+}
+
+.ccModalHeader {
+  background: red;
+  color: white;
+}
+
+.ccModalFooter {
+  background: grey;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: right;
+}
+
+.ccModalContent, .ccModalHeader, .ccModalFooter {
+  padding: 6px 12px;
+}
+
+.ccModalContent {
+  padding-top: 12px;
+}
+
+.ccModalContent, .ccModalHeader {
+  text-align: left;
+}
+
+.ccModal button {
+  margin-left: 12px;
+}
+
+.ccModal span {
+  display: inline-block;
+  width: 50%;
+}
+
+.ccModal .fa-exclamation-triangle {
+  color: white;
+  font-size: 36px;
+}
+
+.ccModal .title {
+  font-size: 14px;
+  position: relative;
+  top: -8px;
+}
+
+@media only screen and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
+  .ccModal {
+    width: 500px;
+    height: 300px;
+  }
+}

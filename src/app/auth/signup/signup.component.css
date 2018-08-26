@@ -1,0 +1,18 @@
+.signup {
+  width: 100%;
+  position: relative;
+}
+
+.signup form {
+  width: 320px;
+  position: absolute;
+  left: 10px;
+  top: 15px;
+}
+
+@media only screen and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
+  .signup form {
+    top: 60px;
+  }
+}
+

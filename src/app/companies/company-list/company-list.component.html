@@ -1,0 +1,14 @@
+<div class="companyListContainer" *ngIf="!showDelete">
+  <div class="full right">
+      <button type="button" class="add" (click)="addCompany()">{{companyLabels.addCompany}}</button>
+  </div>
+  <div *ngIf="companies && companies.length > 0">
+    <div *ngFor="let company of companies" class="companyHeader">
+      <span class="companyItem title">{{company.name}}</span>
+      <a class="companyItem link" *ngIf="isLoggedIn" [routerLink]="['/companies/edit', company.id]"><i class="fas fa-pencil-alt"></i></a>
+      <a class="companyItem link" *ngIf="isLoggedIn" (click)="openDeleteModal(company)"><i class="fas fa-trash-alt"></i></a>
+    </div>
+  </div>
+  <p *ngIf="companies.length === 0">No companies added yet</p>
+</div>
+<app-cc-modal *ngIf="showDelete" (ccModalResult)="deleteCompany($event)" [title]="title" [message]="message" [type]="type" [id]="companyToDeleteId"></app-cc-modal>

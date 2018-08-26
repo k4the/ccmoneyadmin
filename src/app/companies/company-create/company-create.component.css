@@ -1,0 +1,10 @@
+.pollRating {
+  display: flex;
+  flex-direction: row;
+}
+
+h4 {
+  display: block;
+  margin: 10px 12px 0 6px;
+  font-size: 14px;
+}

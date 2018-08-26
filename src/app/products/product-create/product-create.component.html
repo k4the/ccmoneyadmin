@@ -1,0 +1,71 @@
+<!-- <section class="card">
+  <form (submit)="onSaveProduct(productForm)" #productForm="ngForm">
+    <div class="productData">
+      <h4>Product</h4>
+      <input type="text" [ngModel]="product?.name" name="name" #name="ngModel" placeholder="{{productLabels.name}}" required>
+      <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+        {{ productMessages.noName }}
+      </div>
+      <input type="text" [ngModel]="product?.logoUrl" name="logoUrl" #logoUrl="ngModel" placeholder="{{productLabels.logoUrl}}"
+        required>
+      <div [hidden]="logoUrl.valid || logoUrl.pristine" class="alert alert-danger">
+        {{ productMessages.noLogoUrl }}
+      </div>
+      <input type="text" [ngModel]="product?.forumUrl" name="forumUrl" #forumUrl="ngModel" placeholder="{{productLabels.forumUrl}}">
+      <app-cc-select (ccSelectedItems)="setSelectedRegions($event)" [items]="regions"  [selectedItems]="selectedRegions" [label]="productLabels.regions"></app-cc-select>
+    </div>
+    <div class="pollRatingContainer">
+      <h4>{{productLabels.pollRating}}</h4>
+      <div class="pollRating">
+        <div class="labelOnTop">
+          <label>{{productLabels.great}}</label>
+          <input type="number" min="0" [ngModel]="product?.pollRating.great" name="great" #great="ngModel" placeholder="{{productLabels.great}}"
+            required>
+          <div [hidden]="great.valid || great.pristine" class="alert alert-danger">
+            {{ productMessages.noPollRating }}
+          </div>
+        </div>
+        <div class="labelOnTop">
+          <label>{{productLabels.ok}}</label>
+          <input type="number" min="0" [ngModel]="product?.pollRating.ok" name="ok" #ok="ngModel" placeholder="{{productLabels.ok}}" required>
+          <div [hidden]="ok.valid || ok.pristine" class="alert alert-danger">
+            {{ productMessages.noPollRating }}
+          </div>
+        </div>
+        <div class="labelOnTop">
+          <label>{{productLabels.poor}}</label>
+          <input type="number" min="0" [ngModel]="product?.pollRating.poor" name="poor" #poor="ngModel" placeholder="{{productLabels.poor}}"
+            required>
+          <div [hidden]="poor.valid || poor.pristine" class="alert alert-danger">
+            {{ productMessages.noPollRating }}
+          </div>
+        </div>
+        <div class="labelOnTop">
+          <label>{{productLabels.total}}</label>
+          <input type="number" min="0" [ngModel]="product?.pollRating.total" name="total" #total="ngModel" placeholder="{{productLabels.total}}"
+            required>
+          <div [hidden]="total.valid || total.pristine" class="alert alert-danger">
+            {{ productMessages.noPollRating }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="productMessage">
+      <div class="labelOnTop">
+        <label>{{productLabels.message}}</label>
+        <textarea name="message" rows="6" [ngModel]="product?.message" name="message" #message="ngModel">
+        </textarea>
+      </div>
+      <div class="labelOnTop">
+        <label>{{productLabels.warningMessage}}</label>
+        <textarea name="warningMessage" rows="6" [ngModel]="product?.warningMessage" name="warningMessage" #warningMessage="ngModel">
+        </textarea>
+      </div>
+    </div>
+    <button type="submit" class="primary">Save product</button>
+    <div [hidden]="productForm.valid || productForm.pristine" class="alert alert-danger">
+      {{ productMessages.allFields }}
+    </div>
+  </form>
+</section> -->
+Create Product

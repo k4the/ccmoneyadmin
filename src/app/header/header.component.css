@@ -1,0 +1,71 @@
+header {
+  max-width: 990px;
+  margin: 0 auto;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+}
+
+.navItem {
+  padding: 6px 10px;
+  color: grey;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.navItem:hover, .navItem.active {
+  background: #f4df8c;
+  color: white;
+}
+
+.logoutBut {
+  width: auto;
+  height: 30px;
+  font-size: 14px;
+  line-height: 1;
+  color: lightcoral;
+  background: white;
+}
+
+.logoutBut:hover {
+  background: #f4df8c;
+  color: white;
+}
+
+.rightBox, .leftBox {
+  display: flex;
+  flex-direction: row;
+}
+
+.leftBox {
+  width: 70%;
+}
+
+.rightBox {
+  text-align: right;
+  width: 30%;
+}
+
+@media only screen and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
+  .leftBox {
+    width: 80%;
+  }
+
+  .rightBox {
+    text-align: right;
+    width: 20%;
+  }
+}
+
+@media only screen and (min-device-width: 960px) and (-webkit-min-device-pixel-ratio: 1) {
+  .leftBox {
+    width: 90%;
+  }
+
+  .rightBox {
+    text-align: right;
+    width: 10%;
+  }
+}

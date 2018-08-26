@@ -1,0 +1,75 @@
+.ccSelect {
+  text-align: left;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #999;
+}
+
+.ccSelect button {
+  background: none;
+  padding: 12px 10px;
+  border: 1px solid #ccc;
+  color: #7d7a7a;
+  height: auto;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  position: relative;
+}
+
+.ccSelect .fa-chevron-down, .ccSelect .fa-chevron-up {
+  color: #ccc;
+  font-size: 12px;
+  text-align: right;
+}
+
+.ccSelect span {
+  display: inline-block;
+}
+
+.ccSelect .icon,
+.ccSelect .iconToggle {
+  width: 30px;
+  text-align: right;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}
+
+.ccSelect .iconToggle {
+  top: 10px;
+}
+
+.ccSelect .fa-plus-circle {
+  color: lightgreen;
+  font-size: 22px;
+}
+
+.ccSelect .fa-trash-alt {
+  color: #F9C9C8;
+  font-size: 18px;
+}
+
+.ccSelect .listItem {
+  padding: 10px;
+  border: 1px solid #ccc;
+  color: #999;
+  cursor: pointer;
+  border-bottom: none;
+  position: relative;
+}
+
+.ccSelect .listItem:first-child {
+  border-top: none;
+}
+
+.ccSelect .listItem:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.ccSelect .listItem:hover, .ccSelect button:hover {
+  background: aliceblue;
+}
+
+.ccSelect.selected .listItem:first-child {
+  border-top: 1px solid #ccc;
+}

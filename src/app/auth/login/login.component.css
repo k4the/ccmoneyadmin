@@ -1,0 +1,18 @@
+.login {
+  width: 100%;
+  position: relative;
+  background: none;
+}
+
+.login form {
+  width: 320px;
+  position: absolute;
+  right: 10px;
+  top: 15px;
+}
+
+@media only screen and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
+  .login form {
+    top: 160px;
+  }
+}

@@ -1,0 +1,70 @@
+<section class="card">
+  <form (submit)="onSaveCompany(companyForm)" #companyForm="ngForm">
+    <div class="companyData">
+      <h4>Company</h4>
+      <input type="text" [ngModel]="company?.name" name="name" #name="ngModel" placeholder="{{companyLabels.name}}" required>
+      <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+        {{ companyMessages.noName }}
+      </div>
+      <input type="text" [ngModel]="company?.logoUrl" name="logoUrl" #logoUrl="ngModel" placeholder="{{companyLabels.logoUrl}}"
+        required>
+      <div [hidden]="logoUrl.valid || logoUrl.pristine" class="alert alert-danger">
+        {{ companyMessages.noLogoUrl }}
+      </div>
+      <input type="text" [ngModel]="company?.forumUrl" name="forumUrl" #forumUrl="ngModel" placeholder="{{companyLabels.forumUrl}}">
+      <app-cc-select (ccSelectedItems)="setSelectedRegions($event)" [items]="regions"  [selectedItems]="selectedRegions" [label]="companyLabels.regions"></app-cc-select>
+    </div>
+    <div class="pollRatingContainer">
+      <h4>{{companyLabels.pollRating}}</h4>
+      <div class="pollRating">
+        <div class="labelOnTop">
+          <label>{{companyLabels.great}}</label>
+          <input type="number" min="0" [ngModel]="company?.pollRating.great" name="great" #great="ngModel" placeholder="{{companyLabels.great}}"
+            required>
+          <div [hidden]="great.valid || great.pristine" class="alert alert-danger">
+            {{ companyMessages.noPollRating }}
+          </div>
+        </div>
+        <div class="labelOnTop">
+          <label>{{companyLabels.ok}}</label>
+          <input type="number" min="0" [ngModel]="company?.pollRating.ok" name="ok" #ok="ngModel" placeholder="{{companyLabels.ok}}" required>
+          <div [hidden]="ok.valid || ok.pristine" class="alert alert-danger">
+            {{ companyMessages.noPollRating }}
+          </div>
+        </div>
+        <div class="labelOnTop">
+          <label>{{companyLabels.poor}}</label>
+          <input type="number" min="0" [ngModel]="company?.pollRating.poor" name="poor" #poor="ngModel" placeholder="{{companyLabels.poor}}"
+            required>
+          <div [hidden]="poor.valid || poor.pristine" class="alert alert-danger">
+            {{ companyMessages.noPollRating }}
+          </div>
+        </div>
+        <div class="labelOnTop">
+          <label>{{companyLabels.total}}</label>
+          <input type="number" min="0" [ngModel]="company?.pollRating.total" name="total" #total="ngModel" placeholder="{{companyLabels.total}}"
+            required>
+          <div [hidden]="total.valid || total.pristine" class="alert alert-danger">
+            {{ companyMessages.noPollRating }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="companyMessage">
+      <div class="labelOnTop">
+        <label>{{companyLabels.message}}</label>
+        <textarea name="message" rows="6" [ngModel]="company?.message" name="message" #message="ngModel">
+        </textarea>
+      </div>
+      <div class="labelOnTop">
+        <label>{{companyLabels.warningMessage}}</label>
+        <textarea name="warningMessage" rows="6" [ngModel]="company?.warningMessage" name="warningMessage" #warningMessage="ngModel">
+        </textarea>
+      </div>
+    </div>
+    <button type="submit" class="primary">Save company</button>
+    <div [hidden]="companyForm.valid || companyForm.pristine" class="alert alert-danger">
+      {{ companyMessages.allFields }}
+    </div>
+  </form>
+</section>
