@@ -12,9 +12,9 @@
       {{message}}
     </div>
     <div class="ccModalFooter right">
+        <button type="button" class="cancel right capitalize" (click)="cancel()">{{keys.cancel}}</button>
       <button type="button" class="delete right capitalize" *ngIf="type === keys.danger" (click)="ok()">{{keys.delete}}</button>
       <button type="button" class="ok right upperCase" *ngIf="type === keys.ok" (click)="ok()">{{keys.ok}}</button>
-      <button type="button" class="cancel right capitalize" (click)="cancel()">{{keys.cancel}}</button>
     </div>
   </div>
 </div>

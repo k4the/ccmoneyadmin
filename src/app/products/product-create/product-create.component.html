@@ -1,5 +1,5 @@
 <!-- <section class="card">
-  <form (submit)="onSaveProduct(productForm)" #productForm="ngForm">
+  <form #productForm="ngForm">
     <div class="productData">
       <h4>Product</h4>
       <input type="text" [ngModel]="product?.name" name="name" #name="ngModel" placeholder="{{productLabels.name}}" required>
@@ -66,6 +66,9 @@
     <div [hidden]="productForm.valid || productForm.pristine" class="alert alert-danger">
       {{ productMessages.allFields }}
     </div>
+    <div class="productButtons right">
+      <button type="button" class="cancel right capitalize" (click)="onCancel(productForm)">{{productsLabels.cancel}}</button>
+      <button type="button" class="ok" (click)="onSaveCompany(productForm)">{{productsLabels.saveCompany}}</button>
+    </div>
   </form>
 </section> -->
-Create Product

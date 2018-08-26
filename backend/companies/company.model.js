@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const PollRating = require('./pollRating.model');
 
 const companySchema = mongoose.Schema({
   name: { type: String, required: true, unique: true },
@@ -8,7 +7,14 @@ const companySchema = mongoose.Schema({
   warningMessage: { type: String, default: null },
   regions: { type: [String], required: true },
   isBig: { type: Boolean, default: false },
-  pollRating: PollRating.schema
+  pollRating: {
+    great: { type: Number, default: 0 },
+    ok: { type: Number, default: 0 },
+    poor: { type: Number, default: 0 },
+    total: { type: Number, default: 0 },
+    feedbackMessage: { type: String, default: null },
+    limitedFeedbackMessage: { type: String, default: null }
+  }
 });
 module.exports = mongoose.model('Company', companySchema);
 

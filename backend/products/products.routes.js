@@ -3,10 +3,10 @@ const router = express.Router();
 const ProductsController = require('./products.controller');
 const checkAuth = require('../shared/check-auth');
 
-router.get('', checkAuth, ProductsController.getCompanies);
-router.get('/:id', checkAuth, ProductsController.getCompanyById);
-router.post('', checkAuth, ProductsController.addCompany);
-router.delete('/:id', checkAuth, ProductsController.deleteCompany);
-router.put('/:id', checkAuth, ProductsController.modifyCompany);
+router.get('', checkAuth, ProductsController.getProducts);
+router.get('/:id', checkAuth, ProductsController.getProductById);
+router.post('', checkAuth, ProductsController.addProduct);
+router.delete('/:id', checkAuth, ProductsController.deleteProduct);
+router.put('/:id', checkAuth, ProductsController.modifyProduct);
 
 module.exports = router;

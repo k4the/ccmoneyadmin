@@ -1,5 +1,7 @@
+<div id="overlay" *ngIf="isLoading"></div>
+<app-loading [isLoading]="isLoading"></app-loading>
 <section class="card">
-  <form (submit)="onSaveCompany(companyForm)" #companyForm="ngForm">
+  <form #companyForm="ngForm">
     <div class="companyData">
       <h4>Company</h4>
       <input type="text" [ngModel]="company?.name" name="name" #name="ngModel" placeholder="{{companyLabels.name}}" required>
@@ -12,7 +14,7 @@
         {{ companyMessages.noLogoUrl }}
       </div>
       <input type="text" [ngModel]="company?.forumUrl" name="forumUrl" #forumUrl="ngModel" placeholder="{{companyLabels.forumUrl}}">
-      <app-cc-select (ccSelectedItems)="setSelectedRegions($event)" [items]="regions"  [selectedItems]="selectedRegions" [label]="companyLabels.regions"></app-cc-select>
+      <app-cc-select (onSelectedItems)="setSelectedRegions($event)" [items]="regions" [selectedItems]="selectedRegions" [label]="companyLabels.regions"></app-cc-select>
     </div>
     <div class="pollRatingContainer">
       <h4>{{companyLabels.pollRating}}</h4>
@@ -27,7 +29,8 @@
         </div>
         <div class="labelOnTop">
           <label>{{companyLabels.ok}}</label>
-          <input type="number" min="0" [ngModel]="company?.pollRating.ok" name="ok" #ok="ngModel" placeholder="{{companyLabels.ok}}" required>
+          <input type="number" min="0" [ngModel]="company?.pollRating.ok" name="ok" #ok="ngModel" placeholder="{{companyLabels.ok}}"
+            required>
           <div [hidden]="ok.valid || ok.pristine" class="alert alert-danger">
             {{ companyMessages.noPollRating }}
           </div>
@@ -62,9 +65,12 @@
         </textarea>
       </div>
     </div>
-    <button type="submit" class="primary">Save company</button>
     <div [hidden]="companyForm.valid || companyForm.pristine" class="alert alert-danger">
       {{ companyMessages.allFields }}
+    </div>
+    <div class="companyButtons right">
+      <button type="button" class="cancel right capitalize" (click)="onCancel(companyForm)">{{companyLabels.cancel}}</button>
+      <button type="button" class="ok" (click)="onSaveCompany(companyForm)">{{companyLabels.saveCompany}}</button>
     </div>
   </form>
 </section>

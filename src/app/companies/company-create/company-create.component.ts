@@ -1,8 +1,8 @@
 import { CompanyMessages, CompanyLabels } from '../companies.constants';
-import { Keys, ErrorMessages } from './../../global.constants';
+import { Keys } from './../../global.constants';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { CompaniesService } from '../companies.service';
 import { Company } from '../company.model';
@@ -22,27 +22,23 @@ export class CompanyCreateComponent implements OnInit {
   companyLabels = CompanyLabels;
   selectedRegions: Array<string> = [];
   regionsError = false;
+  isLoading = false;
   private mode = Keys.create;
   private companyId: string = null;
 
   constructor(
     public companiesService: CompaniesService,
     public companyMapper: CompanyMapper,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.regions = Regions;
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('companyId')) {
-        this.mode = Keys.edit;
         this.companyId = paramMap.get('companyId');
-        this.companiesService
-          .getCompany(this.companyId)
-          .subscribe(companyData => {
-            this.company = this.companyMapper.mapFromJson(companyData);
-            this.selectedRegions = this.company.regions;
-          });
+        this.getCompanyById();
       } else {
         this.mode = Keys.create;
         this.companyId = null;
@@ -51,8 +47,29 @@ export class CompanyCreateComponent implements OnInit {
     });
   }
 
+  getCompanyById(): void {
+    this.isLoading = true;
+    this.mode = Keys.edit;
+    this.companiesService.getCompany(this.companyId).subscribe(
+      companyData => {
+        this.company = companyData;
+        this.selectedRegions = this.company.regions;
+        this.isLoading = false;
+      },
+      err => {
+        console.log(err);
+        this.isLoading = false;
+      }
+    );
+  }
+
   setSelectedRegions(regions: Array<string>): void {
     this.selectedRegions = regions;
+  }
+
+  onCancel(form: NgForm): void {
+    form.resetForm();
+    this.router.navigate(['/companies']);
   }
 
   onSaveCompany(form: NgForm): void {
@@ -90,11 +107,29 @@ export class CompanyCreateComponent implements OnInit {
       isBig: form.value.isBig,
       pollRating: pollRating
     };
-    // this.companyMapper.mapToJson(company);
+    this.isLoading = true;
     if (this.mode === Keys.create) {
-      this.companiesService.addCompany(company);
+      this.companiesService.addCompany(company).subscribe(
+        () => {
+          this.isLoading = false;
+          this.router.navigate(['/companies']);
+        },
+        err => {
+          console.log(err);
+          this.isLoading = false;
+        }
+      );
     } else {
-      this.companiesService.updateCompany(this.companyId, company);
+      this.companiesService.updateCompany(this.companyId, company).subscribe(
+        () => {
+          this.isLoading = false;
+          this.router.navigate(['/companies']);
+        },
+        err => {
+          this.isLoading = false;
+          console.log(err);
+        }
+      );
     }
     form.resetForm();
   }

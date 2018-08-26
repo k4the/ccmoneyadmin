@@ -22,13 +22,20 @@ exports.getCompanyById = (req, res, next) => {
 
 exports.addCompany = (req, res, next) => {
   const company = new Company({
-    name: req.body.name,
-    logoUrl: req.body.logoUrl,
-    message: req.body.message,
-    warningMessage: req.body.warningMessage,
-    regions: req.body.regions,
-    isBig: req.body.isBig,
-    pollRating: req.body.pollRating
+    name: req.sanitize(req.body.name),
+    logoUrl: req.sanitize(req.body.logoUrl),
+    message: req.sanitize(req.body.message),
+    warningMessage: req.sanitize(req.body.warningMessage),
+    regions: req.sanitize(req.body.regions),
+    isBig: req.sanitize(req.body.isBig),
+    pollRating: {
+      great: req.sanitize(req.body.pollRating.great),
+      ok: req.sanitize(req.body.pollRating.ok),
+      poor: req.sanitize(req.body.pollRating.poor),
+      total: req.sanitize(req.body.pollRating.total),
+      feedbackMessage: req.sanitize(req.body.pollRating.feedbackMessage),
+      limitedFeedbackMessage: req.sanitize(req.body.pollRating.limitedFeedbackMessage)
+    }
   });
   company.save().then(createdCompany => {
     res.status(201).json({
@@ -47,13 +54,20 @@ exports.deleteCompany = (req, res, next) => {
 exports.modifyCompany = (req, res, next) => {
   const company = new Company({
     _id: req.params.id,
-    name: req.body.name,
-    logoUrl: req.body.logoUrl,
-    message: req.body.message,
-    warningMessage: req.body.warningMessage,
-    regions: req.body.regions,
-    isBig: req.body.isBig,
-    pollRating: req.body.pollRating
+    name: req.sanitize(req.body.name),
+    logoUrl: req.sanitize(req.body.logoUrl),
+    message: req.sanitize(req.body.message),
+    warningMessage: req.sanitize(req.body.warningMessage),
+    regions: req.sanitize(req.body.regions),
+    isBig: req.sanitize(req.body.isBig),
+    pollRating: {
+      great: req.sanitize(req.body.pollRating.great),
+      ok: req.sanitize(req.body.pollRating.ok),
+      poor: req.sanitize(req.body.pollRating.poor),
+      total: req.sanitize(req.body.pollRating.total),
+      feedbackMessage: req.sanitize(req.body.pollRating.feedbackMessage),
+      limitedFeedbackMessage: req.sanitize(req.body.pollRating.limitedFeedbackMessage)
+    }
   });
   Company.updateOne({ _id: req.params.id }, company).then(result => {
     if (result) {

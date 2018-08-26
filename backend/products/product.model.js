@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Fuel = require('./fuel.model');
+// const Fuel = require('./fuel.model');
 const Company = require('../companies/company.model');
 
 const productSchema = mongoose.Schema({
@@ -14,8 +14,6 @@ const productSchema = mongoose.Schema({
   discountRate: { type: Number, default: 0 },
   message: { type: String, default: null },
   rateType: { type: String, required: true },
-  company: Company.schema,
-  gas: Fuel.schema,
-  electricity: Fuel.schema
+  company: {type: Schema.Types.ObjectId, ref: 'Company', required: true}
 });
 module.exports = mongoose.model('Product', productSchema);

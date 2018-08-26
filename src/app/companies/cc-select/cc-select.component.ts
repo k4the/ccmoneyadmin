@@ -5,15 +5,12 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: './cc-select.component.html',
   styleUrls: ['./cc-select.component.css']
 })
+
 export class CcSelectComponent implements OnInit {
-  @Output()
-  ccSelectedItems = new EventEmitter<Array<string>>();
-  @Input('items')
-  items: Array<string>;
-  @Input('selectedItems')
-  selectedItems: Array<string>;
-  @Input('label')
-  label: string;
+  @Output() onSelectedItems: EventEmitter<Array<string>> = new EventEmitter();
+  @Input('items') items: Array<string>;
+  @Input('selectedItems') selectedItems: Array<string>;
+  @Input('label') label: string;
 
   selectOpen = false;
 
@@ -31,7 +28,7 @@ export class CcSelectComponent implements OnInit {
       this.selectedItems.push(item);
     }
     this.selectOpen = false;
-    this.ccSelectedItems.next(this.selectedItems);
+    this.onSelectedItems.emit(this.selectedItems);
   }
 
   removeSelectedItem(item: string): void {
@@ -39,6 +36,6 @@ export class CcSelectComponent implements OnInit {
     if (found !== -1) {
         this.selectedItems.splice(found, 1);
       }
-      this.ccSelectedItems.next(this.selectedItems);
+      this.onSelectedItems.emit(this.selectedItems);
     }
 }

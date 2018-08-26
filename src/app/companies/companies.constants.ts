@@ -26,5 +26,6 @@ export const CompanyLabels = {
   addCompany: 'Add company',
   deleteCompany: 'Delete company',
   editCompany: 'Edit company',
-  saveCompany: 'Save company'
+  saveCompany: 'Save company',
+  cancel: 'Cancel'
 };

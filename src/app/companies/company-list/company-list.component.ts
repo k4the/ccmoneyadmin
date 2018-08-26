@@ -23,9 +23,9 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   title: string = null;
   message: string = null;
   type: string = null;
-    companyToDeleteId: string = null;
+  companyToDeleteId: string = null;
+  isLoading = false;
 
-  private companiesSub: Subscription;
   private authStatusSub: Subscription;
 
   constructor(
@@ -35,12 +35,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.companiesService.getCompanies();
-    this.companiesSub = this.companiesService
-      .getCompanyUpdateListener()
-      .subscribe((companies: Company[]) => {
-        this.companies = companies;
-      });
+    this.getCompanies();
     this.isLoggedIn = this.authService.getIsAuth();
     this.authStatusSub = this.authService
       .getAuthStatusListener()
@@ -48,6 +43,20 @@ export class CompanyListComponent implements OnInit, OnDestroy {
         this.isLoggedIn = isAuthenticated;
       });
   }
+
+  getCompanies = () => {
+    this.isLoading = true;
+    this.companiesService.getCompanies().subscribe(
+      data => {
+        this.companies = [...data];
+        this.isLoading = false;
+      },
+      err => {
+        console.log(err);
+        this.isLoading = false;
+      }
+    );
+  };
 
   addCompany(): void {
     this.router.navigate(['/companies/create']);
@@ -64,7 +73,20 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   deleteCompany(item: any): void {
     this.closeDelete();
     if (item.result) {
-      this.companiesService.deleteCompany(item.id);
+      this.isLoading = true;
+      this.companiesService.deleteCompany(item.id).subscribe(
+        data => {
+          const updatedCompanies = this.companies.filter(
+            company => company.id !== item.id
+          );
+          this.companies = [...updatedCompanies];
+          this.isLoading = false;
+        },
+        err => {
+          console.log(err);
+          this.isLoading = false;
+        }
+      );
     }
     this.companyToDeleteId = null;
   }
@@ -75,7 +97,6 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.companiesSub.unsubscribe();
     this.authStatusSub.unsubscribe();
   }
 }

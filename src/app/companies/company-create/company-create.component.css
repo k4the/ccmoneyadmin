@@ -8,3 +8,7 @@ h4 {
   margin: 10px 12px 0 6px;
   font-size: 14px;
 }
+
+.companyButtons .cancel {
+  margin-right: 10px;
+}
