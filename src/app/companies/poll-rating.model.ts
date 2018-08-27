@@ -1,5 +1,4 @@
 export class PollRating {
-  id: string;
   great: number;
   ok: number;
   poor: number;
@@ -8,7 +7,6 @@ export class PollRating {
   limitedFeedbackMessage?: string;
 
   constructor(pollRating: PollRating) {
-    this.id = pollRating.id;
     this.great = pollRating.great;
     this.ok = pollRating.ok;
     this.poor = pollRating.poor;

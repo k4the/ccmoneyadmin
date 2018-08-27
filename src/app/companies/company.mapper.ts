@@ -36,7 +36,6 @@ export class CompanyMapper {
 
   mapPollRatingFromJson(json: any): PollRating {
     const pollRating = {
-      id: json._id,
       great: json.great ? json.great : 0,
       ok: json.ok ? json.ok : 0,
       poor: json.poor ? json.poor : 0,
@@ -49,7 +48,6 @@ export class CompanyMapper {
 
   mapPollRatingToJson(pollRating: PollRating): any {
     return {
-      _id: pollRating.id ? pollRating.id : null,
       great: pollRating.great ? pollRating.great : 0,
       ok: pollRating.ok ? pollRating.ok : 0,
       poor: pollRating.poor ? pollRating.poor : 0,

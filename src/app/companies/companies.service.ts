@@ -5,8 +5,9 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Company } from './company.model';
 import { CompanyMapper } from './company.mapper';
+import { CompanyUrl } from './companies.constants';
 
-const companiesUrl = environment.apiUrl + '/companies/';
+const companiesUrl = environment.apiUrl + CompanyUrl +  '/';
 
 @Injectable({ providedIn: 'root' })
 export class CompaniesService {

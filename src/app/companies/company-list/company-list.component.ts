@@ -1,5 +1,5 @@
 import { Keys } from './../../global.constants';
-import { CompanyLabels, CompanyMessages } from '../companies.constants';
+import { CompanyLabels, CompanyMessages, CompanyCreateUrl } from '../companies.constants';
 import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -59,7 +59,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   };
 
   addCompany(): void {
-    this.router.navigate(['/companies/create']);
+    this.router.navigate([CompanyCreateUrl]);
   }
 
   openDeleteModal(company: Company): void {

@@ -1,0 +1,41 @@
+<form #fuelForm="ngForm" class="fuelForm">
+  <table>
+    <tr>
+      <th>{{ labels.item }}</th>
+      <th>{{ labels.price }}</th>
+    </tr>
+    <tr>
+      <td>{{ labels.yearlyCost }}</td>
+      <td>
+        <input [ngClass]="{ 'error': !yearlyCost.valid && !yearlyCost.pristine }" type="number" min="1" [ngModel]="fuel.yearlyCost"
+          name="yearlyCost" #yearlyCost="ngModel" (change)="setFuel(fuelForm)" required>
+      </td>
+    </tr>
+    <tr>
+      <td>{{ labels.unitRate }}</td>
+      <td>
+        <input [ngClass]="{ 'error': !unitRate.valid && !unitRate.pristine }" type="number" min="1" [ngModel]="fuel.unitRate" name="unitRate"
+          #unitRate="ngModel" (change)="setFuel(fuelForm)" required>
+      </td>
+    </tr>
+    <tr>
+      <td>{{ labels.discountRate }}</td>
+      <td>
+        <input type="number" min="1" [ngModel]="fuel.discountRate" name="discountRate" #discountRate="ngModel" (change)="setFuel(fuelForm)">
+      </td>
+    </tr>
+    <tr>
+      <td>{{ labels.standingCharge }}</td>
+      <td>
+        <input [ngClass]="{ 'error': !standingCharge.valid && !standingCharge.pristine }" type="number" min="1" [ngModel]="fuel.standingCharge"
+          name="standingCharge" #standingCharge="ngModel" (change)="setFuel(fuelForm)" required>
+      </td>
+    </tr>
+    <tr>
+      <td>{{ labels.economy7 }}</td>
+      <td>
+        <input type="number" min="1" [ngModel]="fuel.economy7" name="economy7" #economy7="ngModel" (change)="setFuel(fuelForm)">
+      </td>
+    </tr>
+  </table>
+</form>

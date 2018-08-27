@@ -1,14 +1,18 @@
 import { Fuel } from './../fuel.model';
-import { ProductMessages, ProductLabels } from '../products.constants';
+import {
+  ProductMessages,
+  ProductLabels,
+  ProductUrl
+} from '../products.constants';
 import { Keys, ErrorMessages } from './../../global.constants';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { ProductsService } from '../products.service';
 import { Product } from '../product.model';
-import { ProductMapper } from '../product.mapper';
-import { Pricing } from '../pricing.model';
+import { CompaniesService } from '../../companies/companies.service';
+import { Company } from '../../companies/company.model';
 
 @Component({
   selector: 'app-product-create',
@@ -16,34 +20,110 @@ import { Pricing } from '../pricing.model';
   styleUrls: ['./product-create.component.css']
 })
 export class ProductCreateComponent implements OnInit {
-  product: Product;
+  companies: Array<Company> = [];
+  keys = Keys;
+  product: Product = this.productsService.getEmptyProduct();
   productMessages = ProductMessages;
   productLabels = ProductLabels;
-  private mode = Keys.create;
+  isLoading = false;
+  selectCompanyOpen = false;
+  selectedCompany: Company = null;
+  selectedCompanyLabel: String = this.productLabels.company;
+  private mode = this.keys.create;
   private productId: string = null;
 
   constructor(
-    public productsService: ProductsService,
-    public productMapper: ProductMapper,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private productsService: ProductsService,
+    private companiesService: CompaniesService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('productId')) {
-        this.mode = Keys.edit;
+        this.mode = this.keys.edit;
         this.productId = paramMap.get('productId');
-        this.productsService
-          .getProduct(this.productId)
-          .subscribe(productData => {
-            this.product = this.productMapper.mapFromJson(productData);
-          });
       } else {
-        this.mode = Keys.create;
+        this.mode = this.keys.create;
         this.productId = null;
-        this.product = null;
       }
+      this.getCompanies();
     });
+  }
+
+  setToggleItem(item: any): void {
+    if (item) {
+      switch (item.label) {
+        case this.productLabels.isGreen:
+          this.product.isGreen = item.isOn;
+          break;
+
+          case this.productLabels.isTopPick:
+          this.product.isTopPick = item.isOn;
+          break;
+      }
+    }
+  }
+
+  openSelectCompany(): void {
+    this.selectCompanyOpen = !this.selectCompanyOpen;
+  }
+
+  setSelectedCompany(company: Company): void {
+    this.selectCompanyOpen = false;
+    this.product.company = company;
+    this.selectedCompanyLabel = company.name;
+  }
+
+  setFuelItems(item: any): void {
+    if (item.type === this.productLabels.gas) {
+      this.product.gas = item.fuel;
+    }
+    if (item.type === this.productLabels.electricity) {
+      this.product.electricity = item.fuel;
+    }
+  }
+
+  getCompanies(): void {
+    this.isLoading = true;
+    this.companiesService.getCompanies().subscribe(
+      data => {
+        this.companies = [...data];
+        this.isLoading = false;
+        if (this.mode === this.keys.edit) {
+          this.getProductById();
+        } else {
+          // this.product = this.productsService.getEmptyProduct();
+        }
+      },
+      err => {
+        console.log(err);
+        this.isLoading = false;
+      }
+    );
+  }
+
+  getProductById(): void {
+    this.isLoading = true;
+    this.mode = Keys.edit;
+    this.productsService.getProduct(this.productId).subscribe(
+      productData => {
+        this.product = productData;
+        this.isLoading = false;
+        this.selectedCompanyLabel = this.product.company.name;
+        this.selectedCompany = this.product.company;
+      },
+      err => {
+        console.log(err);
+        this.isLoading = false;
+      }
+    );
+  }
+
+  onCancel(form: NgForm): void {
+    form.resetForm();
+    this.router.navigate([ProductUrl]);
   }
 
   onSaveProduct(form: NgForm): void {
@@ -52,61 +132,37 @@ export class ProductCreateComponent implements OnInit {
     }
     let product: Product = null;
     let id: string = null;
-    let gasId: string = null;
-    let electricityId: string = null;
-    let gasPricingId: string = null;
-    let electricityPricingId: string = null;
-    let gas: Fuel = null;
-    let electricity: Fuel = null;
-
-    if (this.mode === Keys.edit) {
-      id = this.productId;
-      if (form.value.hasGas && product.gas.id) {
-        gasId = product.gas.id;
-        gasPricingId = product.gas.pricing.id;
-        gas = this.setGasFuel(form, gasId, gasPricingId);
-      }
-      if (form.value.hasElectricity && product.electricity.id) {
-        electricityId = product.electricity.id;
-        electricityPricingId = product.electricity.pricing.id;
-        electricity = this.setElectricityFuel(
-          form,
-          electricityId,
-          electricityPricingId
-        );
-      }
-      if (form.value.hasGas && !product.gas.id) {
-        gasId = null;
-        gasPricingId = null;
-        gas = this.setGasFuel(form, gasId, gasPricingId);
-      }
-      if (form.value.hasElectricity && !product.electricity.id) {
-        electricityId = null;
-        electricityPricingId = null;
-        electricity = this.setElectricityFuel(
-          form,
-          electricityId,
-          electricityPricingId
-        );
-      }
+    this.mode === this.keys.edit ? (id = this.productId) : (id = null);
+    product = this.setProduct(form, id);
+    this.isLoading = true;
+    if (this.mode === Keys.create) {
+      this.productsService.addProduct(product).subscribe(
+        () => {
+          this.isLoading = false;
+          this.router.navigate([ProductUrl]);
+        },
+        err => {
+          console.log(err);
+          this.isLoading = false;
+        }
+      );
     } else {
-      id = null;
-      if (form.value.hasGas) {
-        gasId = null;
-        gasPricingId = null;
-        gas = this.setGasFuel(form, gasId, gasPricingId);
-      }
-      if (form.value.hasElectricity) {
-        electricityId = null;
-        electricityPricingId = null;
-        electricity = this.setElectricityFuel(
-          form,
-          electricityId,
-          electricityPricingId
-        );
-      }
+      this.productsService.updateProduct(this.productId, product).subscribe(
+        () => {
+          this.isLoading = false;
+          this.router.navigate([ProductUrl]);
+        },
+        err => {
+          this.isLoading = false;
+          console.log(err);
+        }
+      );
     }
-    product = {
+    form.resetForm();
+  }
+
+  private setProduct(form: NgForm, id: string): Product {
+    return {
       id: id,
       name: form.value.name,
       isDual: form.value.isDual,
@@ -117,53 +173,12 @@ export class ProductCreateComponent implements OnInit {
       cashback: form.value.isCashback,
       earlyExitFee: form.value.earlyExitFee,
       message: form.value.message,
-      discountRate: form.value.discountRate,
+      paymentMethod: form.value.paymentMethod,
       rateType: form.value.rateType,
+      fixedFor: form.value.fixedFor,
       company: form.value.company,
-      gas: gas,
-      electricity: electricity
-    };
-    if (this.mode === Keys.create) {
-      this.productsService.addProduct(product);
-    } else {
-      this.productsService.updateProduct(this.productId, product);
-    }
-    form.resetForm();
-  }
-
-  private setGasFuel(form: any, fuelId: string, pricingId: string): Fuel {
-    return {
-      id: fuelId,
-      name: form.value.gas.name,
-      pricing: {
-        id: pricingId,
-        costYearly: form.value.gas.costYearly,
-        costMonthly: form.value.gas.costMonthly,
-        economy7: form.value.gas.economy7,
-        unitRate: form.value.gas.unitRate,
-        discountRate: form.value.gas.discountRate,
-        standingCharge: form.value.gas.standingCharge
-      }
-    };
-  }
-
-  private setElectricityFuel(
-    form: any,
-    fuelId: string,
-    pricingId: string
-  ): Fuel {
-    return {
-      id: fuelId,
-      name: form.value.electricity.name,
-      pricing: {
-        id: pricingId,
-        costYearly: form.value.electricity.costYearly,
-        costMonthly: form.value.electricity.costMonthly,
-        economy7: form.value.electricity.economy7,
-        unitRate: form.value.electricity.unitRate,
-        discountRate: form.value.electricity.discountRate,
-        standingCharge: form.value.electricity.standingCharge
-      }
+      gas: this.product.gas,
+      electricity: this.product.electricity
     };
   }
 }

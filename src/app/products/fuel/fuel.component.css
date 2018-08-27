@@ -1,0 +1,31 @@
+.fuelForm table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.fuelForm td, .fuelForm th {
+  border: 1px solid #dddddd;
+  text-align: left;
+}
+
+.fuelForm th {
+  padding: 8px 12px;
+}
+
+.fuelForm td {
+  padding: 6px 12px 0 12px;
+}
+
+.fuelForm tr:nth-child(even) {
+  background-color: #F4F4F4;
+}
+
+.fuelForm input[type=number] {
+  width: 80px;
+  padding: 6px 12px;
+}
+
+/* .fuelForm input[type=number].error {
+  border: 1px solid red;
+} */

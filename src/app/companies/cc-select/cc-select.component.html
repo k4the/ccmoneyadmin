@@ -5,9 +5,11 @@
           <i class="linkIcon fas" [ngClass]="{ 'fa-chevron-down': !selectOpen, 'fa-chevron-up': selectOpen }"></i>
       </span>
     </button>
-    <div [hidden]="!selectOpen" *ngFor="let item of items" class="listItem" (click)="addSelectedItem(item)">
-      <span>{{item}}</span>
-      <span class="icon"><i class="fas fa-plus-circle"></i></span>
+    <div [hidden]="!selectOpen" class="ccSelectList">
+      <div *ngFor="let item of items" class="listItem" (click)="addSelectedItem(item)">
+        <span>{{item}}</span>
+        <span class="icon"><i class="fas fa-plus-circle"></i></span>
+      </div>
     </div>
   </div>
   <div class="half ccSelect selected">

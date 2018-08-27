@@ -1,7 +1,16 @@
 export const ProductMessages = {
   noName: 'Please enter a name',
   allFields: 'Please enter all required fields',
-  deleteSure: 'Are you sure you want to delete'
+  deleteSure: 'Are you sure you want to delete',
+  noProductName: 'Please enter a product name',
+  noFuel: 'Please choose a fuel',
+  noCompany: 'Please choose a company',
+  noYearlyCost: 'Please enter a yearly cost',
+  noUnitRate: 'Please enter a unit rate',
+  noEconomy7: 'Please enter an economy 7 rate',
+  noDiscountRate: 'Please enter a discount rate',
+  noStandingCharge: 'Please enter a standing charge',
+  noPaymentMethod: 'Please choose a payment method'
 };
 
 export const ProductLabels = {
@@ -32,5 +41,11 @@ export const ProductLabels = {
   addProduct: 'Add product',
   deleteProduct: 'Delete product',
   editProduct: 'Edit product',
-  saveProduct: 'Save product'
+  saveProduct: 'Save product',
+  item: 'Item',
+  price: 'Price'
 };
+
+export const ProductUrl = '/products';
+export const ProductCreateUrl = '/products/create';
+export const ProductIdRouteParam = 'productId';

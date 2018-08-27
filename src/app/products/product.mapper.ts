@@ -1,5 +1,4 @@
 import { Product } from './product.model';
-import { Pricing } from './pricing.model';
 import { PollRating } from './../companies/poll-rating.model';
 import { Fuel } from './fuel.model';
 import { Company } from '../companies/company.model';
@@ -7,7 +6,7 @@ import { Company } from '../companies/company.model';
 export class ProductMapper {
   constructor() {}
 
-  mapFromJson(json: any): Product {
+  mapProductFromJson(json: any): Product {
     const product = {
       id: json._id,
       name: json.name,
@@ -16,11 +15,13 @@ export class ProductMapper {
       hasElectricity: json.hasElectricity,
       isGreen: json.isGreen ? json.isGreen : false,
       isTopPick: json.isTopPick ? json.isTopPick : false,
-      message: json.message ? json.message : null,
       cashback: json.cashback,
       earlyExitFee: json.earlyExitFee,
       discountRate: json.discountRate,
       rateType: json.rateType,
+      fixedFor: json.fixedFor,
+      paymentMethod: json.paymentMethod,
+      message: json.message ? json.message : null,
       company: json.company ? this.mapCompanyFromJson(json.company) : null,
       gas: json.gas ? this.mapFuelFromJson(json.gas) : null,
       electricity: json.electricity ? this.mapFuelFromJson(json.electricity) : null,
@@ -28,7 +29,7 @@ export class ProductMapper {
     return new Product(product);
   }
 
-  mapToJson(product: Product): any {
+  mapProductToJson(product: Product): any {
     return {
       _id: product.id ? product.id : null,
       name: product.name,
@@ -37,11 +38,12 @@ export class ProductMapper {
       hasElectricity: product.hasElectricity,
       isGreen: product.isGreen ? product.isGreen : false,
       isTopPick: product.isTopPick ? product.isTopPick : false,
-      message: product.message ? product.message : null,
       cashback: product.cashback,
       earlyExitFee: product.earlyExitFee,
-      discountRate: product.discountRate,
       rateType: product.rateType,
+      fixedFor: product.fixedFor,
+      paymentMethod: product.paymentMethod,
+      message: product.message ? product.message : null,
       company: product.company ? this.mapCompanyToJson(product.company) : null,
       gas: product.gas ? this.mapFuelToJson(product.gas) : null,
       electricity: product.electricity ? this.mapFuelToJson(product.electricity) : null,
@@ -56,7 +58,7 @@ export class ProductMapper {
       forumUrl: json.forumUrl ? json.forumUrl : null,
       message: json.message ? json.message : null,
       warningMessage: json.warningMessage ? json.warningMessage : null,
-      regions: json.regions,
+      regions: json.regions ? json.regions : [],
       isBig: json.isBig,
       pollRating: json.pollRating ? this.mapPollRatingFromJson(json.pollRating) : null
     };
@@ -71,7 +73,7 @@ export class ProductMapper {
       forumUrl: company.forumUrl ? company.forumUrl : null,
       message: company.message ? company.message : null,
       warningMessage: company.warningMessage ? company.warningMessage : null,
-      regions: company.regions,
+      regions: company.regions ? company.regions : [],
       isBig: company.isBig,
       pollRating: company.pollRating ? this.mapPollRatingToJson(company.pollRating) : null
     };
@@ -79,7 +81,6 @@ export class ProductMapper {
 
   mapPollRatingFromJson(json: any): PollRating {
     const pollRating = {
-      id: json._id,
       great: json.great ? json.great : 0,
       ok: json.ok ? json.ok : 0,
       poor: json.poor ? json.poor : 0,
@@ -92,7 +93,6 @@ export class ProductMapper {
 
   mapPollRatingToJson(pollRating: PollRating): any {
     return {
-      _id: pollRating.id ? pollRating.id : null,
       great: pollRating.great ? pollRating.great : 0,
       ok: pollRating.ok ? pollRating.ok : 0,
       poor: pollRating.poor ? pollRating.poor : 0,
@@ -104,43 +104,24 @@ export class ProductMapper {
 
   mapFuelFromJson(json: any): Fuel {
     const fuel = {
-      id: json._id,
-      name: json.name,
-      pricing: json.pricing ? json.pricing : null
-    };
-    return new Fuel(fuel);
-  }
-
-  mapFuelToJson(fuel: Fuel): any {
-    return {
-      _id: fuel.id ? fuel.id : null,
-      name: fuel.name,
-      pricing: fuel.pricing ? this.mapPricingToJson(fuel.pricing) : null
-    };
-  }
-
-  mapPricingFromJson(json: any): Pricing {
-    const pricing = {
-      id: json._id,
-      costYearly: json.costYearly,
+      yearlyCost: json.yearlyCost,
       costMonthly: json.costMonthly ? json.costMonthly : null,
       economy7: json.economy7,
       unitRate: json.unitRate,
       discountRate: json.discountRate ? json.discountRate : null,
       standingCharge: json.standingCharge ? json.standingCharge : null
     };
-    return new Pricing(pricing);
+    return new Fuel(fuel);
   }
 
-  mapPricingToJson(pricing: Pricing): any {
+  mapFuelToJson(fuel: Fuel): any {
     return {
-      _id: pricing.id,
-      costYearly: pricing.costYearly,
-      costMonthly: pricing.costMonthly ? pricing.costMonthly : null,
-      economy7: pricing.economy7,
-      unitRate: pricing.unitRate,
-      discountRate: pricing.discountRate ? pricing.discountRate : null,
-      standingCharge: pricing.standingCharge ? pricing.standingCharge : null
+      yearlyCost: fuel.yearlyCost,
+      costMonthly: fuel.costMonthly ? fuel.costMonthly : null,
+      economy7: fuel.economy7,
+      unitRate: fuel.unitRate,
+      discountRate: fuel.discountRate ? fuel.discountRate : null,
+      standingCharge: fuel.standingCharge ? fuel.standingCharge : null
     };
   }
 }

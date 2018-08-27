@@ -1,13 +1,17 @@
-import { Pricing } from './pricing.model';
-
 export class Fuel {
-  id?: string;
-  name: string;
-  pricing: Pricing;
+  yearlyCost: number;
+  costMonthly?: number;
+  economy7: number;
+  unitRate: number;
+  discountRate?: number;
+  standingCharge?: number;
 
   constructor(fuel: Fuel) {
-    this.id = fuel.id ? fuel.id : null;
-    this.name = fuel.name;
-    this.pricing = fuel.pricing ? new Pricing(fuel.pricing) : null;
+    this.yearlyCost = fuel.yearlyCost;
+    this.costMonthly = fuel.costMonthly ? fuel.costMonthly : null;
+    this.economy7 = fuel.economy7;
+    this.unitRate = fuel.unitRate;
+    this.discountRate = fuel.discountRate ? fuel.discountRate : null;
+    this.standingCharge = fuel.standingCharge ? fuel.standingCharge : null;
   }
 }

@@ -8,6 +8,8 @@ import { ProductCreateComponent } from './product-create/product-create.componen
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductModalComponent } from './product-modal/product-modal.component';
 import { ProductSelectComponent } from './product-select/product-select.component';
+import { FuelComponent } from './fuel/fuel.component';
+import { ProductToggleComponent } from './product-toggle/product-toggle.component';
 
 @NgModule({
   imports: [
@@ -17,7 +19,7 @@ import { ProductSelectComponent } from './product-select/product-select.componen
     ProductsRoutingModule
   ],
   declarations: [
-    ProductCreateComponent, ProductListComponent, ProductModalComponent, ProductSelectComponent
+    ProductCreateComponent, ProductListComponent, ProductModalComponent, ProductSelectComponent, FuelComponent, ProductToggleComponent
   ],
   providers: [ProductMapper]
 })

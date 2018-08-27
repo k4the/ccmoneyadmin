@@ -11,9 +11,10 @@ export class Product {
   isTopPick: boolean;
   cashback: number;
   earlyExitFee: number;
-  message: string;
-  discountRate: boolean;
   rateType: string;
+  fixedFor: number;
+  paymentMethod: string;
+  message: string;
   company: Company;
   gas: Fuel;
   electricity: Fuel;
@@ -28,8 +29,9 @@ export class Product {
     this.isTopPick = product.isTopPick ? product.isTopPick : false;
     this.cashback = product.cashback ? product.cashback : 0;
     this.earlyExitFee = product.earlyExitFee ? product.earlyExitFee : 0;
-    this.discountRate = product.discountRate;
     this.rateType = product.rateType;
+    this.fixedFor = product.fixedFor;
+    this.paymentMethod = product.paymentMethod;
     this.message = product.message;
     this.company = product.company ? new Company(product.company) : null;
     this.gas = product.gas ? new Fuel(product.gas) : null;

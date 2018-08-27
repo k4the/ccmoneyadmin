@@ -29,3 +29,6 @@ export const CompanyLabels = {
   saveCompany: 'Save company',
   cancel: 'Cancel'
 };
+
+export const CompanyUrl = '/companies';
+export const CompanyCreateUrl = '/companies/create';

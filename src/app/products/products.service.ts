@@ -1,87 +1,131 @@
+import { PollRating } from './../companies/poll-rating.model';
+import { Company } from './../companies/company.model';
+import { Fuel } from './fuel.model';
 import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from './product.model';
 import { ProductMapper } from './product.mapper';
+import { ProductUrl } from './products.constants';
 
-const productsUrl = environment.apiUrl + '/products/';
+const productsUrl = environment.apiUrl + ProductUrl + '/';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
-  private products: Array<Product> = [];
-  private productsUpdated = new Subject<Product[]>();
+  constructor(private http: HttpClient, private productMapper: ProductMapper) {}
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private productMapper: ProductMapper
-  ) {}
-
-  getProducts() {
-    this.http
-      .get<{ message: string; products: Array<any> }>(productsUrl)
-      .pipe(
-        map(productData => {
-          return productData.products.map(product => {
-            return this.productMapper.mapFromJson(product);
-          });
-        })
-      )
-      .subscribe(transformedProducts => {
-        this.products = transformedProducts;
-        this.productsUpdated.next([...this.products]);
-      });
-  }
-
-  addProduct(product: Product) {
-    if (product) {
-      product = this.productMapper.mapToJson(product);
-      this.http
-        .post<{ message: string; productId: string }>(productsUrl, product)
-        .subscribe(responseData => {
-          const id: string = responseData.productId;
-          product.id = id;
-          this.products.push(product);
-          this.productsUpdated.next([...this.products]);
-          this.router.navigate(['/products']);
+  getProducts(): Observable<Product[]> {
+    const results = this.http.get<{ message: string; products: Array<any> }>(
+      productsUrl
+    );
+    return results.pipe(
+      map(productData => {
+        return productData.products.map(product => {
+          return this.productMapper.mapProductFromJson(product);
         });
-    }
+      })
+    );
   }
 
-  updateProduct(productId: string, product: Product) {
+  addProduct(product: Product): Observable<any> {
     if (product) {
-      product = this.productMapper.mapToJson(product);
-      this.http.put(productsUrl + productId, product).subscribe(response => {
-        const updatedProducts = [...this.products];
-        const oldProductIndex = updatedProducts.findIndex(
-          p => p.id === productId
-        );
-        updatedProducts[oldProductIndex] = product;
-        this.products = updatedProducts;
-        this.productsUpdated.next([...this.products]);
-        this.router.navigate(['/products']);
-      });
+      product = this.productMapper.mapProductToJson(product);
+      const result = this.http.post<{ message: string; productId: string }>(
+        productsUrl,
+        product
+      );
+      return result.pipe(
+        map(productData => {
+          product.id = productData.productId;
+        })
+      );
     }
   }
 
-  getProduct(id: string) {
-    return this.http.get<{}>(productsUrl + id);
+  updateProduct(productId: string, product: Product): Observable<any> {
+    if (product) {
+      product = this.productMapper.mapProductToJson(product);
+      return this.http.put(productsUrl + productId, product);
+    }
   }
 
-  deleteProduct(productId: string) {
-    this.http.delete(productsUrl + productId).subscribe(() => {
-      const updatedProducts = this.products.filter(
-        product => product.id !== productId
+  getProduct(id: string): Observable<any> {
+    if (id) {
+      const result = this.http.get<{}>(productsUrl + id);
+      return result.pipe(
+        map(productData => {
+          return this.productMapper.mapProductFromJson(productData);
+        })
       );
-      this.products = updatedProducts;
-      this.productsUpdated.next([...this.products]);
-    });
+    }
   }
 
-  getProductUpdateListener() {
-    return this.productsUpdated.asObservable();
+  deleteProduct(id: string): Observable<any> {
+    if (id) {
+      return this.http.delete<{}>(productsUrl + id);
+    }
+  }
+
+  getEmptyProduct(): Product {
+    const gas: Fuel = this.getEmptyFuel();
+    const electricity: Fuel = this.getEmptyFuel();
+    const company: Company = this.getEmptyCompany();
+    return {
+      id: null,
+      name: null,
+      isDual: false,
+      hasGas: false,
+      hasElectricity: false,
+      isGreen: false,
+      isTopPick: false,
+      cashback: null,
+      earlyExitFee: null,
+      message: null,
+      paymentMethod: null,
+      rateType: null,
+      fixedFor: null,
+      company: company,
+      gas: gas,
+      electricity: electricity
+    };
+  }
+
+  public getEmptyFuel(): Fuel {
+    return {
+      yearlyCost: null,
+      costMonthly: null,
+      economy7: null,
+      unitRate: null,
+      discountRate: null,
+      standingCharge: null
+    };
+  }
+
+  public getEmptyPollRating(): PollRating {
+    return {
+      great: 0,
+      ok: 0,
+      poor: 0,
+      total: 0,
+      feedbackMessage: null,
+      limitedFeedbackMessage: null
+    };
+  }
+
+  public getEmptyCompany(): Company {
+    const pollRating: PollRating = this.getEmptyPollRating();
+    return  {
+      id: null,
+      name: null,
+      logoUrl: null,
+      forumUrl: null,
+      message: null,
+      warningMessage: null,
+      regions: [],
+      isBig: false,
+      pollRating: pollRating
+    };
   }
 }

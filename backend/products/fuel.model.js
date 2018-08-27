@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
-const Pricing = require('./pricing.model');
 
 const fuelSchema = mongoose.Schema({
-  name: { type: String, required: true },
-  pricing: Pricing.schema
+  pricing: {
+    yearlyCost: { type: Number, required: true },
+    economy7: { type: Number, default: null },
+    standingCharge: { type: Number, required: true },
+    unitRate: { type: Number, required: true },
+    discountRate: { type: Number, default: null }
+  }
 });
 module.exports = mongoose.model('Fuel', fuelSchema);

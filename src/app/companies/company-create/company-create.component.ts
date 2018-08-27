@@ -84,13 +84,7 @@ export class CompanyCreateComponent implements OnInit {
     let company: Company = null;
     let pollRating: PollRating = null;
     let id: string = null;
-    let pollRatingId: string = null;
-    if (this.mode === Keys.edit) {
-      id = this.companyId;
-      pollRatingId = this.company.pollRating.id;
-    }
     pollRating = {
-      id: pollRatingId,
       great: form.value.great,
       ok: form.value.ok,
       poor: form.value.poor,

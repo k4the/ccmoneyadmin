@@ -1,0 +1,12 @@
+.productToggle .fa-toggle-on, .fa-toggle-off {
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.productToggle .fa-toggle-on {
+  color: red;
+}
+
+.productToggle .fa-toggle-off {
+  color: lightgray;
+}

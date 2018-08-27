@@ -1,74 +1,88 @@
-<!-- <section class="card">
+<section class="card">
   <form #productForm="ngForm">
     <div class="productData">
       <h4>Product</h4>
-      <input type="text" [ngModel]="product?.name" name="name" #name="ngModel" placeholder="{{productLabels.name}}" required>
-      <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-        {{ productMessages.noName }}
+      <div class="halfContainer">
+        <div class="half">
+          <div class="labelOnTop">
+            <label>{{productLabels.name}}</label>
+            <input type="text" [ngModel]="product?.name" name="name" #name="ngModel" placeholder="{{productLabels.name}}" required>
+            <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+              {{ productMessages.noName }}
+            </div>
+          </div>
+        </div>
+        <div class="half">
+          <div class="labelOnTop">
+            <label>{{productLabels.company}}</label>
+            <div class="companySelect">
+              <button type="text" (click)="openSelectCompany()">{{selectedCompanyLabel}}
+                <span class="iconToggle">
+                      <i class="linkIcon fas" [ngClass]="{ 'fa-chevron-down': !selectCompanyOpen, 'fa-chevron-up': selectCompanyOpen }"></i>
+                  </span>
+              </button>
+              <div [hidden]="!selectCompanyOpen" class="companySelectList">
+                <div *ngFor="let company of companies" class="listItem" (click)="setSelectedCompany(company)">
+                    {{company.name}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <input type="text" [ngModel]="product?.logoUrl" name="logoUrl" #logoUrl="ngModel" placeholder="{{productLabels.logoUrl}}"
+      <div class="quarterContainer">
+        <div class="quarter">
+          <div class="labelOnTop">
+            <label>{{productLabels.isGreen}}</label>
+            <app-product-toggle (toggleItem)="setToggleItem($event)" [label]="productLabels.isGreen" [item]="product.isGreen"></app-product-toggle>
+          </div>
+        </div>
+        <div class="quarter">
+            <div class="labelOnTop">
+                <label>{{productLabels.isTopPick}}</label>
+                <app-product-toggle (toggleItem)="setToggleItem($event)" [label]="productLabels.isTopPick" [item]="product.isTopPick"></app-product-toggle>
+              </div>
+        </div>
+        <div class="quarter">
+          Rate type
+        </div>
+        <div class="quarter">
+          Cashback
+        </div>
+      </div>
+      <div class="halfContainer">
+        <div class="half">
+          fixed variable
+        </div>
+        <div class="half">
+          Gas leki both
+        </div>
+      </div>
+    </div>
+    <div class="pricingContainer">
+      <h4>{{productLabels.pricing}}</h4>
+      <div class="pricing">
+        <app-fuel (fuelItems)="setFuelItems($event)" [labels]="productLabels" [fuel]="product.gas" [type]="productLabels.gas"></app-fuel>
+      </div>
+    </div>
+    <div class="paymentMethod">
+      Payment method
+    </div>
+    <!-- <div class="labelOnTop">
+      <label>{{productLabels.paymentMethod}}</label>
+      <input type="number" min="0" [ngModel]="product?.paymentMethod" name="paymentMethod" #paymentMethod="ngModel" placeholder="{{productLabels.paymentMethod}}"
         required>
-      <div [hidden]="logoUrl.valid || logoUrl.pristine" class="alert alert-danger">
-        {{ productMessages.noLogoUrl }}
+      <div [hidden]="paymentMethod.valid || paymentMethod.pristine" class="alert alert-danger">
+        {{ productMessages.noPaymentMethod }}
       </div>
-      <input type="text" [ngModel]="product?.forumUrl" name="forumUrl" #forumUrl="ngModel" placeholder="{{productLabels.forumUrl}}">
-      <app-cc-select (ccSelectedItems)="setSelectedRegions($event)" [items]="regions"  [selectedItems]="selectedRegions" [label]="productLabels.regions"></app-cc-select>
-    </div>
-    <div class="pollRatingContainer">
-      <h4>{{productLabels.pollRating}}</h4>
-      <div class="pollRating">
-        <div class="labelOnTop">
-          <label>{{productLabels.great}}</label>
-          <input type="number" min="0" [ngModel]="product?.pollRating.great" name="great" #great="ngModel" placeholder="{{productLabels.great}}"
-            required>
-          <div [hidden]="great.valid || great.pristine" class="alert alert-danger">
-            {{ productMessages.noPollRating }}
-          </div>
-        </div>
-        <div class="labelOnTop">
-          <label>{{productLabels.ok}}</label>
-          <input type="number" min="0" [ngModel]="product?.pollRating.ok" name="ok" #ok="ngModel" placeholder="{{productLabels.ok}}" required>
-          <div [hidden]="ok.valid || ok.pristine" class="alert alert-danger">
-            {{ productMessages.noPollRating }}
-          </div>
-        </div>
-        <div class="labelOnTop">
-          <label>{{productLabels.poor}}</label>
-          <input type="number" min="0" [ngModel]="product?.pollRating.poor" name="poor" #poor="ngModel" placeholder="{{productLabels.poor}}"
-            required>
-          <div [hidden]="poor.valid || poor.pristine" class="alert alert-danger">
-            {{ productMessages.noPollRating }}
-          </div>
-        </div>
-        <div class="labelOnTop">
-          <label>{{productLabels.total}}</label>
-          <input type="number" min="0" [ngModel]="product?.pollRating.total" name="total" #total="ngModel" placeholder="{{productLabels.total}}"
-            required>
-          <div [hidden]="total.valid || total.pristine" class="alert alert-danger">
-            {{ productMessages.noPollRating }}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="productMessage">
-      <div class="labelOnTop">
-        <label>{{productLabels.message}}</label>
-        <textarea name="message" rows="6" [ngModel]="product?.message" name="message" #message="ngModel">
-        </textarea>
-      </div>
-      <div class="labelOnTop">
-        <label>{{productLabels.warningMessage}}</label>
-        <textarea name="warningMessage" rows="6" [ngModel]="product?.warningMessage" name="warningMessage" #warningMessage="ngModel">
-        </textarea>
-      </div>
-    </div>
+    </div> -->
     <button type="submit" class="primary">Save product</button>
     <div [hidden]="productForm.valid || productForm.pristine" class="alert alert-danger">
       {{ productMessages.allFields }}
     </div>
     <div class="productButtons right">
-      <button type="button" class="cancel right capitalize" (click)="onCancel(productForm)">{{productsLabels.cancel}}</button>
-      <button type="button" class="ok" (click)="onSaveCompany(productForm)">{{productsLabels.saveCompany}}</button>
+      <button type="button" class="cancel right capitalize" (click)="onCancel(productForm)">{{keys.cancel}}</button>
+      <button type="button" class="ok" (click)="onSaveProduct(productForm)">{{productLabels.saveProduct}}</button>
     </div>
   </form>
-</section> -->
+</section>
