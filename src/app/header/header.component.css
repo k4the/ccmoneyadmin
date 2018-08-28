@@ -16,6 +16,7 @@ nav {
   color: darkgray;
   font-size: 14px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .navItem:hover, .navItem.active {
