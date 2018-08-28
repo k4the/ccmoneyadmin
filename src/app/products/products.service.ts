@@ -16,6 +16,21 @@ const productsUrl = environment.apiUrl + ProductUrl + '/';
 export class ProductsService {
   constructor(private http: HttpClient, private productMapper: ProductMapper) {}
 
+  sortProducts<T>(propName: keyof Product, order: "ASC" | "DESC", products: Array<Product>): void {
+    products.sort((a, b) => {
+        if (a[propName] < b[propName])
+            return -1;
+        if (a[propName] > b[propName])
+            return 1;
+        return 0;
+    });
+
+    if (order === 'DESC') {
+      products.reverse();
+    }
+    console.log(products)
+  }
+
   getProducts(): Observable<Product[]> {
     const results = this.http.get<{ message: string; products: Array<any> }>(
       productsUrl
@@ -45,7 +60,6 @@ export class ProductsService {
   }
 
   updateProduct(productId: string, product: Product): Observable<any> {
-    console.log('updateProduct',product)
     if (product) {
       product = this.productMapper.mapProductToJson(product);
       return this.http.put(productsUrl + productId, product);
@@ -57,7 +71,6 @@ export class ProductsService {
       const result = this.http.get<{}>(productsUrl + id);
       return result.pipe(
         map(productData => {
-          console.log(productData)
           return this.productMapper.mapProductFromJson(productData);
         })
       );
@@ -77,6 +90,7 @@ export class ProductsService {
     return {
       id: null,
       name: null,
+      totalYearlyCost: null,
       hasBoth: false,
       hasGas: false,
       hasElectricity: false,
@@ -118,7 +132,7 @@ export class ProductsService {
 
   public getEmptyCompany(): Company {
     const pollRating: PollRating = this.getEmptyPollRating();
-    return  {
+    return {
       id: null,
       name: null,
       logoUrl: null,

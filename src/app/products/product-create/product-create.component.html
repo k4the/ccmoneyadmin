@@ -44,10 +44,14 @@
         </div>
       </div>
     </div>
-    <div class="full">
+    <div class="full" *ngIf="product.hasGas">
       <h4>{{productLabels.gas}}</h4>
         <app-fuel (fuelItems)="setFuelItems($event)" [labels]="productLabels" [fuel]="product.gas" [type]="productLabels.gas"></app-fuel>
     </div>
+    <div class="full" *ngIf="product.hasElectricity">
+        <h4>{{productLabels.electricity}}</h4>
+          <app-fuel (fuelItems)="setFuelItems($event)" [labels]="productLabels" [fuel]="product.electricity" [type]="productLabels.electricity"></app-fuel>
+      </div>
     <div [hidden]="productForm.valid || productForm.pristine" class="alert alert-danger">
       {{ productMessages.allFields }}
     </div>

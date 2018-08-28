@@ -31,7 +31,7 @@
           name="standingCharge" #standingCharge="ngModel" (change)="setFuel(fuelForm)" required>
       </td>
     </tr>
-    <tr>
+    <tr *ngIf="type === labels.electricity">
       <td>{{ labels.economy7 }}</td>
       <td>
         <input type="number" min="1" [ngModel]="fuel.economy7" name="economy7" #economy7="ngModel" (change)="setFuel(fuelForm)">

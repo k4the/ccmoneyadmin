@@ -1,5 +1,5 @@
 import { Keys } from './../../global.constants';
-import { ProductLabels, ProductMessages, ProductCreateUrl } from '../products.constants';
+import { ProductLabels, ProductMessages, ProductCreateUrl, ProductProperties } from '../products.constants';
 import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -15,6 +15,7 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[] = [];
+  productProperties = ProductProperties;
   isLoggedIn = false;
   totalProducts = 0;
   productMessages = ProductMessages;
@@ -26,8 +27,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
   type: string = null;
   productToDeleteId: string = null;
   isLoading = false;
+  sortAscYearlyCost = false;
+  sortAscName = false;
 
-  private productsSub: Subscription;
   private authStatusSub: Subscription;
 
   constructor(
@@ -44,6 +46,25 @@ export class ProductListComponent implements OnInit, OnDestroy {
       .subscribe(isAuthenticated => {
         this.isLoggedIn = isAuthenticated;
       });
+  }
+
+  sortProductsByProperty(property: any): void {
+    if(property === this.productProperties.name) {
+      if(this.sortAscName) {
+        this.productsService.sortProducts(property, 'DESC', this.products);
+      } else {
+        this.productsService.sortProducts(property, 'ASC', this.products);
+      }
+      this.sortAscName = !this.sortAscName;
+    }
+    if(property === this.productProperties.totalYearlyCost) {
+      if(this.sortAscYearlyCost) {
+        this.productsService.sortProducts(property, 'DESC', this.products);
+      } else {
+        this.productsService.sortProducts(property, 'ASC', this.products);
+      }
+      this.sortAscYearlyCost = !this.sortAscYearlyCost;
+    }
   }
 
   getProducts = () => {

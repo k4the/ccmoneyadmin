@@ -4,6 +4,7 @@ import { Fuel } from './fuel.model';
 export class Product {
   id?: string;
   name: string;
+  totalYearlyCost: number;
   hasBoth: boolean;
   hasGas: boolean;
   hasElectricity: boolean;
@@ -22,6 +23,7 @@ export class Product {
   constructor(product: Product) {
     this.id = product.id ? product.id : null;
     this.name = product.name;
+    this.totalYearlyCost = product.totalYearlyCost;
     this.hasBoth = product.hasBoth;
     this.hasGas = product.hasGas,
     this.hasElectricity = product.hasElectricity,

@@ -19,7 +19,6 @@ export class ProductToggleComponent implements OnInit {
       isOn: this.item,
       label: this.label
     };
-    console.log(this.displayToggle.isOn)
   }
 
   setToggle(): void {

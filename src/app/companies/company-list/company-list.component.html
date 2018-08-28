@@ -1,16 +1,21 @@
 <div id="overlay" *ngIf="isLoading"></div>
-<app-loading [isLoading]="isLoading"></app-loading>
+<app-company-loading [isLoading]="isLoading"></app-company-loading>
 <div class="companyListContainer" *ngIf="!showDelete">
-  <div class="full right">
+    <div class="full right">
       <button type="button" class="add" (click)="addCompany()">{{companyLabels.addCompany}}</button>
-  </div>
-  <div *ngIf="companies && companies.length > 0">
-    <div *ngFor="let company of companies" class="companyHeader">
-      <span class="companyItem title">{{company.name}}</span>
-      <a class="companyItem link" *ngIf="isLoggedIn" [routerLink]="['/companies/edit', company.id]"><i class="fas fa-pencil-alt"></i></a>
-      <a class="companyItem link" *ngIf="isLoggedIn" (click)="openDeleteModal(company)"><i class="fas fa-trash-alt"></i></a>
     </div>
+    <table  *ngIf="companies && companies.length > 0">
+      <tr>
+        <th>{{ companyLabels.mainTitle }}</th>
+        <th class="small capitalize">{{ keys.edit }}</th>
+        <th class="small capitalize">{{ keys.delete }}</th>
+      </tr>
+      <tr *ngFor="let company of companies">
+        <td>{{ company.name }}</td>
+        <td class="small"><a class="companyItem link" *ngIf="isLoggedIn" [routerLink]="['/companies/edit', company.id]"><i class="fas fa-pencil-alt"></i></a></td>
+        <td class="small"><a class="companyItem link" *ngIf="isLoggedIn" (click)="openDeleteModal(company)"><i class="fas fa-trash-alt"></i></a></td>
+      </tr>
+    </table>
+    <p *ngIf="companies.length === 0">{{ companyLabels.noCompanies }}</p>
   </div>
-  <p *ngIf="companies.length === 0">No companies added yet</p>
-</div>
 <app-cc-modal *ngIf="showDelete" (ccModalResult)="deleteCompany($event)" [title]="title" [message]="message" [type]="type" [id]="companyToDeleteId"></app-cc-modal>

@@ -31,3 +31,35 @@
 .companyListContainer .add {
 margin-bottom: 12px;
 }
+
+.companyListContainer table {
+  background: white;
+}
+
+.companyListContainer table td, .companyListContainer table th {
+  padding: 12px 10px;
+}
+
+.companyListContainer table td.small, .companyListContainer table th.small {
+  width: 10%;
+  text-align: center;
+}
+
+.companyListContainer table th.small.capitalize {
+  text-transform: capitalize;
+}
+
+.companyListContainer table th.tableLink {
+  cursor: pointer;
+  position: relative;
+}
+
+.companyListContainer table th.tableLink span {
+  display: inline-block;
+}
+
+.companyListContainer table th.tableLink span i {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+}

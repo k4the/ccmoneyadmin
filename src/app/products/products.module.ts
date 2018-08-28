@@ -11,7 +11,7 @@ import { ProductSelectComponent } from './product-select/product-select.componen
 import { FuelComponent } from './fuel/fuel.component';
 import { ProductToggleComponent } from './product-toggle/product-toggle.component';
 import { ProductSingleSelectComponent } from './product-single-select/product-single-select.component';
-import { LoadingComponent } from '../shared/loading/loading.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   imports: [

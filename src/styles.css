@@ -102,8 +102,6 @@ router-outlet {
 }
 
 .headerLink {
-  background: url(/assets/images/cec-logo-mobile.png) no-repeat;
-  background-size: contain;
   margin-top: 0;
   margin-left: auto;
   margin-right: auto;
@@ -203,12 +201,16 @@ td, th {
   padding: 8px;
 }
 
+td .capitalise, th .capitalise {
+  text-transform: capitalize;
+}
+
 tr:hover, tr:nth-child(even):hover {
   background: #F3F4D5;
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: #e4e4e4;
 }
 
 .moreInfoToggle {

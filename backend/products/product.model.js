@@ -3,6 +3,7 @@ const Company = require('../companies/company.model');
 
 const productSchema = mongoose.Schema({
   name: { type: String, required: true },
+  totalYearlyCost: { type: Number, default: 0 },
   endDate: { type: Date, required: false, default: null },
   hasBoth: { type: Boolean, required: false, default: false },
   hasGas: { type: Boolean, required: false, default: false },

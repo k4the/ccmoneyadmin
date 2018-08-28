@@ -45,8 +45,14 @@ export const ProductLabels = {
   saveProduct: 'Save product',
   item: 'Item',
   price: 'Price',
-  fuelType: 'Fuel type'
+  fuelType: 'Fuel type',
+  noProducts: 'No products added yet'
 };
+
+export const ProductProperties = {
+  name: 'name',
+  totalYearlyCost: 'totalYearlyCost'
+}
 
 export const ProductUrl = '/products';
 export const ProductCreateUrl = '/products/create';

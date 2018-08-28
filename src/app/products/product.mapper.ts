@@ -10,6 +10,7 @@ export class ProductMapper {
     const product = {
       id: json._id,
       name: json.name,
+      totalYearlyCost: json.totalYearlyCost,
       hasBoth: json.hasBoth,
       hasGas: json.hasGas,
       hasElectricity: json.hasElectricity,
@@ -33,6 +34,7 @@ export class ProductMapper {
     return {
       _id: product.id ? product.id : null,
       name: product.name,
+      totalYearlyCost: product.totalYearlyCost ? product.totalYearlyCost : 0,
       hasBoth: product.hasBoth,
       hasGas: product.hasGas,
       hasElectricity: product.hasElectricity,

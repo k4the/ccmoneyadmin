@@ -25,7 +25,8 @@ export const CompanyLabels = {
   deleteCompany: 'Delete company',
   editCompany: 'Edit company',
   saveCompany: 'Save company',
-  cancel: 'Cancel'
+  cancel: 'Cancel',
+  noCompanies: 'There are no companies added yet'
 };
 
 export const CompanyUrl = '/companies';

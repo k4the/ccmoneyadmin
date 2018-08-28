@@ -58,6 +58,7 @@ export class ProductCreateComponent implements OnInit {
   }
 
   setSingleSelectedItems(item: any): void {
+    console.log(item)
     if (item) {
       switch (item.label) {
         case this.productLabels.company:
@@ -76,14 +77,18 @@ export class ProductCreateComponent implements OnInit {
           switch (item.data.name) {
             case this.productLabels.gas:
               this.product.hasGas = true;
+              this.product.hasElectricity = false;
               break;
 
             case this.productLabels.electricity:
               this.product.hasElectricity = true;
+              this.product.hasGas = false;
               break;
 
             case this.productLabels.both:
               this.product.hasBoth = true;
+              this.product.hasGas = true;
+              this.product.hasElectricity = true;
               break;
           }
           break;
@@ -114,6 +119,20 @@ export class ProductCreateComponent implements OnInit {
     }
   }
 
+  getTotalYearlyCost() : number {
+    let totalYearlyCost = 0;
+    if(this.product.gas && this.product.gas.yearlyCost && this.product.electricity && this.product.electricity.yearlyCost) {
+      totalYearlyCost = this.product.gas.yearlyCost + this.product.electricity.yearlyCost;
+    }
+    if((this.product.gas && this.product.gas.yearlyCost) && (!this.product.electricity || !this.product.electricity.yearlyCost)) {
+      totalYearlyCost = this.product.gas.yearlyCost;
+    }
+    if((this.product.electricity && this.product.electricity.yearlyCost) && (!this.product.gas || !this.product.gas.yearlyCost)) {
+      totalYearlyCost = this.product.electricity.yearlyCost;
+    }
+    return totalYearlyCost;
+  }
+
   getCompanies(): void {
     this.isLoading = true;
     this.companiesService.getCompanies().subscribe(
@@ -139,15 +158,16 @@ export class ProductCreateComponent implements OnInit {
     this.productsService.getProduct(this.productId).subscribe(
       productData => {
         this.product = {...productData};
+        console.log(this.product);
         this.isLoading = false;
         this.selectedCompany = this.product.company;
         this.selectedCompanyLabel = this.product.company.name;
         this.selectedRateTypeLabel = this.product.rateType;
         this.selectedPaymentMethodLabel = this.product.paymentMethod;
-        if (this.product.electricity && this.product.gas) {
+        if (this.product.hasElectricity && this.product.hasGas) {
           this.selectedFuelTypeLabel = this.productLabels.both;
         } else {
-          if (this.product.electricity) {
+          if (this.product.hasElectricity) {
             this.selectedFuelTypeLabel = this.productLabels.electricity;
           } else {
             this.selectedFuelTypeLabel = this.productLabels.gas;
@@ -205,6 +225,7 @@ export class ProductCreateComponent implements OnInit {
     return {
       id: id,
       name: form.value.name,
+      totalYearlyCost: this.getTotalYearlyCost(),
       hasBoth: this.product.hasBoth,
       hasGas: this.product.hasGas,
       hasElectricity: this.product.hasElectricity,

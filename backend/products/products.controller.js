@@ -4,6 +4,7 @@ exports.getProducts = (req, res, next) => {
   try {
     Product.find()
       .populate('company')
+      .sort({ yearlyCost: -1 })
       .then(documents => {
         res.status(200).json({
           message: 'Products fetched successfully',
@@ -36,6 +37,7 @@ exports.getProductById = (req, res, next) => {
 exports.addProduct = (req, res, next) => {
   const product = new Product({
     name: req.sanitize(req.body.name),
+    totalYearlyCost: req.sanitize(req.body.totalYearlyCost),
     hasBoth: req.sanitize(req.body.hasBoth),
     hasGas: req.sanitize(req.body.hasGas),
     hasElectricity: req.sanitize(req.body.hasElectricity),
@@ -49,7 +51,8 @@ exports.addProduct = (req, res, next) => {
     rateType: req.sanitize(req.body.rateType),
     fixedFor: req.sanitize(req.body.fixedFor),
     company: req.body.company,
-    gas: req.body.gas
+    gas: req.body.gas,
+    electricity: req.body.electricity
   });
   try {
     product.save().then(createdProduct => {
@@ -80,6 +83,7 @@ exports.modifyProduct = (req, res, next) => {
     const product = new Product({
       _id: req.sanitize(req.params.id),
       name: req.sanitize(req.body.name),
+      totalYearlyCost: req.sanitize(req.body.totalYearlyCost),
       hasBoth: req.sanitize(req.body.hasBoth),
       hasGas: req.sanitize(req.body.hasGas),
       hasElectricity: req.sanitize(req.body.hasElectricity),
@@ -92,7 +96,8 @@ exports.modifyProduct = (req, res, next) => {
       rateType: req.sanitize(req.body.rateType),
       fixedFor: req.sanitize(req.body.fixedFor),
       company: req.body.company,
-      gas: req.body.gas
+      gas: req.body.gas,
+      electricity: req.body.electricity
     });
     Product.updateOne({ _id: req.params.id }, product).then(result => {
       if (result) {
