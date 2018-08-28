@@ -10,6 +10,8 @@ import { ProductModalComponent } from './product-modal/product-modal.component';
 import { ProductSelectComponent } from './product-select/product-select.component';
 import { FuelComponent } from './fuel/fuel.component';
 import { ProductToggleComponent } from './product-toggle/product-toggle.component';
+import { ProductSingleSelectComponent } from './product-single-select/product-single-select.component';
+import { LoadingComponent } from '../shared/loading/loading.component';
 
 @NgModule({
   imports: [
@@ -19,7 +21,7 @@ import { ProductToggleComponent } from './product-toggle/product-toggle.componen
     ProductsRoutingModule
   ],
   declarations: [
-    ProductCreateComponent, ProductListComponent, ProductModalComponent, ProductSelectComponent, FuelComponent, ProductToggleComponent
+    ProductCreateComponent, ProductListComponent, ProductModalComponent, ProductSelectComponent, FuelComponent, ProductToggleComponent, ProductSingleSelectComponent, LoadingComponent
   ],
   providers: [ProductMapper]
 })

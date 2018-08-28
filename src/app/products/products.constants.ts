@@ -19,6 +19,7 @@ export const ProductLabels = {
   company: 'Company',
   gas: 'Gas',
   electricity: 'Electricity',
+  both: 'Both',
   hasGas: 'Has gas',
   hasElectricity: 'Has electricity',
   hasBoth: 'Has both',
@@ -43,7 +44,8 @@ export const ProductLabels = {
   editProduct: 'Edit product',
   saveProduct: 'Save product',
   item: 'Item',
-  price: 'Price'
+  price: 'Price',
+  fuelType: 'Fuel type'
 };
 
 export const ProductUrl = '/products';

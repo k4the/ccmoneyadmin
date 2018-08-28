@@ -1,4 +1,4 @@
-import { Fuel } from './../fuel.model';
+import { RateTypes, PaymentMethods, FuelTypes } from '../data/product-lists';
 import {
   ProductMessages,
   ProductLabels,
@@ -20,15 +20,20 @@ import { Company } from '../../companies/company.model';
   styleUrls: ['./product-create.component.css']
 })
 export class ProductCreateComponent implements OnInit {
+  paymentMethods = PaymentMethods;
+  rateTypes = RateTypes;
+  fuelTypes = FuelTypes;
   companies: Array<Company> = [];
   keys = Keys;
-  product: Product = this.productsService.getEmptyProduct();
+  product: Product = null;
   productMessages = ProductMessages;
   productLabels = ProductLabels;
   isLoading = false;
-  selectCompanyOpen = false;
   selectedCompany: Company = null;
   selectedCompanyLabel: String = this.productLabels.company;
+  selectedRateTypeLabel: String = this.productLabels.rateType;
+  selectedPaymentMethodLabel: String = this.productLabels.paymentMethod;
+  selectedFuelTypeLabel: String = this.productLabels.fuelType;
   private mode = this.keys.create;
   private productId: string = null;
 
@@ -52,6 +57,40 @@ export class ProductCreateComponent implements OnInit {
     });
   }
 
+  setSingleSelectedItems(item: any): void {
+    if (item) {
+      switch (item.label) {
+        case this.productLabels.company:
+          this.product.company = item.data;
+          break;
+
+        case this.productLabels.rateType:
+          this.product.rateType = item.data.name;
+          break;
+
+        case this.productLabels.paymentMethod:
+          this.product.paymentMethod = item.data.name;
+          break;
+
+        case this.productLabels.fuelType:
+          switch (item.data.name) {
+            case this.productLabels.gas:
+              this.product.hasGas = true;
+              break;
+
+            case this.productLabels.electricity:
+              this.product.hasElectricity = true;
+              break;
+
+            case this.productLabels.both:
+              this.product.hasBoth = true;
+              break;
+          }
+          break;
+      }
+    }
+  }
+
   setToggleItem(item: any): void {
     if (item) {
       switch (item.label) {
@@ -59,21 +98,11 @@ export class ProductCreateComponent implements OnInit {
           this.product.isGreen = item.isOn;
           break;
 
-          case this.productLabels.isTopPick:
+        case this.productLabels.isTopPick:
           this.product.isTopPick = item.isOn;
           break;
       }
     }
-  }
-
-  openSelectCompany(): void {
-    this.selectCompanyOpen = !this.selectCompanyOpen;
-  }
-
-  setSelectedCompany(company: Company): void {
-    this.selectCompanyOpen = false;
-    this.product.company = company;
-    this.selectedCompanyLabel = company.name;
   }
 
   setFuelItems(item: any): void {
@@ -94,7 +123,7 @@ export class ProductCreateComponent implements OnInit {
         if (this.mode === this.keys.edit) {
           this.getProductById();
         } else {
-          // this.product = this.productsService.getEmptyProduct();
+          this.product = this.productsService.getEmptyProduct();
         }
       },
       err => {
@@ -109,10 +138,21 @@ export class ProductCreateComponent implements OnInit {
     this.mode = Keys.edit;
     this.productsService.getProduct(this.productId).subscribe(
       productData => {
-        this.product = productData;
+        this.product = {...productData};
         this.isLoading = false;
-        this.selectedCompanyLabel = this.product.company.name;
         this.selectedCompany = this.product.company;
+        this.selectedCompanyLabel = this.product.company.name;
+        this.selectedRateTypeLabel = this.product.rateType;
+        this.selectedPaymentMethodLabel = this.product.paymentMethod;
+        if (this.product.electricity && this.product.gas) {
+          this.selectedFuelTypeLabel = this.productLabels.both;
+        } else {
+          if (this.product.electricity) {
+            this.selectedFuelTypeLabel = this.productLabels.electricity;
+          } else {
+            this.selectedFuelTypeLabel = this.productLabels.gas;
+          }
+        }
       },
       err => {
         console.log(err);
@@ -165,18 +205,18 @@ export class ProductCreateComponent implements OnInit {
     return {
       id: id,
       name: form.value.name,
-      isDual: form.value.isDual,
-      hasGas: form.value.hasGas,
-      hasElectricity: form.value.hasElectricity,
-      isGreen: form.value.isGreen,
-      isTopPick: form.value.isTopPick,
-      cashback: form.value.isCashback,
+      hasBoth: this.product.hasBoth,
+      hasGas: this.product.hasGas,
+      hasElectricity: this.product.hasElectricity,
+      isGreen: this.product.isGreen,
+      isTopPick: this.product.isTopPick,
+      cashback: form.value.cashback,
       earlyExitFee: form.value.earlyExitFee,
       message: form.value.message,
-      paymentMethod: form.value.paymentMethod,
-      rateType: form.value.rateType,
+      paymentMethod: this.product.paymentMethod,
+      rateType: this.product.rateType,
       fixedFor: form.value.fixedFor,
-      company: form.value.company,
+      company: this.product.company,
       gas: this.product.gas,
       electricity: this.product.electricity
     };

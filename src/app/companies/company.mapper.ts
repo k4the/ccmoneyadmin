@@ -9,7 +9,6 @@ export class CompanyMapper {
       id: json._id,
       name: json.name,
       logoUrl: json.logoUrl,
-      forumUrl: json.forumUrl ? json.forumUrl : null,
       message: json.message ? json.message : null,
       warningMessage: json.warningMessage ? json.warningMessage : null,
       regions: json.regions,
@@ -20,12 +19,10 @@ export class CompanyMapper {
   }
 
   mapToJson(company: Company): any {
-    console.log(company);
     return {
       _id: company.id ? company.id : null,
       name: company.name,
       logoUrl: company.logoUrl,
-      forumUrl: company.forumUrl ? company.forumUrl : null,
       message: company.message ? company.message : null,
       warningMessage: company.warningMessage ? company.warningMessage : null,
       regions: company.regions,

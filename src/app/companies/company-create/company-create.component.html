@@ -13,7 +13,6 @@
       <div [hidden]="logoUrl.valid || logoUrl.pristine" class="alert alert-danger">
         {{ companyMessages.noLogoUrl }}
       </div>
-      <input type="text" [ngModel]="company?.forumUrl" name="forumUrl" #forumUrl="ngModel" placeholder="{{companyLabels.forumUrl}}">
       <app-cc-select (onSelectedItems)="setSelectedRegions($event)" [items]="regions" [selectedItems]="selectedRegions" [label]="companyLabels.regions"></app-cc-select>
     </div>
     <div class="pollRatingContainer">

@@ -45,6 +45,7 @@ export class ProductsService {
   }
 
   updateProduct(productId: string, product: Product): Observable<any> {
+    console.log('updateProduct',product)
     if (product) {
       product = this.productMapper.mapProductToJson(product);
       return this.http.put(productsUrl + productId, product);
@@ -56,6 +57,7 @@ export class ProductsService {
       const result = this.http.get<{}>(productsUrl + id);
       return result.pipe(
         map(productData => {
+          console.log(productData)
           return this.productMapper.mapProductFromJson(productData);
         })
       );
@@ -75,7 +77,7 @@ export class ProductsService {
     return {
       id: null,
       name: null,
-      isDual: false,
+      hasBoth: false,
       hasGas: false,
       hasElectricity: false,
       isGreen: false,
@@ -120,7 +122,6 @@ export class ProductsService {
       id: null,
       name: null,
       logoUrl: null,
-      forumUrl: null,
       message: null,
       warningMessage: null,
       regions: [],

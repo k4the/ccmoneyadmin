@@ -4,7 +4,6 @@ export class Company {
   id?: string;
   name: string;
   logoUrl: string;
-  forumUrl?: string;
   message?: string;
   warningMessage?: string;
   regions: Array<string>;
@@ -15,7 +14,6 @@ export class Company {
     this.id = company.id ? company.id : null;
     this.name = company.name;
     this.logoUrl = company.logoUrl;
-    this.forumUrl = company.forumUrl ? company.forumUrl : null;
     this.message = company.message ? company.message : null;
     this.warningMessage = company.warningMessage ? company.warningMessage : null;
     this.regions = company.regions ? company.regions : [];

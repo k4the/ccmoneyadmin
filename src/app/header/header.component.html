@@ -1,10 +1,10 @@
 <header>
-  <nav>
-    <div class="leftBox">
+  <nav class="container">
+    <div class="flex1">
       <a class="navItem" routerLink="/companies" routerLinkActive="active" *ngIf="isLoggedIn">Companies</a>
       <a class="navItem" routerLink="/products" routerLinkActive="active" *ngIf="isLoggedIn">Products</a>
     </div>
-    <div class="rightBox">
+    <div class="flex1 right">
       <a class="navItem" routerLink="/auth/login" routerLinkActive="active" *ngIf="!isLoggedIn">Login</a>
       <a class="navItem" routerLink="/auth/signup" routerLinkActive="active" *ngIf="!isLoggedIn">Signup</a>
       <button class="navItem logoutBut" *ngIf="isLoggedIn" (click)="onLogout()">Logout</button>

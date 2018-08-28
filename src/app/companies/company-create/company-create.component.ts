@@ -94,7 +94,6 @@ export class CompanyCreateComponent implements OnInit {
       id: id,
       name: form.value.name,
       logoUrl: form.value.logoUrl,
-      forumUrl: form.value.forumUrl,
       message: form.value.message,
       warningMessage: form.value.warningMesage,
       regions: this.selectedRegions,

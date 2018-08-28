@@ -1,12 +1,26 @@
-.productToggle .fa-toggle-on, .fa-toggle-off {
-  font-size: 28px;
+.productToggle {
+  position: relative;
+}
+
+.productToggle .fa-check-circle,
+.productToggle .fa-circle {
+  font-size: 22px;
   cursor: pointer;
 }
 
-.productToggle .fa-toggle-on {
+.productToggle .fa-toggle-on, .productToggle .fa-check-circle {
   color: red;
 }
 
-.productToggle .fa-toggle-off {
+.productToggle .fa-toggle-off, .productToggle .fa-circle {
   color: lightgray;
+}
+
+.productToggle label {
+  display: inline-block;
+  padding-right: 6px;
+}
+
+.productToggle i {
+  display: inline-block;
 }

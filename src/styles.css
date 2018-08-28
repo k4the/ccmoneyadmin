@@ -25,13 +25,33 @@ header {
   text-transform: capitalize;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.thirdContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.third {
+  /* width: 33.33%; */
+  flex: 1;
+}
+
 .halfContainer {
   display: flex;
   flex-direction: column;
 }
 
 .half {
-  width: 50%;
+  /* width: 50%; */
+  flex: 1;
 }
 
 .quarterContainer {
@@ -40,7 +60,8 @@ header {
 }
 
 .quarter {
-  width: 25%;
+  /* width: 25%; */
+  flex: 1;
 }
 
 h1, h2, h3, h4, h5 {
@@ -172,7 +193,6 @@ button.ok {
 }
 
 table {
-  font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
@@ -181,6 +201,10 @@ td, th {
   border: 1px solid #efefef;
   text-align: left;
   padding: 8px;
+}
+
+tr:hover, tr:nth-child(even):hover {
+  background: #F3F4D5;
 }
 
 tr:nth-child(even) {
@@ -217,12 +241,22 @@ label {
   margin: 8px 12px 8px 0;
 }
 
-.labelOnTop input[type=text], input[type=email], input[type=password], input[type=number], textarea, select {
+.labelLeft {
+  display: inline-block;
+  margin-top: 0;
+}
+
+.labelLeft {
+  padding-right: 10px;
+}
+
+.labelOnTop input[type=text] {
   margin-top: 0;
 }
 
 .labelOnTop label {
   padding-left: 4px;
+  padding-bottom: 6px;
 }
 
 .ng-valid[required], .ng-valid.required  {
@@ -273,8 +307,16 @@ label {
     flex: 3;
   }
 
-  .halfContainer {
+  .container {
     display: flex;
+    flex-direction: row;
+  }
+
+  .thirdContainer {
+    flex-direction: row;
+  }
+
+  .halfContainer {
     flex-direction: row;
   }
 
@@ -283,7 +325,6 @@ label {
   }
 
   .quarterContainer {
-    display: flex;
     flex-direction: row;
   }
 }

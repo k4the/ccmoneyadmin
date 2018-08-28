@@ -1,5 +1,4 @@
 .fuelForm table {
-  font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
@@ -24,6 +23,14 @@
 .fuelForm input[type=number] {
   width: 80px;
   padding: 6px 12px;
+}
+
+tr:hover, tr:nth-child(even):hover {
+  background: #F3F4D5;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
 }
 
 /* .fuelForm input[type=number].error {

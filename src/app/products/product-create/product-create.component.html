@@ -1,9 +1,11 @@
-<section class="card">
+<div id="overlay" *ngIf="isLoading"></div>
+<app-loading [isLoading]="isLoading"></app-loading>
+<section class="card" *ngIf="!isLoading">
   <form #productForm="ngForm">
     <div class="productData">
       <h4>Product</h4>
-      <div class="halfContainer">
-        <div class="half">
+      <div class="container">
+        <div class="flex1">
           <div class="labelOnTop">
             <label>{{productLabels.name}}</label>
             <input type="text" [ngModel]="product?.name" name="name" #name="ngModel" placeholder="{{productLabels.name}}" required>
@@ -12,71 +14,40 @@
             </div>
           </div>
         </div>
-        <div class="half">
-          <div class="labelOnTop">
-            <label>{{productLabels.company}}</label>
-            <div class="companySelect">
-              <button type="text" (click)="openSelectCompany()">{{selectedCompanyLabel}}
-                <span class="iconToggle">
-                      <i class="linkIcon fas" [ngClass]="{ 'fa-chevron-down': !selectCompanyOpen, 'fa-chevron-up': selectCompanyOpen }"></i>
-                  </span>
-              </button>
-              <div [hidden]="!selectCompanyOpen" class="companySelectList">
-                <div *ngFor="let company of companies" class="listItem" (click)="setSelectedCompany(company)">
-                    {{company.name}}
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="flex1">
+          <app-product-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="productLabels.company" [selectedLabel]="selectedCompanyLabel" [items]="companies"></app-product-single-select>
         </div>
       </div>
-      <div class="quarterContainer">
-        <div class="quarter">
+      <div class="container">
+        <div class="flex1">
+          <app-product-toggle (toggleItem)="setToggleItem($event)" [label]="productLabels.isGreen" [item]="product.isGreen"></app-product-toggle>
+        </div>
+        <div class="flex1">
+            <app-product-toggle (toggleItem)="setToggleItem($event)" [label]="productLabels.isTopPick" [item]="product.isTopPick"></app-product-toggle>
+        </div>
+        <div class="flex1">
           <div class="labelOnTop">
-            <label>{{productLabels.isGreen}}</label>
-            <app-product-toggle (toggleItem)="setToggleItem($event)" [label]="productLabels.isGreen" [item]="product.isGreen"></app-product-toggle>
-          </div>
+            <label class="cashbackLabel">{{productLabels.cashback}}</label>
+            <input class="cashback" type="number" [ngModel]="product?.cashback" name="cashback" #cashback="ngModel" min="0">
         </div>
-        <div class="quarter">
-            <div class="labelOnTop">
-                <label>{{productLabels.isTopPick}}</label>
-                <app-product-toggle (toggleItem)="setToggleItem($event)" [label]="productLabels.isTopPick" [item]="product.isTopPick"></app-product-toggle>
-              </div>
-        </div>
-        <div class="quarter">
-          Rate type
-        </div>
-        <div class="quarter">
-          Cashback
         </div>
       </div>
-      <div class="halfContainer">
-        <div class="half">
-          fixed variable
+      <div class="container">
+        <div class="flex1">
+            <app-product-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="productLabels.rateType" [selectedLabel]="selectedRateTypeLabel" [items]="rateTypes"></app-product-single-select>
         </div>
-        <div class="half">
-          Gas leki both
+        <div class="flex1">
+            <app-product-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="productLabels.fuelType" [selectedLabel]="selectedFuelTypeLabel" [items]="fuelTypes"></app-product-single-select>
+        </div>
+        <div class="flex1">
+            <app-product-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="productLabels.paymentMethod" [selectedLabel]="selectedPaymentMethodLabel" [items]="paymentMethods"></app-product-single-select>
         </div>
       </div>
     </div>
-    <div class="pricingContainer">
-      <h4>{{productLabels.pricing}}</h4>
-      <div class="pricing">
+    <div class="full">
+      <h4>{{productLabels.gas}}</h4>
         <app-fuel (fuelItems)="setFuelItems($event)" [labels]="productLabels" [fuel]="product.gas" [type]="productLabels.gas"></app-fuel>
-      </div>
     </div>
-    <div class="paymentMethod">
-      Payment method
-    </div>
-    <!-- <div class="labelOnTop">
-      <label>{{productLabels.paymentMethod}}</label>
-      <input type="number" min="0" [ngModel]="product?.paymentMethod" name="paymentMethod" #paymentMethod="ngModel" placeholder="{{productLabels.paymentMethod}}"
-        required>
-      <div [hidden]="paymentMethod.valid || paymentMethod.pristine" class="alert alert-danger">
-        {{ productMessages.noPaymentMethod }}
-      </div>
-    </div> -->
-    <button type="submit" class="primary">Save product</button>
     <div [hidden]="productForm.valid || productForm.pristine" class="alert alert-danger">
       {{ productMessages.allFields }}
     </div>

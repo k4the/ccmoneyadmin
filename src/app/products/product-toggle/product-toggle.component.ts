@@ -10,15 +10,16 @@ export class ProductToggleComponent implements OnInit {
   @Input('label') label: string;
   @Input('item') item: any;
 
-  displayToggle = {
-    isOn: false,
-    item: this.item,
-    label: this.label
-  };
+  displayToggle:any = null;
 
   constructor() { }
 
   ngOnInit() {
+    this.displayToggle = {
+      isOn: this.item,
+      label: this.label
+    };
+    console.log(this.displayToggle.isOn)
   }
 
   setToggle(): void {

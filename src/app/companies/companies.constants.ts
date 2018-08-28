@@ -1,7 +1,6 @@
 export const CompanyMessages = {
   noName: 'Please enter a name',
   noLogoUrl: 'Please enter a logo url',
-  noForumUrl: 'Please enter a forum url',
   noRegion: 'Please select a region',
   noPollRating: 'Please enter a poll rating',
   limitedFeedback: 'There is not enough feedback for this company',
@@ -12,7 +11,6 @@ export const CompanyMessages = {
 export const CompanyLabels = {
   name: 'Name',
   logoUrl: 'Logo url',
-  forumUrl: 'Forum url',
   regions: 'Regions',
   pollRating: 'Poll rating',
   great: 'Great',

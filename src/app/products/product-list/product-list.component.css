@@ -1,4 +1,4 @@
-.companyHeader {
+.productHeader {
   border: 1px solid lightgray;
   padding: 12px 20px;
   margin-bottom: 10px;
@@ -6,11 +6,11 @@
   flex-direction: row;
 }
 
-.companyItem.title {
+.productItem.title {
   flex: 2;
 }
 
-.companyItem.link {
+.productItem.link {
   padding-right: 10px;
   text-align: right;
   cursor: pointer;
@@ -24,10 +24,10 @@
   color: red;
 }
 
-.companyListContainer {
+.productListContainer {
   position: relative;
 }
 
-.companyListContainer .add {
+.productListContainer .add {
 margin-bottom: 12px;
 }

@@ -1,4 +1,6 @@
-<div class="companyListContainer" *ngIf="!showDelete">
+<div id="overlay" *ngIf="isLoading"></div>
+<app-loading [isLoading]="isLoading"></app-loading>
+<div class="productListContainer" *ngIf="!showDelete">
   <div class="full right">
       <button type="button" class="add" (click)="addProduct()">{{productLabels.addProduct}}</button>
   </div>

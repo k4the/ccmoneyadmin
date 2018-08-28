@@ -1,3 +1,4 @@
 <div class="productToggle" (click)="setToggle()">
-  <i class="fas" [ngClass]="{ 'fa-toggle-on': displayToggle.isOn, 'fa-toggle-off': !displayToggle.isOn }"></i>
+    <label>{{label}}</label>
+  <i class="far" [ngClass]="{ 'fa-check-circle': displayToggle.isOn, 'fa-circle': !displayToggle.isOn }"></i>
 </div>

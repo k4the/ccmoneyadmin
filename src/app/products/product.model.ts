@@ -4,7 +4,7 @@ import { Fuel } from './fuel.model';
 export class Product {
   id?: string;
   name: string;
-  isDual: boolean;
+  hasBoth: boolean;
   hasGas: boolean;
   hasElectricity: boolean;
   isGreen: boolean;
@@ -22,7 +22,7 @@ export class Product {
   constructor(product: Product) {
     this.id = product.id ? product.id : null;
     this.name = product.name;
-    this.isDual = product.isDual;
+    this.hasBoth = product.hasBoth;
     this.hasGas = product.hasGas,
     this.hasElectricity = product.hasElectricity,
     this.isGreen = product.isGreen ? product.isGreen : false;

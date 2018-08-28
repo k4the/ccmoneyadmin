@@ -10,7 +10,7 @@ export class ProductMapper {
     const product = {
       id: json._id,
       name: json.name,
-      isDual: json.isDual,
+      hasBoth: json.hasBoth,
       hasGas: json.hasGas,
       hasElectricity: json.hasElectricity,
       isGreen: json.isGreen ? json.isGreen : false,
@@ -33,7 +33,7 @@ export class ProductMapper {
     return {
       _id: product.id ? product.id : null,
       name: product.name,
-      isDual: product.isDual,
+      hasBoth: product.hasBoth,
       hasGas: product.hasGas,
       hasElectricity: product.hasElectricity,
       isGreen: product.isGreen ? product.isGreen : false,
@@ -55,7 +55,6 @@ export class ProductMapper {
       id: json._id,
       name: json.name,
       logoUrl: json.logoUrl,
-      forumUrl: json.forumUrl ? json.forumUrl : null,
       message: json.message ? json.message : null,
       warningMessage: json.warningMessage ? json.warningMessage : null,
       regions: json.regions ? json.regions : [],
@@ -70,7 +69,6 @@ export class ProductMapper {
       _id: company.id ? company.id : null,
       name: company.name,
       logoUrl: company.logoUrl,
-      forumUrl: company.forumUrl ? company.forumUrl : null,
       message: company.message ? company.message : null,
       warningMessage: company.warningMessage ? company.warningMessage : null,
       regions: company.regions ? company.regions : [],
