@@ -11,9 +11,11 @@
 }
 
 .companyItem.link {
-  padding-right: 10px;
-  text-align: right;
+  text-align: center;
   cursor: pointer;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
 }
 
 .fa-pencil-alt {

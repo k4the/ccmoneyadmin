@@ -1,10 +1,15 @@
 <div id="overlay" *ngIf="isLoading"></div>
 <app-loading [isLoading]="isLoading"></app-loading>
 <div class="productListContainer" *ngIf="!showDelete">
-  <div class="full right">
-    <button type="button" class="add" (click)="addProduct()">{{productLabels.addProduct}}</button>
-  </div>
-  <table  *ngIf="products && products.length > 0">
+    <div class="container">
+        <div class="flex1">
+          <input type="text" [(ngModel)]="searchText" placeholder="Search" class="search">
+        </div>
+        <div class="flex1 right">
+          <button type="button" class="add" (click)="addProduct()">{{productLabels.addProduct}}</button>
+        </div>
+      </div>
+  <table *ngIf="products && products.length > 0">
     <tr>
       <th (click)="sortProductsByProperty(productProperties.name)" class="tableLink">
           <span>{{ productLabels.mainTitle }}</span>
@@ -19,7 +24,7 @@
       <th class="small capitalize">{{ keys.edit }}</th>
       <th class="small capitalize">{{ keys.delete }}</th>
     </tr>
-    <tr *ngFor="let product of products">
+    <tr *ngFor="let product of products | filter : searchText">
       <td>{{ product.name }}</td>
       <td>{{ product.company.name }}</td>
       <td *ngIf="product.hasBoth">{{ productLabels.both }}</td>

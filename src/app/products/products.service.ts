@@ -91,6 +91,7 @@ export class ProductsService {
       id: null,
       name: null,
       totalYearlyCost: null,
+      fuelType: null,
       hasBoth: false,
       hasGas: false,
       hasElectricity: false,

@@ -29,6 +29,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   isLoading = false;
   sortAscYearlyCost = false;
   sortAscName = false;
+  searchText = '';
 
   private authStatusSub: Subscription;
 

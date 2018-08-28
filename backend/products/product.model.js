@@ -5,6 +5,7 @@ const productSchema = mongoose.Schema({
   name: { type: String, required: true },
   totalYearlyCost: { type: Number, default: 0 },
   endDate: { type: Date, required: false, default: null },
+  fuelType: { type: String, required: false, default: 'both' },
   hasBoth: { type: Boolean, required: false, default: false },
   hasGas: { type: Boolean, required: false, default: false },
   hasElectricity: { type: Boolean, required: false, default: false },

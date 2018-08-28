@@ -7,7 +7,7 @@
     <div class="flex1 right">
       <a class="navItem" routerLink="/auth/login" routerLinkActive="active" *ngIf="!isLoggedIn">Login</a>
       <a class="navItem" routerLink="/auth/signup" routerLinkActive="active" *ngIf="!isLoggedIn">Signup</a>
-      <button class="navItem logoutBut" *ngIf="isLoggedIn" (click)="onLogout()">Logout</button>
+      <a class="navItem" *ngIf="isLoggedIn" (click)="onLogout()" routerLinkActive="active">Logout</a>
     </div>
   </nav>
 </header>

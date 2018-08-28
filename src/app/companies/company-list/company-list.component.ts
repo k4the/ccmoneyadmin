@@ -25,6 +25,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   type: string = null;
   companyToDeleteId: string = null;
   isLoading = false;
+  searchText = '';
 
   private authStatusSub: Subscription;
 

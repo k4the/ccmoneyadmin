@@ -229,6 +229,11 @@ input[type=text], input[type=email], input[type=password], input[type=number], t
   color: #999;
 }
 
+input[type=text].search {
+  width: 200px;
+  margin: 0;
+}
+
 input[type=number] {
   width: 80px;
 }

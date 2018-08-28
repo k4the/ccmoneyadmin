@@ -9,6 +9,7 @@ import { CompaniesRoutingModule } from './companies-routing.module';
 import { CcModalComponent } from './cc-modal/cc-modal.component';
 import { CcSelectComponent } from './cc-select/cc-select.component';
 import { CompanyLoadingComponent } from './company-loading/company-loading.component';
+import { FilterPipe} from './filter.pipe';
 
 @NgModule({
   imports: [
@@ -18,7 +19,12 @@ import { CompanyLoadingComponent } from './company-loading/company-loading.compo
     CompaniesRoutingModule
   ],
   declarations: [
-    CompanyCreateComponent, CompanyListComponent, CcModalComponent, CcSelectComponent, CompanyLoadingComponent
+    CompanyCreateComponent,
+    CompanyListComponent,
+    CcModalComponent,
+    CcSelectComponent,
+    CompanyLoadingComponent,
+    FilterPipe
   ],
   providers: [CompanyMapper]
 })

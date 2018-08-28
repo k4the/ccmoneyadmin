@@ -225,6 +225,7 @@ export class ProductCreateComponent implements OnInit {
     return {
       id: id,
       name: form.value.name,
+      fuelType: this.product.fuelType,
       totalYearlyCost: this.getTotalYearlyCost(),
       hasBoth: this.product.hasBoth,
       hasGas: this.product.hasGas,

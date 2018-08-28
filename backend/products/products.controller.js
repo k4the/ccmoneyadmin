@@ -38,6 +38,7 @@ exports.addProduct = (req, res, next) => {
   const product = new Product({
     name: req.sanitize(req.body.name),
     totalYearlyCost: req.sanitize(req.body.totalYearlyCost),
+    fuelType: req.sanitize(req.body.fuelType),
     hasBoth: req.sanitize(req.body.hasBoth),
     hasGas: req.sanitize(req.body.hasGas),
     hasElectricity: req.sanitize(req.body.hasElectricity),
@@ -84,6 +85,7 @@ exports.modifyProduct = (req, res, next) => {
       _id: req.sanitize(req.params.id),
       name: req.sanitize(req.body.name),
       totalYearlyCost: req.sanitize(req.body.totalYearlyCost),
+      fuelType: req.sanitize(req.body.fuelType),
       hasBoth: req.sanitize(req.body.hasBoth),
       hasGas: req.sanitize(req.body.hasGas),
       hasElectricity: req.sanitize(req.body.hasElectricity),
