@@ -3,6 +3,7 @@ export const Keys = {
   edit: 'edit',
   gas: 'gas',
   electricity: 'electricity',
+  both: 'both',
   delete: 'delete',
   danger: 'danger',
   ok: 'ok',

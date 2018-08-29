@@ -11,10 +11,8 @@ export class ProductMapper {
       id: json._id,
       name: json.name,
       totalYearlyCost: json.totalYearlyCost,
+      totalMonthlyCost: json.totalMonthlyCost,
       fuelType: json.fuelType ? json.fuelType : null,
-      hasBoth: json.hasBoth,
-      hasGas: json.hasGas,
-      hasElectricity: json.hasElectricity,
       isGreen: json.isGreen ? json.isGreen : false,
       isTopPick: json.isTopPick ? json.isTopPick : false,
       cashback: json.cashback,
@@ -31,15 +29,14 @@ export class ProductMapper {
     return new Product(product);
   }
 
+
   mapProductToJson(product: Product): any {
     return {
       _id: product.id ? product.id : null,
       name: product.name,
       totalYearlyCost: product.totalYearlyCost ? product.totalYearlyCost : 0,
+      totalMonthlyCost: product.totalYearlyCost ? product.totalMonthlyCost : 0,
       fuelType: product.fuelType ? product.fuelType : null,
-      hasBoth: product.hasBoth,
-      hasGas: product.hasGas,
-      hasElectricity: product.hasElectricity,
       isGreen: product.isGreen ? product.isGreen : false,
       isTopPick: product.isTopPick ? product.isTopPick : false,
       cashback: product.cashback,
@@ -83,10 +80,10 @@ export class ProductMapper {
 
   mapPollRatingFromJson(json: any): PollRating {
     const pollRating = {
-      great: json.great ? json.great : 0,
-      ok: json.ok ? json.ok : 0,
-      poor: json.poor ? json.poor : 0,
-      total: json.total ? json.total : 0,
+      greatPercentage: json.greatPercentage ? json.greatPercentage : 0,
+      okPercentage: json.okPercentage ? json.okPercentage : 0,
+      poorPercentage: json.poorPercentage ? json.poorPercentage : 0,
+      totalVotes: json.totalVotes ? json.totalVotes : 0,
       feedbackMessage: json.feedbackMessage ? json.feedbackMessage : null,
       limitedFeedbackMessage: json.limitedFeedbackMessage ? json.limitedFeedbackMessage : null
     };
@@ -95,10 +92,10 @@ export class ProductMapper {
 
   mapPollRatingToJson(pollRating: PollRating): any {
     return {
-      great: pollRating.great ? pollRating.great : 0,
-      ok: pollRating.ok ? pollRating.ok : 0,
-      poor: pollRating.poor ? pollRating.poor : 0,
-      total: pollRating.total ? pollRating.total : 0,
+      great: pollRating.greatPercentage ? pollRating.greatPercentage : 0,
+      ok: pollRating.okPercentage ? pollRating.okPercentage : 0,
+      poor: pollRating.poorPercentage ? pollRating.poorPercentage : 0,
+      total: pollRating.totalVotes ? pollRating.totalVotes : 0,
       feedbackMessage: pollRating.feedbackMessage ? pollRating.feedbackMessage : null,
       limitedFeedbackMessage: pollRating.limitedFeedbackMessage ? pollRating.limitedFeedbackMessage : null
     };
@@ -107,7 +104,7 @@ export class ProductMapper {
   mapFuelFromJson(json: any): Fuel {
     const fuel = {
       yearlyCost: json.yearlyCost,
-      costMonthly: json.costMonthly ? json.costMonthly : null,
+      monthlyCost: json.monthlyCost ? json.monthlyCost : null,
       economy7: json.economy7,
       unitRate: json.unitRate,
       discountRate: json.discountRate ? json.discountRate : null,
@@ -119,7 +116,7 @@ export class ProductMapper {
   mapFuelToJson(fuel: Fuel): any {
     return {
       yearlyCost: fuel.yearlyCost,
-      costMonthly: fuel.costMonthly ? fuel.costMonthly : null,
+      monthlyCost: fuel.monthlyCost ? fuel.monthlyCost : null,
       economy7: fuel.economy7,
       unitRate: fuel.unitRate,
       discountRate: fuel.discountRate ? fuel.discountRate : null,

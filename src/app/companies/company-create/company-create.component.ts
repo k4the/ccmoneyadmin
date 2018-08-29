@@ -85,10 +85,10 @@ export class CompanyCreateComponent implements OnInit {
     let pollRating: PollRating = null;
     let id: string = null;
     pollRating = {
-      great: form.value.great,
-      ok: form.value.ok,
-      poor: form.value.poor,
-      total: form.value.total
+      greatPercentage: form.value.greatPercentage,
+      okPercentage: form.value.okPercentage,
+      poorPercentage: form.value.poorPercentage,
+      totalVotes: form.value.totalVotes
     };
     company = {
       id: id,

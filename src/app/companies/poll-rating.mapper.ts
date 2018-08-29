@@ -5,10 +5,10 @@ export class PollRatingMapper {
 
   mapFromJson(json: any): PollRating {
     const pollRating = {
-      great: json.great ? json.great : 0,
-      ok: json.ok ? json.ok : 0,
-      poor: json.poor ? json.poor : 0,
-      total: json.total ? json.total : 0,
+      greatPercentage: json.greatPercentage ? json.greatPercentage : 0,
+      okPercentage: json.okPercentage ? json.okPercentage : 0,
+      poorPercentage: json.poorPercentage ? json.poorPercentage : 0,
+      totalVotes: json.totalVotes ? json.totalVotes : 0,
       feedbackMessage: json.feedbackMessage ? json.feedbackMessage : null,
       limitedFeedbackMessage: json.limitedFeedbackMessage ? json.limitedFeedbackMessage : null
     };
@@ -17,10 +17,10 @@ export class PollRatingMapper {
 
   mapToJson(pollRating: PollRating): any {
     return {
-      great: pollRating.great ? pollRating.great : 0,
-      ok: pollRating.ok ? pollRating.ok : 0,
-      poor: pollRating.poor ? pollRating.poor : 0,
-      total: pollRating.total ? pollRating.total : 0,
+      greatPercentage: pollRating.greatPercentage ? pollRating.greatPercentage : 0,
+      ok: pollRating.okPercentage ? pollRating.okPercentage : 0,
+      poor: pollRating.poorPercentage ? pollRating.poorPercentage : 0,
+      total: pollRating.totalVotes ? pollRating.totalVotes : 0,
       feedbackMessage: pollRating.feedbackMessage ? pollRating.feedbackMessage : null,
       limitedFeedbackMessage: pollRating.limitedFeedbackMessage ? pollRating.limitedFeedbackMessage : null
     };

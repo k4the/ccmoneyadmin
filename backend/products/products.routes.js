@@ -3,7 +3,7 @@ const router = express.Router();
 const ProductsController = require('./products.controller');
 const checkAuth = require('../shared/check-auth');
 
-router.get('', checkAuth, ProductsController.getProducts);
+router.get('', ProductsController.getProducts);
 router.get('/:id', checkAuth, ProductsController.getProductById);
 router.post('', checkAuth, ProductsController.addProduct);
 router.delete('/:id', checkAuth, ProductsController.deleteProduct);

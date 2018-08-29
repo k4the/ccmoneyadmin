@@ -20,33 +20,33 @@
       <div class="pollRating">
         <div class="labelOnTop">
           <label>{{companyLabels.great}}</label>
-          <input type="number" min="0" [ngModel]="company?.pollRating.great" name="great" #great="ngModel" placeholder="{{companyLabels.great}}"
+          <input type="number" min="0" [ngModel]="company?.pollRating.greatPercentage" name="greatPercentage" #greatPercentage="ngModel" placeholder="{{companyLabels.great}}"
             required>
-          <div [hidden]="great.valid || great.pristine" class="alert alert-danger">
+          <div [hidden]="greatPercentage.valid || greatPercentage.pristine" class="alert alert-danger">
             {{ companyMessages.noPollRating }}
           </div>
         </div>
         <div class="labelOnTop">
           <label>{{companyLabels.ok}}</label>
-          <input type="number" min="0" [ngModel]="company?.pollRating.ok" name="ok" #ok="ngModel" placeholder="{{companyLabels.ok}}"
+          <input type="number" min="0" [ngModel]="company?.pollRating.okPercentage" name="okPercentage" #okPercentage="ngModel" placeholder="{{companyLabels.ok}}"
             required>
-          <div [hidden]="ok.valid || ok.pristine" class="alert alert-danger">
+          <div [hidden]="okPercentage.valid || okPercentage.pristine" class="alert alert-danger">
             {{ companyMessages.noPollRating }}
           </div>
         </div>
         <div class="labelOnTop">
           <label>{{companyLabels.poor}}</label>
-          <input type="number" min="0" [ngModel]="company?.pollRating.poor" name="poor" #poor="ngModel" placeholder="{{companyLabels.poor}}"
+          <input type="number" min="0" [ngModel]="company?.pollRating.poorPercentage" name="poorPercentage" #poorPercentage="ngModel" placeholder="{{companyLabels.poor}}"
             required>
-          <div [hidden]="poor.valid || poor.pristine" class="alert alert-danger">
+          <div [hidden]="poorPercentage.valid || poorPercentage.pristine" class="alert alert-danger">
             {{ companyMessages.noPollRating }}
           </div>
         </div>
         <div class="labelOnTop">
           <label>{{companyLabels.total}}</label>
-          <input type="number" min="0" [ngModel]="company?.pollRating.total" name="total" #total="ngModel" placeholder="{{companyLabels.total}}"
+          <input type="number" min="0" [ngModel]="company?.pollRating.totalVotes" name="totalVotes" #totalVotes="ngModel" placeholder="{{companyLabels.total}}"
             required>
-          <div [hidden]="total.valid || total.pristine" class="alert alert-danger">
+          <div [hidden]="totalVotes.valid || totalVotes.pristine" class="alert alert-danger">
             {{ companyMessages.noPollRating }}
           </div>
         </div>

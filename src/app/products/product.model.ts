@@ -5,10 +5,8 @@ export class Product {
   id?: string;
   name: string;
   totalYearlyCost: number;
+  totalMonthlyCost: number;
   fuelType: string;
-  hasBoth: boolean;
-  hasGas: boolean;
-  hasElectricity: boolean;
   isGreen: boolean;
   isTopPick: boolean;
   cashback: number;
@@ -25,10 +23,8 @@ export class Product {
     this.id = product.id ? product.id : null;
     this.name = product.name;
     this.totalYearlyCost = product.totalYearlyCost;
+    this.totalMonthlyCost = product.totalMonthlyCost;
     this.fuelType = product.fuelType;
-    this.hasBoth = product.hasBoth;
-    this.hasGas = product.hasGas,
-    this.hasElectricity = product.hasElectricity,
     this.isGreen = product.isGreen ? product.isGreen : false;
     this.isTopPick = product.isTopPick ? product.isTopPick : false;
     this.cashback = product.cashback ? product.cashback : 0;

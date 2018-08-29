@@ -24,11 +24,9 @@ export class ProductsService {
             return 1;
         return 0;
     });
-
     if (order === 'DESC') {
       products.reverse();
     }
-    console.log(products)
   }
 
   getProducts(): Observable<Product[]> {
@@ -91,10 +89,8 @@ export class ProductsService {
       id: null,
       name: null,
       totalYearlyCost: null,
+      totalMonthlyCost: null,
       fuelType: null,
-      hasBoth: false,
-      hasGas: false,
-      hasElectricity: false,
       isGreen: false,
       isTopPick: false,
       cashback: null,
@@ -112,7 +108,7 @@ export class ProductsService {
   public getEmptyFuel(): Fuel {
     return {
       yearlyCost: null,
-      costMonthly: null,
+      monthlyCost: null,
       economy7: null,
       unitRate: null,
       discountRate: null,
@@ -122,10 +118,10 @@ export class ProductsService {
 
   public getEmptyPollRating(): PollRating {
     return {
-      great: 0,
-      ok: 0,
-      poor: 0,
-      total: 0,
+      greatPercentage: 0,
+      okPercentage: 0,
+      poorPercentage: 0,
+      totalVotes: 0,
       feedbackMessage: null,
       limitedFeedbackMessage: null
     };

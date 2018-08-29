@@ -27,9 +27,7 @@
     <tr *ngFor="let product of products | filter : searchText">
       <td>{{ product.name }}</td>
       <td>{{ product.company.name }}</td>
-      <td *ngIf="product.hasBoth">{{ productLabels.both }}</td>
-      <td *ngIf="!product.hasBoth && product.hasElectricity">{{ productLabels.electricity }}</td>
-      <td *ngIf="!product.hasBoth && product.hasGas">{{ productLabels.gas }}</td>
+      <td class="capitalize">{{ product.fuelType }}</td>
       <td>{{ product.totalYearlyCost }}</td>
       <td class="small"><a class="productItem link" *ngIf="isLoggedIn" [routerLink]="['/products/edit', product.id]"><i class="fas fa-pencil-alt"></i></a></td>
       <td class="small"><a class="productItem link" *ngIf="isLoggedIn" (click)="openDeleteModal(product)"><i class="fas fa-trash-alt"></i></a></td>

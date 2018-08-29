@@ -12,6 +12,12 @@
       </td>
     </tr>
     <tr>
+      <td>{{ labels.monthlyCost }}</td>
+      <td class="noInput">
+        {{ monthlyCost | number : '1.2-2' }}
+      </td>
+    </tr>
+    <tr>
       <td>{{ labels.unitRate }}</td>
       <td>
         <input [ngClass]="{ 'error': !unitRate.valid && !unitRate.pristine }" type="number" min="1" [ngModel]="fuel.unitRate" name="unitRate"

@@ -56,6 +56,10 @@
   text-transform: capitalize;
 }
 
+.productListContainer table td.capitalize {
+  text-transform: capitalize;
+}
+
 .productListContainer table th.tableLink {
   cursor: pointer;
   position: relative;

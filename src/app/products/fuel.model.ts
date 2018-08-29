@@ -1,6 +1,6 @@
 export class Fuel {
   yearlyCost: number;
-  costMonthly?: number;
+  monthlyCost?: number;
   economy7: number;
   unitRate: number;
   discountRate?: number;
@@ -8,7 +8,7 @@ export class Fuel {
 
   constructor(fuel: Fuel) {
     this.yearlyCost = fuel.yearlyCost;
-    this.costMonthly = fuel.costMonthly ? fuel.costMonthly : null;
+    this.monthlyCost = fuel.monthlyCost ? fuel.monthlyCost : null;
     this.economy7 = fuel.economy7;
     this.unitRate = fuel.unitRate;
     this.discountRate = fuel.discountRate ? fuel.discountRate : null;

@@ -44,13 +44,13 @@
         </div>
       </div>
     </div>
-    <div class="full" *ngIf="product.hasGas">
+    <div class="full" *ngIf="product.fuelType === this.keys.gas || product.fuelType === this.keys.both">
       <h4>{{productLabels.gas}}</h4>
-        <app-fuel (fuelItems)="setFuelItems($event)" [labels]="productLabels" [fuel]="product.gas" [type]="productLabels.gas"></app-fuel>
+        <app-fuel (fuelItems)="setFuelItems($event)" [labels]="productLabels" [fuel]="product.gas" [type]="keys.gas"></app-fuel>
     </div>
-    <div class="full" *ngIf="product.hasElectricity">
+    <div class="full" *ngIf="product.fuelType === this.keys.electricity || product.fuelType === this.keys.both">
         <h4>{{productLabels.electricity}}</h4>
-          <app-fuel (fuelItems)="setFuelItems($event)" [labels]="productLabels" [fuel]="product.electricity" [type]="productLabels.electricity"></app-fuel>
+          <app-fuel (fuelItems)="setFuelItems($event)" [labels]="productLabels" [fuel]="product.electricity" [type]="keys.electricity"></app-fuel>
       </div>
     <div [hidden]="productForm.valid || productForm.pristine" class="alert alert-danger">
       {{ productMessages.allFields }}

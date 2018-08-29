@@ -33,6 +33,10 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
+.fuelForm td.noInput {
+  padding: 12px;
+}
+
 /* .fuelForm input[type=number].error {
   border: 1px solid red;
 } */
