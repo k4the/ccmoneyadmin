@@ -1,0 +1,65 @@
+.starRating {
+    position: relative;
+    display: block;
+    top: 0;
+    right: 0;
+    margin: 0;
+    width: auto;
+}
+
+.fa-star,
+.fa-star-half {
+    font-size: 14px;
+    color: #dedede;
+}
+
+.fa-star-half {
+    display: none;
+    position: absolute;
+}
+
+.fa-star.checked,
+.fa-star-half.checked {
+    color: #f37000;
+    display: inline-block;
+}
+
+.fa-star-half.checked {
+    top: 2px;
+}
+
+.noStars,
+.oneStar,
+.oneAndAHalfStars,
+.twoStars,
+.twoAndAHalfStars,
+.threeStars,
+.threeAndAHalfStars,
+.fourStars,
+.fourAndAHalfStars,
+.fiveStars {
+    display: inline-block;
+    position: relative;
+}
+
+.oneAndAHalfStars .fa-star-half.checked {
+    left: 16px;
+}
+
+.twoAndAHalfStars .fa-star-half.checked {
+    left: 32px;
+}
+
+.threeAndAHalfStars .fa-star-half.checked {
+    left: 48px;
+}
+
+.fourAndAHalfStars .fa-star-half.checked {
+    left: 64px;
+}
+
+@media only screen and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
+    .starRating {
+        width: 100px;
+    }
+}

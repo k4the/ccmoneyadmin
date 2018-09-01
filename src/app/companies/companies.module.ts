@@ -10,6 +10,7 @@ import { CcModalComponent } from './cc-modal/cc-modal.component';
 import { CcSelectComponent } from './cc-select/cc-select.component';
 import { CompanyLoadingComponent } from './company-loading/company-loading.component';
 import { FilterPipe} from './filter.pipe';
+import { StarRatingComponent } from './star-rating/star-rating.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { FilterPipe} from './filter.pipe';
     CcModalComponent,
     CcSelectComponent,
     CompanyLoadingComponent,
-    FilterPipe
+    FilterPipe,
+    StarRatingComponent
   ],
   providers: [CompanyMapper]
 })

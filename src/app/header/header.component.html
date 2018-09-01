@@ -3,10 +3,11 @@
     <div class="flex1">
       <a class="navItem" routerLink="/companies" routerLinkActive="active" *ngIf="isLoggedIn">Companies</a>
       <a class="navItem" routerLink="/products" routerLinkActive="active" *ngIf="isLoggedIn">Products</a>
+      <a class="navItem" routerLink="/users" routerLinkActive="active" *ngIf="isLoggedIn">Users</a>
     </div>
     <div class="flex1 right">
-      <a class="navItem" routerLink="/auth/login" routerLinkActive="active" *ngIf="!isLoggedIn">Login</a>
-      <a class="navItem" routerLink="/auth/signup" routerLinkActive="active" *ngIf="!isLoggedIn">Signup</a>
+      <a class="navItem" routerLink="/users/login" routerLinkActive="active" *ngIf="!isLoggedIn">Login</a>
+      <a class="navItem" routerLink="/users/signup" routerLinkActive="active" *ngIf="!isLoggedIn">Signup</a>
       <a class="navItem" *ngIf="isLoggedIn" (click)="onLogout()" routerLinkActive="active">Logout</a>
     </div>
   </nav>

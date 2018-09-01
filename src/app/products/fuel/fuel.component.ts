@@ -22,12 +22,13 @@ export class FuelComponent implements OnInit {
   }
 
   setFuel(form): void {
+    this.monthlyCost = form.value.yearlyCost ? form.value.yearlyCost / 12 : 0;
     const fuel: Fuel = {
       yearlyCost: form.value.yearlyCost,
-      monthlyCost: form.value.yearlylyCost/12,
+      monthlyCost: this.monthlyCost,
       unitRate: form.value.unitRate,
       discountRate: form.value.discountRate,
-      economy7: form.value.economy7,
+      economy7: form.value.economy7 ? form.value.economy7 : 0,
       standingCharge: form.value.standingCharge
     };
     this.fuel = fuel;

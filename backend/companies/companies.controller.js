@@ -29,10 +29,14 @@ exports.addCompany = (req, res, next) => {
     regions: req.sanitize(req.body.regions),
     isBig: req.sanitize(req.body.isBig),
     pollRating: {
+      great: req.sanitize(req.body.pollRating.great),
+      ok: req.sanitize(req.body.pollRating.ok),
+      poor: req.sanitize(req.body.pollRating.poor),
       greatPercentage: req.sanitize(req.body.pollRating.greatPercentage),
       okPercentage: req.sanitize(req.body.pollRating.okPercentage),
       poorPercentage: req.sanitize(req.body.pollRating.poorPercentage),
       totalVotes: req.sanitize(req.body.pollRating.totalVotes),
+      starClass: req.sanitize(req.body.pollRating.starClass),
       feedbackMessage: req.sanitize(req.body.pollRating.feedbackMessage),
       limitedFeedbackMessage: req.sanitize(req.body.pollRating.limitedFeedbackMessage)
     }
@@ -61,10 +65,14 @@ exports.modifyCompany = (req, res, next) => {
     regions: req.sanitize(req.body.regions),
     isBig: req.sanitize(req.body.isBig),
     pollRating: {
+      great: req.sanitize(req.body.pollRating.great),
+      ok: req.sanitize(req.body.pollRating.ok),
+      poor: req.sanitize(req.body.pollRating.poor),
       greatPercentage: req.sanitize(req.body.pollRating.greatPercentage),
       okPercentage: req.sanitize(req.body.pollRating.okPercentage),
       poorPercentage: req.sanitize(req.body.pollRating.poorPercentage),
       totalVotes: req.sanitize(req.body.pollRating.totalVotes),
+      starClass: req.sanitize(req.body.pollRating.starClass),
       feedbackMessage: req.sanitize(req.body.pollRating.feedbackMessage),
       limitedFeedbackMessage: req.sanitize(req.body.pollRating.limitedFeedbackMessage)
     }

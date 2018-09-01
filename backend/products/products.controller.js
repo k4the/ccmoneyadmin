@@ -50,8 +50,21 @@ exports.addProduct = (req, res, next) => {
     rateType: req.sanitize(req.body.rateType),
     fixedFor: req.sanitize(req.body.fixedFor),
     company: req.body.company,
-    gas: req.body.gas,
-    electricity: req.body.electricity
+    gas: {
+      yearlyCost: req.sanitize(req.body.gas.yearlyCost),
+      monthlyCost: req.sanitize(req.body.gas.monthlyCost),
+      standingCharge: req.sanitize(req.body.gas.standingCharge),
+      unitRate: req.sanitize(req.body.gas.unitRate),
+      discountRate: req.sanitize(req.body.gas.discountRate)
+    },
+    electricity: {
+      yearlyCost: req.sanitize(req.body.electricity.yearlyCost),
+      monthlyCost: req.sanitize(req.body.electricity.monthlyCost),
+      economy7: req.sanitize(req.body.electricity.economy7),
+      standingCharge: req.sanitize(req.body.electricity.standingCharge),
+      unitRate: req.sanitize(req.body.electricity.unitRate),
+      discountRate: req.sanitize(req.body.electricity.discountRate)
+    }
   });
   try {
     product.save().then(createdProduct => {
@@ -94,8 +107,21 @@ exports.modifyProduct = (req, res, next) => {
       rateType: req.sanitize(req.body.rateType),
       fixedFor: req.sanitize(req.body.fixedFor),
       company: req.body.company,
-      gas: req.body.gas,
-      electricity: req.body.electricity
+      gas: {
+        yearlyCost: req.sanitize(req.body.gas.yearlyCost),
+        monthlyCost: req.sanitize(req.body.gas.monthlyCost),
+        standingCharge: req.sanitize(req.body.gas.standingCharge),
+        unitRate: req.sanitize(req.body.gas.unitRate),
+        discountRate: req.sanitize(req.body.gas.discountRate)
+      },
+      electricity: {
+        yearlyCost: req.sanitize(req.body.electricity.yearlyCost),
+        monthlyCost: req.sanitize(req.body.electricity.monthlyCost),
+        economy7: req.sanitize(req.body.electricity.economy7),
+        standingCharge: req.sanitize(req.body.electricity.standingCharge),
+        unitRate: req.sanitize(req.body.electricity.unitRate),
+        discountRate: req.sanitize(req.body.electricity.discountRate)
+      }
     });
     Product.updateOne({ _id: req.params.id }, product).then(result => {
       if (result) {

@@ -1,0 +1,17 @@
+<div id="overlay" *ngIf="isLoading"></div>
+<app-user-loading [isLoading]="isLoading"></app-user-loading>
+<div class="userListContainer" *ngIf="!showDelete">
+  <table *ngIf="users && users.length > 0">
+    <tr>
+      <th>Email address</th>
+      <th class="small capitalize">{{ keys.delete }}</th>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td>{{ user.email }}</td>
+      <td class="small"><a class="userItem link" *ngIf="isLoggedIn" (click)="openDeleteModal(user)"><i class="fas fa-trash-alt"></i></a></td>
+    </tr>
+  </table>
+  <p *ngIf="users.length === 0">No users to display</p>
+</div>
+<app-users-modal *ngIf="showDelete" (usersModalResult)="deleteUser($event)" [title]="title" [message]="message" [type]="type"
+  [id]="userToDeleteId"></app-users-modal>

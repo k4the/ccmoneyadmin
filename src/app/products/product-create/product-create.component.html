@@ -8,7 +8,7 @@
         <div class="flex1">
           <div class="labelOnTop">
             <label>{{productLabels.name}}</label>
-            <input type="text" [ngModel]="product?.name" name="name" #name="ngModel" placeholder="{{productLabels.name}}" required>
+            <input type="text" autofocus [ngModel]="product?.name" name="name" #name="ngModel" placeholder="{{productLabels.name}}" required>
             <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
               {{ productMessages.noName }}
             </div>

@@ -1,6 +1,6 @@
 <div class="signup">
     <form (submit)="onSignup(signupForm)" #signupForm="ngForm" class="card">
-        <input type="email" ngModel name="email" #email="ngModel" placeholder="Please enter your email" required email>
+        <input type="email" autofocus ngModel name="email" #email="ngModel" placeholder="Please enter your email" required email>
         <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
           Please enter a valid email
         </div>

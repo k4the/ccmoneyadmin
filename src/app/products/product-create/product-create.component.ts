@@ -106,66 +106,38 @@ export class ProductCreateComponent implements OnInit {
   }
 
   setFuelItems(item: any): void {
-    if (item.type === this.productLabels.gas) {
+    if (item.type === this.keys.gas) {
       this.product.gas = item.fuel;
     }
-    if (item.type === this.productLabels.electricity) {
+    if (item.type === this.keys.electricity) {
       this.product.electricity = item.fuel;
     }
   }
 
   getTotalYearlyCost(): number {
     let totalYearlyCost = 0;
-    if (
-      this.product.gas &&
-      this.product.gas.yearlyCost &&
-      this.product.electricity &&
-      this.product.electricity.yearlyCost
-    ) {
-      totalYearlyCost =
-        this.product.gas.yearlyCost + this.product.electricity.yearlyCost;
+    if(this.product.fuelType === this.keys.electricity) {
+      totalYearlyCost = this.product.electricity.yearlyCost;
     }
-    if (
-      this.product.gas &&
-      this.product.gas.yearlyCost &&
-      (!this.product.electricity || !this.product.electricity.yearlyCost)
-    ) {
+    if(this.product.fuelType === this.keys.gas) {
       totalYearlyCost = this.product.gas.yearlyCost;
     }
-    if (
-      this.product.electricity &&
-      this.product.electricity.yearlyCost &&
-      (!this.product.gas || !this.product.gas.yearlyCost)
-    ) {
-      totalYearlyCost = this.product.electricity.yearlyCost;
+    if(this.product.fuelType === this.keys.both) {
+      totalYearlyCost = (this.product.gas.yearlyCost + this.product.electricity.yearlyCost);
     }
     return totalYearlyCost;
   }
 
   getTotalMonthlyCost(): number {
     let totalMonthlyCost = 0;
-    if (
-      this.product.gas &&
-      this.product.gas.monthlyCost &&
-      this.product.electricity &&
-      this.product.electricity.monthlyCost
-    ) {
-      totalMonthlyCost =
-        this.product.gas.monthlyCost + this.product.electricity.monthlyCost;
+    if(this.product.fuelType === this.keys.electricity) {
+      totalMonthlyCost = this.product.electricity.yearlyCost/12;
     }
-    if (
-      this.product.gas &&
-      this.product.gas.monthlyCost &&
-      (!this.product.electricity || !this.product.electricity.monthlyCost)
-    ) {
-      totalMonthlyCost = this.product.gas.monthlyCost;
+    if(this.product.fuelType === this.keys.gas) {
+      totalMonthlyCost = this.product.gas.yearlyCost/12;
     }
-    if (
-      this.product.electricity &&
-      this.product.electricity.monthlyCost &&
-      (!this.product.gas || !this.product.gas.monthlyCost)
-    ) {
-      totalMonthlyCost = this.product.electricity.monthlyCost;
+    if(this.product.fuelType === this.keys.both) {
+      totalMonthlyCost = (this.product.gas.yearlyCost + this.product.electricity.yearlyCost)/12;
     }
     return totalMonthlyCost;
   }
@@ -179,7 +151,7 @@ export class ProductCreateComponent implements OnInit {
         if (this.mode === this.keys.edit) {
           this.getProductById();
         } else {
-          this.product = this.productsService.getEmptyProduct();
+          this.product = new Product(null);
         }
       },
       err => {
@@ -195,7 +167,6 @@ export class ProductCreateComponent implements OnInit {
     this.productsService.getProduct(this.productId).subscribe(
       productData => {
         this.product = { ...productData };
-        console.log(this.product);
         this.isLoading = false;
         this.selectedCompany = this.product.company;
         this.selectedCompanyLabel = this.product.company.name;

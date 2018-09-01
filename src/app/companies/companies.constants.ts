@@ -5,7 +5,8 @@ export const CompanyMessages = {
   noPollRating: 'Please enter a poll rating',
   limitedFeedback: 'There is not enough feedback for this company',
   allFields: 'Please enter all required fields',
-  deleteSure: 'Are you sure you want to delete'
+  deleteSure: 'Are you sure you want to delete',
+  totalVotesError: 'The total number of votes must be greater or equal to the sum of great, ok and poor votes'
 };
 
 export const CompanyLabels = {

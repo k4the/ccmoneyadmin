@@ -1,0 +1,67 @@
+.userHeader {
+  border: 1px solid lightgray;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.userItem.title {
+  flex: 2;
+}
+
+.userItem.link {
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+
+.fa-pencil-alt {
+  color: green;
+}
+
+.fa-trash-alt {
+  color: red;
+}
+
+.userListContainer {
+  position: relative;
+}
+
+.userListContainer .add {
+margin-bottom: 12px;
+}
+
+.userListContainer table {
+  background: white;
+}
+
+.userListContainer table td, .userListContainer table th {
+  padding: 12px 10px;
+}
+
+.userListContainer table td.small, .userListContainer table th.small {
+  width: 10%;
+  text-align: center;
+}
+
+.userListContainer table th.small.capitalize {
+  text-transform: capitalize;
+}
+
+.userListContainer table th.tableLink {
+  cursor: pointer;
+  position: relative;
+}
+
+.userListContainer table th.tableLink span {
+  display: inline-block;
+}
+
+.userListContainer table th.tableLink span i {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+}

@@ -12,3 +12,13 @@ h4 {
 .companyButtons .cancel {
   margin-right: 10px;
 }
+
+.stars {
+  padding-top: 0;
+}
+
+@media only screen and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
+  .stars {
+    padding-top: 70px;
+  }
+}

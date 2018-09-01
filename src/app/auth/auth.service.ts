@@ -1,9 +1,12 @@
+import { UserMapper } from './user.mapper';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Auth } from './auth.model';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { User } from './user.model';
 
 const usersUrl = environment.apiUrl + '/users/';
 const loginUrl = 'login';
@@ -17,7 +20,54 @@ export class AuthService {
   private isAuthenticated = false;
   private authStatusListener = new Subject<boolean>();
   private tokenTimer: any;
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private userMapper: UserMapper) {}
+
+  getUsers(): Observable<User[]> {
+    const results = this.http.get<{ message: string; users: Array<any> }>(usersUrl);
+    return results.pipe(
+      map(userData => {
+        return userData.users.map(user => {
+          return this.userMapper.mapFromJson(user);
+        });
+      })
+    )
+  }
+
+  // addUser(user: User): Observable<any> {
+  //   if (user) {
+  //     user = this.userMapper.mapToJson(user);
+  //     const result = this.http.post<{ message: string; userId: string }>(usersUrl, user);
+  //     return result.pipe(
+  //       map(userData => {
+  //         user.id = userData.userId;
+  //       })
+  //     )
+  //   }
+  // }
+
+  // updateUser(userId: string, user: User): Observable<any> {
+  //   if (user) {
+  //     user = this.userMapper.mapToJson(user);
+  //     return this.http.put(usersUrl + userId, user);
+  //   }
+  // }
+
+  getUser(id: string): Observable<any> {
+    if (id) {
+      const result = this.http.get<{}>(usersUrl + id);
+      return result.pipe(
+        map(userData => {
+          return this.userMapper.mapFromJson(userData);
+        })
+      )
+    }
+  }
+
+  deleteUser(id: string): Observable<any> {
+    if (id) {
+      return this.http.delete<{}>(usersUrl + id);
+    }
+  }
 
   autoAuthUser(): any {
     const authInformation = this.getAuthData();
@@ -51,7 +101,7 @@ export class AuthService {
       .post(usersUrl + signupUrl, auth)
       .subscribe(response => {
         this.login(auth);
-        // this.router.navigate(['/']);
+        this.router.navigate(['/']);
       }, error => {
         this.authStatusListener.next(false);
       });

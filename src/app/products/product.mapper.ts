@@ -1,3 +1,4 @@
+// import { CompanyMapper } from './../companies/company.mapper';
 import { Product } from './product.model';
 import { PollRating } from './../companies/poll-rating.model';
 import { Fuel } from './fuel.model';
@@ -34,8 +35,8 @@ export class ProductMapper {
     return {
       _id: product.id ? product.id : null,
       name: product.name,
-      totalYearlyCost: product.totalYearlyCost ? product.totalYearlyCost : 0,
-      totalMonthlyCost: product.totalYearlyCost ? product.totalMonthlyCost : 0,
+      totalYearlyCost: product.totalYearlyCost,
+      totalMonthlyCost: product.totalMonthlyCost,
       fuelType: product.fuelType ? product.fuelType : null,
       isGreen: product.isGreen ? product.isGreen : false,
       isTopPick: product.isTopPick ? product.isTopPick : false,
@@ -80,6 +81,10 @@ export class ProductMapper {
 
   mapPollRatingFromJson(json: any): PollRating {
     const pollRating = {
+      great: json.great ? json.great : 0,
+      ok: json.ok ? json.ok : 0,
+      poor: json.poor ? json.poor : 0,
+      starClass: json.starClass ? json.starClass : null,
       greatPercentage: json.greatPercentage ? json.greatPercentage : 0,
       okPercentage: json.okPercentage ? json.okPercentage : 0,
       poorPercentage: json.poorPercentage ? json.poorPercentage : 0,
@@ -92,10 +97,14 @@ export class ProductMapper {
 
   mapPollRatingToJson(pollRating: PollRating): any {
     return {
-      great: pollRating.greatPercentage ? pollRating.greatPercentage : 0,
-      ok: pollRating.okPercentage ? pollRating.okPercentage : 0,
-      poor: pollRating.poorPercentage ? pollRating.poorPercentage : 0,
-      total: pollRating.totalVotes ? pollRating.totalVotes : 0,
+      great: pollRating.great ? pollRating.great : 0,
+      ok: pollRating.ok ? pollRating.ok : 0,
+      poor: pollRating.poor ? pollRating.poor : 0,
+      starClass: pollRating.starClass ? pollRating.starClass : null,
+      greatPercentage: pollRating.greatPercentage ? pollRating.greatPercentage : 0,
+      okPercentage: pollRating.okPercentage ? pollRating.okPercentage : 0,
+      poorPercentage: pollRating.poorPercentage ? pollRating.poorPercentage : 0,
+      totalVotes: pollRating.totalVotes ? pollRating.totalVotes : 0,
       feedbackMessage: pollRating.feedbackMessage ? pollRating.feedbackMessage : null,
       limitedFeedbackMessage: pollRating.limitedFeedbackMessage ? pollRating.limitedFeedbackMessage : null
     };

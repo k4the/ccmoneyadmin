@@ -1,3 +1,4 @@
+import { UserMapper } from './auth/user.mapper';
 import { CompanyMapper } from './companies/company.mapper';
 import { ProductMapper } from './products/product.mapper';
 import { HomeComponent } from './home/home.component';
@@ -27,7 +28,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     CompanyMapper,
-    ProductMapper
+    ProductMapper, UserMapper
 ],
   bootstrap: [AppComponent]
 })

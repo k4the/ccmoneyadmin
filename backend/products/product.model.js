@@ -25,15 +25,15 @@ const productSchema = mongoose.Schema({
     monthlyCost: { type: Number, required: false, default: 0 },
     economy7: { type: Number, required: false, default: 0 },
     standingCharge: { type: Number, required: false, default: 0 },
-    unitRate: { type: Number, required: true, default: 0 },
+    unitRate: { type: Number, required: false, default: 0 },
     discountRate: { type: Number, required: false, default: 0 }
   },
   electricity: {
     yearlyCost: { type: Number, required: false, default: 0 },
     monthlyCost: { type: Number, required: false, default: 0 },
-    economy7: { type: Number, required: true, default: 0 },
-    standingCharge: { type: Number, required: true, default: 0 },
-    unitRate: { type: Number, required: true, default: 0 },
+    economy7: { type: Number, required: false, default: 0 },
+    standingCharge: { type: Number, required: false, default: 0 },
+    unitRate: { type: Number, required: false, default: 0 },
     discountRate: { type: Number, default: null, default: 0 }
   }
 });
