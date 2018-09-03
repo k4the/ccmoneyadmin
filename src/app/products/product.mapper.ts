@@ -1,4 +1,3 @@
-// import { CompanyMapper } from './../companies/company.mapper';
 import { Product } from './product.model';
 import { PollRating } from './../companies/poll-rating.model';
 import { Fuel } from './fuel.model';
