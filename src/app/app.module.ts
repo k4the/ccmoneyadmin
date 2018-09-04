@@ -1,3 +1,6 @@
+import { CcSingleSelectModule } from './cc-single-select/cc-single-select.module';
+import { CcSelectModule } from './cc-select/cc-select.module';
+import { CcModalModule } from './cc-modal/cc-modal.module';
 import { UserMapper } from './auth/user.mapper';
 import { CompanyMapper } from './companies/company.mapper';
 import { ProductMapper } from './products/product.mapper';
@@ -11,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app.routing.module';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CcToggleModule } from './cc-toggle/cc-toggle.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    CcModalModule,
+    CcSelectModule,
+    CcSingleSelectModule,
+    CcToggleModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

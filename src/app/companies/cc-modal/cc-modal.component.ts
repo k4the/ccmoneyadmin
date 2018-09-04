@@ -2,11 +2,11 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Keys } from '../../global.constants';
 
 @Component({
-  selector: 'app-cc-modal',
+  selector: 'app-cc-modal2',
   templateUrl: './cc-modal.component.html',
   styleUrls: ['./cc-modal.component.css']
 })
-export class CcModalComponent implements OnInit {
+export class CcModalComponent2 implements OnInit {
   @Output()
   ccModalResult = new EventEmitter<{result: boolean, id: string}>();
   @Input('name')

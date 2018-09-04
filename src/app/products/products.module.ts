@@ -1,3 +1,6 @@
+import { CcToggleModule } from './../cc-toggle/cc-toggle.module';
+import { CcSingleSelectModule } from './../cc-single-select/cc-single-select.module';
+import { CcModalModule } from './../cc-modal/cc-modal.module';
 import { ProductMapper } from './product.mapper';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -6,29 +9,26 @@ import { FormsModule } from '@angular/forms';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductsRoutingModule } from './products-routing.module';
-import { ProductModalComponent } from './product-modal/product-modal.component';
-import { ProductSelectComponent } from './product-select/product-select.component';
 import { FuelComponent } from './fuel/fuel.component';
-import { ProductToggleComponent } from './product-toggle/product-toggle.component';
-import { ProductSingleSelectComponent } from './product-single-select/product-single-select.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ProductsFilterPipe} from './products-filter.pipe';
+import { CcSelectModule } from '../cc-select/cc-select.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     RouterModule,
-    ProductsRoutingModule
+    ProductsRoutingModule,
+    CcModalModule,
+    CcSelectModule,
+    CcSingleSelectModule,
+    CcToggleModule
   ],
   declarations: [
     ProductCreateComponent,
     ProductListComponent,
-    ProductModalComponent,
-    ProductSelectComponent,
     FuelComponent,
-    ProductToggleComponent,
-    ProductSingleSelectComponent,
     LoadingComponent,
     ProductsFilterPipe
   ],

@@ -15,15 +15,15 @@
           </div>
         </div>
         <div class="flex1">
-          <app-product-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="productLabels.company" [selectedLabel]="selectedCompanyLabel" [items]="companies"></app-product-single-select>
+          <app-cc-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="productLabels.company" [selectedLabel]="selectedCompanyLabel" [items]="companies"></app-cc-single-select>
         </div>
       </div>
       <div class="container">
         <div class="flex1">
-          <app-product-toggle (toggleItem)="setToggleItem($event)" [label]="productLabels.isGreen" [item]="product.isGreen"></app-product-toggle>
+          <app-cc-toggle (toggleItem)="setToggleItem($event)" [label]="productLabels.isGreen" [item]="product.isGreen"></app-cc-toggle>
         </div>
         <div class="flex1">
-            <app-product-toggle (toggleItem)="setToggleItem($event)" [label]="productLabels.isTopPick" [item]="product.isTopPick"></app-product-toggle>
+            <app-cc-toggle (toggleItem)="setToggleItem($event)" [label]="productLabels.isTopPick" [item]="product.isTopPick"></app-cc-toggle>
         </div>
         <div class="flex1">
           <div class="labelOnTop">
@@ -34,13 +34,13 @@
       </div>
       <div class="container">
         <div class="flex1">
-            <app-product-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="productLabels.rateType" [selectedLabel]="selectedRateTypeLabel" [items]="rateTypes"></app-product-single-select>
+            <app-cc-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="productLabels.rateType" [selectedLabel]="selectedRateTypeLabel" [items]="rateTypes"></app-cc-single-select>
         </div>
         <div class="flex1">
-            <app-product-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="productLabels.fuelType" [selectedLabel]="selectedFuelTypeLabel" [items]="fuelTypes"></app-product-single-select>
+            <app-cc-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="productLabels.fuelType" [selectedLabel]="selectedFuelTypeLabel" [items]="fuelTypes"></app-cc-single-select>
         </div>
         <div class="flex1">
-            <app-product-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="productLabels.paymentMethod" [selectedLabel]="selectedPaymentMethodLabel" [items]="paymentMethods"></app-product-single-select>
+            <app-cc-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="productLabels.paymentMethod" [selectedLabel]="selectedPaymentMethodLabel" [items]="paymentMethods"></app-cc-single-select>
         </div>
       </div>
     </div>

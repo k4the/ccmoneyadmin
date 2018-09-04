@@ -35,5 +35,5 @@
   </table>
   <p *ngIf="products.length === 0">{{ productLabels.noProducts }}</p>
 </div>
-<app-product-modal *ngIf="showDelete" (productModalResult)="deleteProduct($event)" [title]="title" [message]="message" [type]="type"
-  [id]="productToDeleteId"></app-product-modal>
+  <app-cc-modal *ngIf="showDelete" (ccModalResult)="deleteProduct($event)" [title]="title" [message]="message" [type]="type"
+  [id]="productToDeleteId"></app-cc-modal>

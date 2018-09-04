@@ -1,14 +1,14 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Keys } from '../../global.constants';
+import { Keys } from '../global.constants';
 
 @Component({
-  selector: 'app-product-modal',
-  templateUrl: './product-modal.component.html',
-  styleUrls: ['./product-modal.component.css']
+  selector: 'app-cc-modal',
+  templateUrl: './cc-modal.component.html',
+  styleUrls: ['./cc-modal.component.css']
 })
-export class ProductModalComponent implements OnInit {
+export class CcModalComponent implements OnInit {
   @Output()
-  productModalResult = new EventEmitter<{result: boolean, id: string}>();
+  ccModalResult = new EventEmitter<{result: boolean, id: string}>();
   @Input('name')
   name: string;
   @Input('title')
@@ -31,10 +31,10 @@ export class ProductModalComponent implements OnInit {
     }, 0);
   }
   ok(): void {
-    this.productModalResult.next({result: true, id: this.id});
+    this.ccModalResult.next({result: true, id: this.id});
   }
 
   cancel(): void {
-    this.productModalResult.next({result: false, id: this.id});
+    this.ccModalResult.next({result: false, id: this.id});
   }
 }

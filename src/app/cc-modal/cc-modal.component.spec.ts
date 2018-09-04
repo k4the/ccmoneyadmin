@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProductToggleComponent } from './product-toggle.component';
+import { CcModalComponent } from './cc-modal.component';
 
-describe('ProductToggleComponent', () => {
-  let component: ProductToggleComponent;
-  let fixture: ComponentFixture<ProductToggleComponent>;
+describe('CcModalComponent', () => {
+  let component: CcModalComponent;
+  let fixture: ComponentFixture<CcModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductToggleComponent ]
+      declarations: [ CcModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProductToggleComponent);
+    fixture = TestBed.createComponent(CcModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

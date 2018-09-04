@@ -1,0 +1,15 @@
+<div class="singleSelectContainer labelOnTop">
+    <label>{{label}}</label>
+    <div class="singleSelect">
+      <button type="text" (click)="openSelect()">{{selectedLabel}}
+        <span class="iconToggle">
+              <i class="linkIcon fas" [ngClass]="{ 'fa-chevron-down': !selectOpen, 'fa-chevron-up': selectOpen }"></i>
+          </span>
+      </button>
+      <div [hidden]="!selectOpen" class="singleSelectList">
+        <div *ngFor="let item of items" class="listItem" (click)="setSelected(item)">
+          {{item.name}}
+        </div>
+      </div>
+    </div>
+  </div>

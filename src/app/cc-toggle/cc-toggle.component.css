@@ -1,0 +1,26 @@
+.ccToggle {
+  position: relative;
+}
+
+.ccToggle .fa-check-circle,
+.ccToggle .fa-circle {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.ccToggle .fa-toggle-on, .ccToggle .fa-check-circle {
+  color: red;
+}
+
+.ccToggle .fa-toggle-off, .ccToggle .fa-circle {
+  color: lightgray;
+}
+
+.ccToggle label {
+  display: inline-block;
+  padding-right: 6px;
+}
+
+.ccToggle i {
+  display: inline-block;
+}
