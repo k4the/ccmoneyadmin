@@ -1,3 +1,4 @@
+import { CcLoadingModule } from './../cc-loading/cc-loading.module';
 import { CcToggleModule } from './../cc-toggle/cc-toggle.module';
 import { CcSingleSelectModule } from './../cc-single-select/cc-single-select.module';
 import { CcModalModule } from './../cc-modal/cc-modal.module';
@@ -10,7 +11,6 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductsRoutingModule } from './products-routing.module';
 import { FuelComponent } from './fuel/fuel.component';
-import { LoadingComponent } from './loading/loading.component';
 import { ProductsFilterPipe} from './products-filter.pipe';
 import { CcSelectModule } from '../cc-select/cc-select.module';
 
@@ -23,13 +23,13 @@ import { CcSelectModule } from '../cc-select/cc-select.module';
     CcModalModule,
     CcSelectModule,
     CcSingleSelectModule,
-    CcToggleModule
+    CcToggleModule,
+    CcLoadingModule
   ],
   declarations: [
     ProductCreateComponent,
     ProductListComponent,
     FuelComponent,
-    LoadingComponent,
     ProductsFilterPipe
   ],
   providers: [ProductMapper]

@@ -4,7 +4,7 @@ import { Keys } from '../global.constants';
 @Component({
   selector: 'app-cc-modal',
   templateUrl: './cc-modal.component.html',
-  styleUrls: ['./cc-modal.component.css']
+  styleUrls: ['./cc-modal.component.scss']
 })
 export class CcModalComponent implements OnInit {
   @Output()

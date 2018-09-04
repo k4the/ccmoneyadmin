@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-cc-single-select',
   templateUrl: './cc-single-select.component.html',
-  styleUrls: ['./cc-single-select.component.css']
+  styleUrls: ['./cc-single-select.component.scss']
 })
 export class CcSingleSelectComponent implements OnInit {
   @Output() singleSelectedItems = new EventEmitter<any>();

@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-cc-toggle',
   templateUrl: './cc-toggle.component.html',
-  styleUrls: ['./cc-toggle.component.css']
+  styleUrls: ['./cc-toggle.component.scss']
 })
 export class CcToggleComponent implements OnInit {
   @Output() toggleItem = new EventEmitter<any>();

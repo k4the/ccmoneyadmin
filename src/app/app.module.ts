@@ -1,3 +1,4 @@
+import { CcLoadingModule } from './cc-loading/cc-loading.module';
 import { CcSingleSelectModule } from './cc-single-select/cc-single-select.module';
 import { CcSelectModule } from './cc-select/cc-select.module';
 import { CcModalModule } from './cc-modal/cc-modal.module';
@@ -11,10 +12,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { AppRoutingModule } from './app.routing.module';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CcToggleModule } from './cc-toggle/cc-toggle.module';
+import { RouterModule } from '@angular/router';
+import { AppRoutes } from './app.routing';
+import { AuthGuard } from './auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -26,17 +29,23 @@ import { CcToggleModule } from './cc-toggle/cc-toggle.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
+    RouterModule.forRoot(AppRoutes),
     HttpClientModule,
     CcModalModule,
     CcSelectModule,
     CcSingleSelectModule,
-    CcToggleModule
+    CcToggleModule,
+    CcLoadingModule
+  ],
+  exports: [
+    RouterModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    AuthGuard,
     CompanyMapper,
-    ProductMapper, UserMapper
+    ProductMapper,
+    UserMapper
 ],
   bootstrap: [AppComponent]
 })

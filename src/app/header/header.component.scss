@@ -1,0 +1,100 @@
+header {
+    max-width: 990px;
+    margin: 0 auto;
+    padding-bottom: 22px;
+    overflow: hidden;
+    #navBut {
+        display: block;
+        position: fixed;
+        top: 8px;
+        left: 10px;
+        z-index: 10;
+        font-size: 28px;
+    }
+    nav {
+        padding: 0;
+        text-align: center;
+        width: 100%;
+        height: 500px;
+        margin: 0;
+        margin-top: 0px;
+        position: fixed;
+        left: 0;
+        top: -500px;
+        z-index: 3;
+        background: white;
+    }
+    .navItemContainer {
+        display: table;
+    }
+    .navItem,
+    .navItem:visited {
+        padding: 14px 10px;
+        color: darkgray;
+        font-size: 14px;
+        text-decoration: none;
+        cursor: pointer;
+        border-bottom: 1px solid lightgrey;
+        height: 50px;
+        display: table-cell;
+        text-align: center;
+        width: 100%;
+        text-transform: uppercase;
+    }
+    .navItem:hover,
+    .navItem.active {
+        color: darkslategrey;
+    }
+    .fas{
+        font-size: 26px;
+    }
+
+    .navItem.home,
+    .navItem.icon  {
+        margin-top: -5px;
+    }
+
+    .navItem.home:hover,
+    .navItem.home.active,
+    .navItem.icon:hover,
+    .navItem.icon.active  {
+        border-bottom: none;
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
+    header {
+        padding-bottom: 10px;
+        #navBut {
+            display: none;
+        }
+        nav {
+            text-align: left;
+            height: auto;
+            margin-top: 20px;
+            position: relative;
+            left: 0;
+            top: 0;
+            background: none;
+        }
+        .navItem {
+            display: inline-block;
+            padding: 6px 0 0 0;
+            border-bottom: none;
+            height: auto;
+            text-align: left;
+            width: auto;
+            margin: 0 10px;
+        }
+        .navItem.active,
+        .navItem:hover {
+            border-bottom: 2px solid darkslategray;
+        }
+        .fas.home,
+        .fas:visited {
+            padding: 0;
+            display: block;
+            top: -10px;
+        }
+    }
+}

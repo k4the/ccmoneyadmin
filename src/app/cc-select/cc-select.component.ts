@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-cc-select',
   templateUrl: './cc-select.component.html',
-  styleUrls: ['./cc-select.component.css']
+  styleUrls: ['./cc-select.component.scss']
 })
 
 export class CcSelectComponent implements OnInit {

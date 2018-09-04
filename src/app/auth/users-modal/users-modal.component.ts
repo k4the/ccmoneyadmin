@@ -4,7 +4,7 @@ import { Keys } from '../../global.constants';
 @Component({
   selector: 'app-users-modal',
   templateUrl: './users-modal.component.html',
-  styleUrls: ['./users-modal.component.css']
+  styleUrls: ['./users-modal.component.scss']
 })
 export class UsersModalComponent implements OnInit {
   @Output()

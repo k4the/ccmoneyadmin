@@ -17,7 +17,7 @@ import { Company } from '../../companies/company.model';
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
-  styleUrls: ['./product-create.component.css']
+  styleUrls: ['./product-create.component.scss']
 })
 export class ProductCreateComponent implements OnInit {
   paymentMethods = PaymentMethods;
