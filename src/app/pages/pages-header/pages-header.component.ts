@@ -1,32 +1,26 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { Subscription } from 'rxjs';
-import { AppRoutes } from '../app.routing';
-import { slideDown } from '../animations/slide-down.animation';
+import { PagesRoutes } from '../pages.routing';
+import { slideDown } from '../../animations/slide-down.animation';
 import { Router } from '@angular/router';
-import { PagesRoutes } from '../pages/pages.routing';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  selector: 'app-pages-header',
+  templateUrl: './pages-header.component.html',
+  styleUrls: ['./pages-header.component.scss'],
   animations: [slideDown]
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class PagesHeaderComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
-  appRoutes: any[] = AppRoutes;
-  pagesRoutes: any[] = PagesRoutes;
+  pagesRoutes: Array<any> = PagesRoutes[0].children;
   minBrowserWidth = 760;
   slideDownState = 'closed';
-  showSubMenus = true;
   private authListenerSubs: Subscription;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    if (window.innerWidth > this.minBrowserWidth) {
-      this.showSubMenus = false;
-    }
     this.isLoggedIn = this.authService.getIsAuth();
     this.authListenerSubs = this.authService
       .getAuthStatusListener()
@@ -35,12 +29,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
       });
   }
 
-  goto(path: string): void {
+  gotoPage(path: string): void {
     this.slideDownState = 'closed';
-    this.router.navigate([path]);
+    if(path === '/') {
+      this.router.navigate(['/']);
+    } else {
+      this.router.navigate(['/pages/' + path]);
+    }
   }
 
-  toggleMenu(event?: any): void {
+  togglePagesMenu(event?: any): void {
     if (window.innerWidth < this.minBrowserWidth) {
       this.slideDownState === 'closed'
         ? (this.slideDownState = 'open')

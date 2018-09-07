@@ -1,0 +1,9 @@
+<div class="pagesHeader">
+  <nav class="container">
+    <div *ngFor="let route of pagesRoutes; index as i" class="navItemContainer">
+      <a *ngIf="isLoggedIn && route.path !== ''" [routerLink]="route.path" class="navItem"
+        (click)="gotoPage(route.path)" routerLinkActive="active">{{ route.data.name }}</a>
+    </div>
+  </nav>
+</div>
+

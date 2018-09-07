@@ -5,10 +5,10 @@
 }
 
 body {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #7d7a7a;
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 header, main {
@@ -216,6 +216,10 @@ tr:nth-child(even) {
   margin-bottom: 10px;
 }
 
+form {
+  position: relative;
+}
+
 input[type=text], input[type=email], input[type=password], input[type=number], textarea, select {
   width: 100%;
   padding: 10px 12px;
@@ -245,6 +249,7 @@ label {
   display: flex;
   flex-direction: column;
   margin: 8px 12px 8px 0;
+  position: relative;
 }
 
 .labelLeft {
@@ -274,10 +279,12 @@ label {
 }
 
 .alert {
-  margin-top: -10px;
+  bottom: -35px;
   width: 100%;
   padding: 12px 20px;
   text-align: left;
+  position: absolute;
+  z-index: 3;
 }
 .alert-danger {
   background: #F2DEDE;

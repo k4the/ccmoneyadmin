@@ -20,30 +20,36 @@ export class AuthService {
   private isAuthenticated = false;
   private authStatusListener = new Subject<boolean>();
   private tokenTimer: any;
-  constructor(private http: HttpClient, private router: Router, private userMapper: UserMapper) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private userMapper: UserMapper
+  ) {}
 
   getUsers(): Observable<User[]> {
-    const results = this.http.get<{ message: string; users: Array<any> }>(usersUrl);
+    const results = this.http.get<{ message: string; users: Array<any> }>(
+      usersUrl
+    );
     return results.pipe(
       map(userData => {
         return userData.users.map(user => {
           return this.userMapper.mapFromJson(user);
         });
       })
-    )
+    );
   }
 
-  // addUser(user: User): Observable<any> {
-  //   if (user) {
-  //     user = this.userMapper.mapToJson(user);
-  //     const result = this.http.post<{ message: string; userId: string }>(usersUrl, user);
-  //     return result.pipe(
-  //       map(userData => {
-  //         user.id = userData.userId;
-  //       })
-  //     )
-  //   }
-  // }
+  addUser(user: User): Observable<any> {
+    if (user) {
+      user = this.userMapper.mapToJson(user);
+      const result = this.http.post<{ message: string; userId: string }>(usersUrl, user);
+      return result.pipe(
+        map(userData => {
+          user.id = userData.userId;
+        })
+      )
+    }
+  }
 
   // updateUser(userId: string, user: User): Observable<any> {
   //   if (user) {
@@ -59,7 +65,7 @@ export class AuthService {
         map(userData => {
           return this.userMapper.mapFromJson(userData);
         })
-      )
+      );
     }
   }
 
@@ -97,37 +103,43 @@ export class AuthService {
   }
 
   createUser(auth: Auth): void {
-    this.http
-      .post(usersUrl + signupUrl, auth)
-      .subscribe(response => {
+    this.http.post(usersUrl + signupUrl, auth).subscribe(
+      response => {
         this.login(auth);
         this.router.navigate(['/']);
-      }, error => {
+      },
+      error => {
         this.authStatusListener.next(false);
-      });
+      }
+    );
   }
 
-  login(auth: Auth): void {
-    this.http
-      .post<{ token: string; expiresIn: number }>(
+  login(auth: Auth): Observable<any> {
+    if (auth) {
+      const result = this.http.post<{ token: string; expiresIn: number }>(
         usersUrl + loginUrl,
         auth
-      )
-      .subscribe(response => {
-        if (response.token) {
-          const expiresInDuration = response.expiresIn;
-          this.setAuthTimer(expiresInDuration);
-          const now = new Date();
-          const expiresIn = new Date(now.getTime() + expiresInDuration * 1000);
-          this.token = response.token;
-          this.saveAuthData(this.token, expiresIn);
-          this.isAuthenticated = true;
-          this.authStatusListener.next(true);
-          this.router.navigate(['/']);
-        }
-      }, error => {
-        this.authStatusListener.next(false);
-      });
+      );
+      return result.pipe(
+        map(response => {
+          if (response.token) {
+            const expiresInDuration = response.expiresIn;
+            this.setAuthTimer(expiresInDuration);
+            const now = new Date();
+            const expiresIn = new Date(
+              now.getTime() + expiresInDuration * 1000
+            );
+            this.token = response.token;
+            this.saveAuthData(this.token, expiresIn);
+            this.isAuthenticated = true;
+            this.authStatusListener.next(true);
+          } else {
+            this.isAuthenticated = false;
+            this.authStatusListener.next(false);
+          }
+        })
+      );
+    }
   }
 
   logout(): void {

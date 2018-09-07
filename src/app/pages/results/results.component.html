@@ -1,0 +1,35 @@
+<div id="overlay" *ngIf="isLoading"></div>
+<app-cc-loading [isLoading]="isLoading"></app-cc-loading>
+<section class="page">
+  <form #resultsForm="ngForm">
+      <h4>Results Messages</h4>
+      <div class="labelOnTop">
+        <label>{{resultsLabels.hurray}}</label>
+        <input type="text" autofocus [ngModel]="results?.hurray" name="hurray" #hurray="ngModel"
+          required>
+        <div [hidden]="hurray.valid || hurray.pristine" class="alert alert-danger">
+          {{ resultsLabels.noHurray }}
+        </div>
+      </div>
+      <div class="labelOnTop">
+        <label>{{resultsLabels.youCanSave}}</label>
+        <input type="text" [ngModel]="results?.youCanSave" name="youCanSave" #youCanSave="ngModel"
+           required>
+        <div [hidden]="youCanSave.valid || youCanSave.pristine" class="alert alert-danger">
+          {{ resultsLabels.noYouCanSave }}
+        </div>
+      </div>
+      <div class="labelOnTop">
+        <label>{{resultsLabels.sorted}}</label>
+        <input type="text" [ngModel]="results?.sorted" name="sorted" #sorted="ngModel"
+          required>
+        <div [hidden]="sorted.valid || sorted.pristine" class="alert alert-danger">
+          {{ resultsLabels.noSorted }}
+        </div>
+      </div>
+    <div class="resultsButtons right">
+      <button type="button" class="cancel right capitalize" (click)="onCancel(resultsForm)">Cancel</button>
+      <button type="button" class="ok" (click)="onSaveResults(resultsForm)">Save</button>
+    </div>
+  </form>
+</section>

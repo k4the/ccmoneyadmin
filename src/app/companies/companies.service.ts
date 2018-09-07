@@ -18,28 +18,6 @@ export class CompaniesService {
     private companyMapper: CompanyMapper
   ) {}
 
-  getCalculatedPollRating(pollRating: PollRating): PollRating {
-    let greatPercentage = (((pollRating.great * 2) + pollRating.ok) / (pollRating.totalVotes * 2)) * 100;
-    console.log('greatPercentage', greatPercentage);
-    let okPercentage = (pollRating.ok / pollRating.totalVotes) * 100;
-    console.log('okPercentage', okPercentage);
-    let poorPercentage = (pollRating.poor / pollRating.totalVotes) * 100;
-    console.log('pooPercentage', poorPercentage);
-    let calculatedPollRating = {
-      great: pollRating.great,
-      ok: pollRating.ok,
-      poor: pollRating.poor,
-      greatPercentage: greatPercentage,
-      okPercentage: okPercentage,
-      poorPercentage: poorPercentage,
-      totalVotes: pollRating.totalVotes,
-      starClass: null
-    };
-    calculatedPollRating.starClass = this.getStarRating(calculatedPollRating);
-    console.log(calculatedPollRating)
-    return calculatedPollRating;
-  }
-
   getCompanies(): Observable<Company[]> {
     const results = this.http.get<{ message: string; companies: Array<any> }>(companiesUrl);
     return results.pipe(
@@ -85,6 +63,28 @@ export class CompaniesService {
     if (id) {
       return this.http.delete<{}>(companiesUrl + id);
     }
+  }
+
+  getCalculatedPollRating(pollRating: PollRating): PollRating {
+    let greatPercentage = (((pollRating.great * 2) + pollRating.ok) / (pollRating.totalVotes * 2)) * 100;
+    console.log('greatPercentage', greatPercentage);
+    let okPercentage = (pollRating.ok / pollRating.totalVotes) * 100;
+    console.log('okPercentage', okPercentage);
+    let poorPercentage = (pollRating.poor / pollRating.totalVotes) * 100;
+    console.log('pooPercentage', poorPercentage);
+    let calculatedPollRating = {
+      great: pollRating.great,
+      ok: pollRating.ok,
+      poor: pollRating.poor,
+      greatPercentage: greatPercentage,
+      okPercentage: okPercentage,
+      poorPercentage: poorPercentage,
+      totalVotes: pollRating.totalVotes,
+      starClass: null
+    };
+    calculatedPollRating.starClass = this.getStarRating(calculatedPollRating);
+    console.log(calculatedPollRating)
+    return calculatedPollRating;
   }
 
   private getStarRating(pollRating: PollRating): string {

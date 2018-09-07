@@ -9,5 +9,8 @@
         Please enter a password
       </div>
       <button type="submit" class="primary">Login</button>
+      <div [hidden]="!loginError" class="alert alert-danger">
+        There is a problem with the login details you have supplied.
+      </div>
   </form>
 </div>

@@ -1,36 +1,22 @@
-header {
+.pagesHeader {
     max-width: 990px;
-    margin: 0 auto 15px auto;
-    padding-bottom: 22px;
+    margin: 0 auto;
+    padding-bottom: 10px;
     overflow: hidden;
+    width: 100%;
+    float: none;
     position: relative;
-    .subLink {
-      display: block;
-    }
-    #menu,
-    .icon {
+    background: white;
+    min-height: 0px;
+    display: none;
+    #pagesMenu {
         display: block;
         position: fixed;
         top: 8px;
-        z-index: 10;
+        left: 10px;
+        z-index: 20;
         font-size: 28px;
-        margin-bottom: 10px;
-    }
-    #menu {
-      left: 10px;
-    }
-    .fas {
-        font-size: 26px;
-    }
-    #menu:hover,
-    .navItem.home:hover,
-    .navItem.home.active,
-    .icon:hover,
-    .icon.active {
-        border-bottom: none;
-    }
-    .icon {
-        right: 10px;
+        color: red;
     }
     nav {
         padding: 0;
@@ -66,48 +52,64 @@ header {
     .navItem.active {
         color: darkslategrey;
     }
+    .fas {
+        font-size: 26px;
+    }
+    .navItem.home,
+    .navItem.icon {
+        margin-top: -5px;
+        z-index: 20;
+    }
 
-    .subMenuHeader {
-      background: lightgrey;
-      color: white;
+    .navItem.home:hover,
+    .navItem.home.active,
+    .navItem.icon:hover,
+    .navItem.icon.active {
+        border-bottom: none;
     }
 }
 
 @media only screen and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
-    header {
-        padding-bottom: 10px;
-        .subLink {
-          display: none;
+    .pagesHeader {
+      background: aliceblue;
+      min-height: 400px;
+      display: block;
+        .container {
+            display: flex;
+            flex-direction: column;
         }
-        #menu {
+        .navItemContainer {
+            display: block;
+        }
+        #pagesMenu {
             display: none;
         }
         nav {
             text-align: left;
             height: auto;
-            margin-top: 20px;
+            margin-top: 0px;
             position: relative;
             left: 0;
             top: 0;
             background: none;
         }
-        .navItem {
-            display: inline-block;
+        .navItem,
+        .navItem:visited {
+            display: block;
             padding: 6px 0 0 0;
             border-bottom: none;
             height: auto;
             text-align: left;
             width: auto;
             margin: 0 10px;
+            text-transform: capitalize;
         }
         .navItem.active,
         .navItem:hover {
-            border-bottom: 2px solid darkslategray;
+            border-bottom: none
         }
-        .navItem.home,
-        .navItem:visited {
-          display: block;
-          margin-top: -8px;
+        .navItem.home {
+            display: none;
         }
     }
 }

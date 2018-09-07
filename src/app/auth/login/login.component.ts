@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Auth } from '../auth.model';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,10 @@ import { Subscription } from 'rxjs';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   isLoading = false;
+  loginError = false;
   private authStatusSub: Subscription;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
@@ -31,10 +33,20 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (form.invalid) {
       return;
     }
+    this.isLoading = true;
     const auth: Auth = {
       email: form.value.email,
       password: form.value.password
     };
-    this.authService.login(auth);
+    this.authService.login(auth).subscribe(
+      () => {
+        this.isLoading = false;
+        this.router.navigate(['/']);
+      },
+      err => {
+        this.loginError = true;
+        this.isLoading = false;
+      }
+    );
   }
 }
