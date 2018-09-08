@@ -1,45 +1,50 @@
 <div id="overlay" *ngIf="isLoading"></div>
 <app-cc-loading [isLoading]="isLoading"></app-cc-loading>
 <section class="page">
+  <h2 class="nine90 pad10">Results</h2>
   <form #resultsForm="ngForm">
-    <div class="container imageFilter">
-      <app-cc-image-filter [type]="keys.currentCompany" [imageFilter]="currentCompany"></app-cc-image-filter>
-      <app-cc-image-filter [type]="keys.bigCompany" [imageFilter]="bigCompany"></app-cc-image-filter>
-      <app-cc-image-filter [type]="keys.none" [imageFilter]="none"></app-cc-image-filter>
-    </div>
-    <h4>Results Messages</h4>
-    <div class="labelOnTop">
-      <label>{{resultsLabels.heading}}</label>
-      <input type="text" autofocus [ngModel]="results?.heading" name="heading" #heading="ngModel" required>
-      <div [hidden]="heading.valid || heading.pristine" class="alert alert-danger">
-        {{ resultsLabels.noHeading }}
+    <div class="container bgContrast">
+      <div class="nine90 imageFilter">
+        <app-cc-image-filter (selectImageFilter)="setImageFilter($event)" [type]="keys.currentCompany" [imageFilter]="currentCompany"></app-cc-image-filter>
+        <app-cc-image-filter (selectImageFilter)="setImageFilter($event)" [type]="keys.bigCompany" [imageFilter]="bigCompany"></app-cc-image-filter>
+        <app-cc-image-filter (selectImageFilter)="setImageFilter($event)" [type]="keys.none" [imageFilter]="none"></app-cc-image-filter>
       </div>
     </div>
-    <div class="labelOnTop">
-      <label>{{resultsLabels.subHeading}}</label>
-      <input type="text" [ngModel]="results?.subHeading" name="subHeading" #subHeading="ngModel" required>
-      <div [hidden]="subHeading.valid || subHeading.pristine" class="alert alert-danger">
-        {{ resultsLabels.noSubHeading }}
+    <div class="nine90">
+      <h4>Results Messages</h4>
+      <div class="labelOnTop">
+        <label>{{resultsLabels.heading}}</label>
+        <input type="text" autofocus [ngModel]="results?.heading" name="heading" #heading="ngModel" required>
+        <div [hidden]="heading.valid || heading.pristine" class="alert alert-danger">
+          {{ resultsLabels.noHeading }}
+        </div>
       </div>
-    </div>
-    <div class="labelOnTop">
-      <label>{{resultsLabels.personalProjectionMessage}}</label>
-      <input type="text" [ngModel]="results?.personalProjectionMessage" name="personalProjectionMessage" #personalProjectionMessage="ngModel"
-        required>
-      <div [hidden]="personalProjectionMessage.valid || personalProjectionMessage.pristine" class="alert alert-danger">
-        {{ resultsLabels.noPersonalProjectionMessage }}
+      <div class="labelOnTop">
+        <label>{{resultsLabels.subHeading}}</label>
+        <input type="text" [ngModel]="results?.subHeading" name="subHeading" #subHeading="ngModel" required>
+        <div [hidden]="subHeading.valid || subHeading.pristine" class="alert alert-danger">
+          {{ resultsLabels.noSubHeading }}
+        </div>
       </div>
-    </div>
-    <div class="labelOnTop">
-      <label>{{resultsLabels.fullRangeMessage}}</label>
-      <input type="text" [ngModel]="results?.fullRangeMessage" name="fullRangeMessage" #fullRangeMessage="ngModel" required>
-      <div [hidden]="fullRangeMessage.valid || fullRangeMessage.pristine" class="alert alert-danger">
-        {{ resultsLabels.noFullRangeMessage }}
+      <div class="labelOnTop">
+        <label>{{resultsLabels.personalProjectionMessage}}</label>
+        <input type="text" [ngModel]="results?.personalProjectionMessage" name="personalProjectionMessage" #personalProjectionMessage="ngModel"
+          required>
+        <div [hidden]="personalProjectionMessage.valid || personalProjectionMessage.pristine" class="alert alert-danger">
+          {{ resultsLabels.noPersonalProjectionMessage }}
+        </div>
       </div>
-    </div>
-    <div class="resultsButtons right">
-      <button type="button" class="cancel right capitalize" (click)="onCancel(resultsForm)">Cancel</button>
-      <button type="button" class="ok" (click)="onSaveResults(resultsForm)">Save</button>
+      <div class="labelOnTop">
+        <label>{{resultsLabels.fullRangeMessage}}</label>
+        <input type="text" [ngModel]="results?.fullRangeMessage" name="fullRangeMessage" #fullRangeMessage="ngModel" required>
+        <div [hidden]="fullRangeMessage.valid || fullRangeMessage.pristine" class="alert alert-danger">
+          {{ resultsLabels.noFullRangeMessage }}
+        </div>
+      </div>
+      <div class="resultsButtons right">
+        <button type="button" class="cancel right capitalize" (click)="onCancel(resultsForm)">Cancel</button>
+        <button type="button" class="ok" (click)="onSaveResults(resultsForm)">Save</button>
+      </div>
     </div>
   </form>
 </section>

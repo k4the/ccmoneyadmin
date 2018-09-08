@@ -1,4 +1,4 @@
-<div class="pagesHeader">
+<div class="nine90 pagesHeader">
   <nav class="container">
     <div *ngFor="let route of pagesRoutes; index as i" class="navItemContainer">
       <a *ngIf="isLoggedIn && route.path !== ''" [routerLink]="route.path" class="navItem"

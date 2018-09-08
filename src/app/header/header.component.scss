@@ -1,23 +1,34 @@
 header {
-    max-width: 990px;
-    margin: 0 auto 15px auto;
+    max-width: 100%;
+    margin: 0 auto;
     padding-bottom: 22px;
     overflow: hidden;
     position: relative;
+    height: 40px;
     .subLink {
-      display: block;
+        display: block;
     }
+    #logo,
     #menu,
     .icon {
         display: block;
-        position: fixed;
+        position: absolute;
         top: 8px;
         z-index: 10;
         font-size: 28px;
         margin-bottom: 10px;
+        cursor: pointer;
+        color: #7A5691;
     }
     #menu {
-      left: 10px;
+        left: 50px;
+        position: fixed;
+    }
+    #logo {
+        left: 10px;
+        color: #7A5691;
+        text-align: left;
+        cursor: auto;
     }
     .fas {
         font-size: 26px;
@@ -37,12 +48,11 @@ header {
         text-align: center;
         width: 100%;
         height: 500px;
-        margin: 0;
-        margin-top: 0px;
+        margin: 15px 0 10px 0;
         position: fixed;
         left: 0;
         top: -500px;
-        z-index: 3;
+        z-index: 10;
         background: white;
     }
     .navItemContainer {
@@ -51,7 +61,7 @@ header {
     .navItem,
     .navItem:visited {
         padding: 14px 10px;
-        color: darkgray;
+        color: #7A5691;
         font-size: 14px;
         text-decoration: none;
         cursor: pointer;
@@ -66,18 +76,19 @@ header {
     .navItem.active {
         color: darkslategrey;
     }
-
     .subMenuHeader {
-      background: lightgrey;
-      color: white;
+        background: lightgrey;
+        color: white;
     }
 }
 
 @media only screen and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
     header {
-        padding-bottom: 10px;
+        padding-top: 15px;
+        height: 60px;
+        border-bottom: #7A5691 1px solid;
         .subLink {
-          display: none;
+            display: none;
         }
         #menu {
             display: none;
@@ -85,7 +96,7 @@ header {
         nav {
             text-align: left;
             height: auto;
-            margin-top: 20px;
+            margin-top: 0;
             position: relative;
             left: 0;
             top: 0;
@@ -106,8 +117,8 @@ header {
         }
         .navItem.home,
         .navItem:visited {
-          display: block;
-          margin-top: -8px;
+            display: block;
+            margin-top: -8px;
         }
     }
 }

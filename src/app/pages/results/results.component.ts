@@ -50,6 +50,24 @@ export class ResultsComponent implements OnInit {
 
   ngOnInit() {}
 
+  setImageFilter(item: any): void {
+    if (item) {
+      switch (item.type) {
+        case this.keys.bigCompany:
+          this.bigCompany.isActive = item.isOn;
+          break;
+
+        case this.keys.currentCompany:
+          this.bigCompany.isActive = item.isOn;
+          break;
+
+        case this.keys.none:
+          this.none.isActive = item.isOn;
+          break;
+      }
+    }
+  }
+
   onCancel(form: NgForm): void {
     form.resetForm();
   }

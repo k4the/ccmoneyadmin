@@ -1,28 +1,31 @@
 <header>
-  <a class="icon" id="menu" (click)="toggleMenu($event)"><i class="fas fa-bars"></i></a>
-  <a class="icon login" routerLink="/users/login" routerLinkActive="active" *ngIf="!isLoggedIn" title="Login"><i class="fas fa-sign-in-alt"></i></a>
-  <a class="icon logout" *ngIf="isLoggedIn" (click)="onLogout()" routerLinkActive="active" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
-  <nav class="container" [@slideDown]="slideDownState">
-    <div class="navItemContainer">
-      <a *ngIf="isLoggedIn" class="navItem home" routerLink="/" (click)="goto('/')" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-home"></i></a>
-    </div>
-    <div class="navItemContainer">
-      <a *ngIf="isLoggedIn" routerLink="companies" class="navItem second" (click)="goto('companies')" routerLinkActive="active">Companies</a>
-    </div>
-    <div class="navItemContainer">
-      <a *ngIf="isLoggedIn" routerLink="products" class="navItem" (click)="goto('products')" routerLinkActive="active">Products</a>
-    </div>
-    <div class="navItemContainer">
-      <a *ngIf="isLoggedIn" routerLink="users" class="navItem" (click)="goto('users')" routerLinkActive="active">Users</a>
-    </div>
-    <div class="navItemContainer">
+  <a class="icon" id="logo"><i class="fas fa-infinity"></i></a>
+  <div class="nine90">
+    <a class="icon" id="menu" (click)="toggleMenu($event)"><i class="fas fa-bars"></i></a>
+    <a class="icon login" routerLink="/users/login" routerLinkActive="active" *ngIf="!isLoggedIn" title="Login"><i class="fas fa-sign-in-alt"></i></a>
+    <a class="icon logout" *ngIf="isLoggedIn" (click)="onLogout()" routerLinkActive="active" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+    <nav class="container" [@slideDown]="slideDownState">
+      <div class="navItemContainer">
+        <a *ngIf="isLoggedIn" class="navItem home" routerLink="/" (click)="goto('/')" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fas fa-home"></i></a>
+      </div>
+      <div class="navItemContainer">
+        <a *ngIf="isLoggedIn" routerLink="companies" class="navItem second" (click)="goto('companies')" routerLinkActive="active">Companies</a>
+      </div>
+      <div class="navItemContainer">
+        <a *ngIf="isLoggedIn" routerLink="products" class="navItem" (click)="goto('products')" routerLinkActive="active">Products</a>
+      </div>
+      <div class="navItemContainer">
+        <a *ngIf="isLoggedIn" routerLink="users" class="navItem" (click)="goto('users')" routerLinkActive="active">Users</a>
+      </div>
+      <div class="navItemContainer">
         <a *ngIf="isLoggedIn" routerLink="pages" class="navItem" (click)="goto('pages')" routerLinkActive="active">Pages</a>
       </div>
-    <div class="navItemContainer subLink">
-      <a *ngIf="isLoggedIn" routerLink="pages/results" class="navItem" (click)="goto('pages/results')" routerLinkActive="active">Results</a>
-    </div>
-    <div class="navItemContainer subLink">
-      <a *ngIf="isLoggedIn" routerLink="pages/thanksyou" class="navItem" (click)="goto('pages/thankyou')" routerLinkActive="active">Thankyou</a>
-    </div>
-  </nav>
+      <div class="navItemContainer subLink">
+        <a *ngIf="isLoggedIn" routerLink="pages/results" class="navItem" (click)="goto('pages/results')" routerLinkActive="active">Results</a>
+      </div>
+      <div class="navItemContainer subLink">
+        <a *ngIf="isLoggedIn" routerLink="pages/thanksyou" class="navItem" (click)="goto('pages/thankyou')" routerLinkActive="active">Thankyou</a>
+      </div>
+    </nav>
+  </div>
 </header>

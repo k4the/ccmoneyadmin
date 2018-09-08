@@ -1,12 +1,15 @@
 <div class="ccImageFilter card">
-  <form #imageFiltersForm="ngForm">
-    <div class="header">
+  <form #imageFiltersForm="ngForm" class="{{type}}">
+    <div class="header" [ngClass]="{ 'selected': imageFilterSelected }">
+      <span class="icon" *ngIf="imageFilterSelected" (click)="setImageFilter()">
+        <i class="fas fa-dot-circle"></i>
+      </span>
+      <span class="icon" *ngIf="!imageFilterSelected" (click)="setImageFilter()">
+        <i class="fas fa-circle"></i>
+      </span>
       <span class="heading">
       <input type="text" autofocus [ngModel]="imageFilter.heading" name="heading" #heading="ngModel" required>
     </span>
-      <span class="icon">
-        <i class="fas fa-dot-circle"></i>
-      </span>
     </div>
     <div class="content">
       <div class="subHeading">
