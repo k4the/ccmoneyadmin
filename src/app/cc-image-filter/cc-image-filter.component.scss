@@ -1,0 +1,47 @@
+.ccImageFilter {
+    width: 300px;
+    height: 260px;
+    margin-right: 0;
+    position: relative;
+    font-family: 'Open Sans', Arial, sans-serif;
+    text-align: left;
+    .header {
+        background: #EBF0F2;
+        color: white;
+        padding: 4px 10px;
+    }
+    .content {
+        padding: 6px 12px;
+        position: relative;
+    }
+    .icon {
+        position: absolute;
+        right: 10px;
+        font-size: 26px;
+        top: 12px;
+    }
+    .heading {
+        font-size: 14px;
+        position: relative;
+        width: 88%;
+        display: inline-block;
+    }
+    .message {
+        position: relative;
+        bottom: 0;
+    }
+    textarea {
+        position: absolute;
+        bottom: -130px;
+    }
+}
+
+.ccImageFilter.card {
+    padding: 0;
+}
+
+@media only screen and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
+    .ccImageFilter {
+        margin-right: 15px;
+    }
+}

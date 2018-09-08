@@ -1,27 +1,23 @@
-.leftMenu {
-    width: 100%;
-}
-
 .page {
     padding: 15px 10px;
     width: 100%;
-    h1, h4 {
+    .imageFilter {
+        margin-left: 10px;
+    }
+    h1,
+    h4 {
         margin: 10px 0;
     }
-
     .cancel {
-      margin-right: 10px;
+        margin-right: 10px;
     }
 }
 
 @media only screen and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
-    .leftMenu {
-        width: 20%;
-        float: left;
-        margin-right: 10px;
-    }
     .page {
-      padding: 0 10px;
-        width: 80%;
+        padding: 0 10px;
+        .imageFilter {
+            margin-left: 15px;
+        }
     }
 }

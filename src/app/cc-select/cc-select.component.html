@@ -1,5 +1,5 @@
-<div class="halfContainer">
-  <div class="half ccSelect">
+<div class="container">
+  <div class="flex1 ccSelect">
     <button type="text" (click)="openSelect()">{{label}}
       <span class="iconToggle">
           <i class="linkIcon fas" [ngClass]="{ 'fa-chevron-down': !selectOpen, 'fa-chevron-up': selectOpen }"></i>
@@ -12,7 +12,7 @@
       </div>
     </div>
   </div>
-  <div class="half ccSelect selected">
+  <div class="flex1 ccSelect selected">
     <div *ngFor="let selectedItem of selectedItems" class="listItem" (click)="removeSelectedItem(selectedItem)">
       <span>{{selectedItem}}</span>
       <span class="icon"><i class="fas fa-trash-alt"></i></span>

@@ -8,7 +8,10 @@ export const Keys = {
   danger: 'danger',
   ok: 'ok',
   warning: 'warning',
-  cancel: 'cancel'
+  cancel: 'cancel',
+  currentCompany: 'currentCompany',
+  bigCompany: 'bigCompany',
+  none: 'none'
 };
 
 export const ErrorMessages = {

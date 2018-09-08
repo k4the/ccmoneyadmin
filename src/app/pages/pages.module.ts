@@ -1,3 +1,5 @@
+import { CcImageFilterModule } from './../cc-image-filter/cc-image-filter.module';
+import { PageMapper } from './page.mapper';
 import { PagesHeaderComponent } from './pages-header/pages-header.component';
 import { ThankyouComponent } from './thankyou/thankyou.component';
 import { NgModule } from '@angular/core';
@@ -14,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     RouterModule.forChild(PagesRoutes),
     CcLoadingModule,
-    FormsModule
+    FormsModule,
+    CcImageFilterModule
   ],
   declarations: [
     PagesComponent,
@@ -24,6 +27,9 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [
     RouterModule
+  ],
+  providers: [
+    PageMapper
   ]
 })
 export class PagesModule { }

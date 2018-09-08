@@ -33,36 +33,6 @@ header {
   flex: 1;
 }
 
-.thirdContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.third {
-  /* width: 33.33%; */
-  flex: 1;
-}
-
-.halfContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.half {
-  /* width: 50%; */
-  flex: 1;
-}
-
-.quarterContainer {
-  display: flex;
-  flex-direction: column;
-}
-
-.quarter {
-  /* width: 25%; */
-  flex: 1;
-}
-
 h1, h2, h3, h4, h5 {
   margin: 10px;
 }
@@ -311,7 +281,7 @@ label {
   min-height: 100px;
 }
 
-.half:first-child {
+.flex1:first-child {
   margin-right: 0;
 }
 
@@ -325,20 +295,8 @@ label {
     flex-direction: row;
   }
 
-  .thirdContainer {
-    flex-direction: row;
-  }
-
-  .halfContainer {
-    flex-direction: row;
-  }
-
-  .half:first-child {
+  .flex1:first-child {
     margin-right: 15px;
-  }
-
-  .quarterContainer {
-    flex-direction: row;
   }
 }
 

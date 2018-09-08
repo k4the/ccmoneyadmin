@@ -18,6 +18,8 @@ import { CcToggleModule } from './cc-toggle/cc-toggle.module';
 import { RouterModule } from '@angular/router';
 import { AppRoutes } from './app.routing';
 import { AuthGuard } from './auth/auth.guard';
+import { PageMapper } from './pages/page.mapper';
+import { CcImageFilterModule } from './cc-image-filter/cc-image-filter.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { AuthGuard } from './auth/auth.guard';
     CcSelectModule,
     CcSingleSelectModule,
     CcToggleModule,
-    CcLoadingModule
+    CcLoadingModule,
+    CcImageFilterModule
   ],
   exports: [
     RouterModule
@@ -45,7 +48,8 @@ import { AuthGuard } from './auth/auth.guard';
     AuthGuard,
     CompanyMapper,
     ProductMapper,
-    UserMapper
+    UserMapper,
+    PageMapper
 ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,20 @@
+<div class="ccImageFilter card">
+  <form #imageFiltersForm="ngForm">
+    <div class="header">
+      <span class="heading">
+      <input type="text" autofocus [ngModel]="imageFilter.heading" name="heading" #heading="ngModel" required>
+    </span>
+      <span class="icon">
+        <i class="fas fa-dot-circle"></i>
+      </span>
+    </div>
+    <div class="content">
+      <div class="subHeading">
+        <input type="text" [ngModel]="imageFilter.subHeading" name="subHeading" #subHeading="ngModel">
+      </div>
+      <div class="message">
+        <textarea autofocus [ngModel]="imageFilter.message" name="message" #message="ngModel" required rows="3"></textarea>
+      </div>
+    </div>
+  </form>
+</div>
