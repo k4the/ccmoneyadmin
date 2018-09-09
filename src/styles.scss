@@ -110,7 +110,7 @@ nav ul {
 
 button {
   border-radius: 4px;
-  background-color: #f4df8c;
+  background-color: #7A5691;
   border: none;
   color: #fff;
   padding: 5px 10px;
@@ -124,7 +124,7 @@ button {
 }
 
 button:hover {
-  background: #d68742;
+  background: purple;
 }
 
 button.delete {
@@ -143,11 +143,11 @@ button.ok {
 }
 
 .linkText, .linkText:active, .linkText:visited, .linkIcon {
-  color: #2c56a7;
+  color: #7A5691;
 }
 
 .linkText:hover, .linkIcon:hover {
-  color: #192844;
+  color: purple;
 }
 
 .linkItem {

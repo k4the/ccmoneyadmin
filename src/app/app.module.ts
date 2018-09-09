@@ -20,6 +20,7 @@ import { AppRoutes } from './app.routing';
 import { AuthGuard } from './auth/auth.guard';
 import { PageMapper } from './pages/page.mapper';
 import { CcImageFilterModule } from './cc-image-filter/cc-image-filter.module';
+import { CustomerMapper } from './customers/customer.mapper';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { CcImageFilterModule } from './cc-image-filter/cc-image-filter.module';
     CompanyMapper,
     ProductMapper,
     UserMapper,
-    PageMapper
+    PageMapper,
+    CustomerMapper
 ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,7 @@
 <div id="overlay" *ngIf="isLoading"></div>
 <app-cc-loading [isLoading]="isLoading"></app-cc-loading>
 <div class="companyListContainer" *ngIf="!showDelete">
-  <div class="container">
+  <div class="container bgContrast">
     <div class="flex1">
       <input type="text" [(ngModel)]="searchText" placeholder="Search" class="search">
     </div>

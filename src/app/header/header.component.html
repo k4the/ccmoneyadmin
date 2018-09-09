@@ -18,6 +18,9 @@
         <a *ngIf="isLoggedIn" routerLink="users" class="navItem" (click)="goto('users')" routerLinkActive="active">Users</a>
       </div>
       <div class="navItemContainer">
+        <a *ngIf="isLoggedIn" routerLink="customers" class="navItem" (click)="goto('customers')" routerLinkActive="active">Customers</a>
+      </div>
+      <div class="navItemContainer">
         <a *ngIf="isLoggedIn" routerLink="pages" class="navItem" (click)="goto('pages')" routerLinkActive="active">Pages</a>
       </div>
       <div class="navItemContainer subLink">

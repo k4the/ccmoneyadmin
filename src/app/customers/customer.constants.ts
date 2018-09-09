@@ -8,7 +8,8 @@ export const CustomerMessages = {
   firstName: 'First name',
   lastName: 'Lirst name',
   email: 'Email',
-  product: 'Product'
+  product: 'Product',
+  customer: 'Customer'
 };
 
 export const CustomerUrl = '/customers';
