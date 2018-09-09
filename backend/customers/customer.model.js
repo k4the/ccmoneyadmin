@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const customerSchema = mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true },
+  password: {type: String, required: true},
   paying: {
     currentlyPaying: {
       monthly: { type: Number, default: 0 },
@@ -24,4 +26,5 @@ const customerSchema = mongoose.Schema({
     required: false
   }
 });
+customerSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('Customer', customerSchema);

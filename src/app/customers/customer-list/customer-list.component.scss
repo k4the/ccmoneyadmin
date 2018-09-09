@@ -1,0 +1,67 @@
+.customerHeader {
+  border: 1px solid lightgray;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.customerItem.title {
+  flex: 2;
+}
+
+.customerItem.link {
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+
+.fa-pencil-alt {
+  color: green;
+}
+
+.fa-trash-alt {
+  color: red;
+}
+
+.customerListContainer {
+  position: relative;
+}
+
+.customerListContainer .add {
+margin-bottom: 12px;
+}
+
+.customerListContainer table {
+  background: white;
+}
+
+.customerListContainer table td, .customerListContainer table th {
+  padding: 12px 10px;
+}
+
+.customerListContainer table td.small, .customerListContainer table th.small {
+  width: 10%;
+  text-align: center;
+}
+
+.customerListContainer table th.small.capitalize {
+  text-transform: capitalize;
+}
+
+.customerListContainer table th.tableLink {
+  cursor: pointer;
+  position: relative;
+}
+
+.customerListContainer table th.tableLink span {
+  display: inline-block;
+}
+
+.customerListContainer table th.tableLink span i {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+}

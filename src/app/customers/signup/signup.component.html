@@ -1,0 +1,27 @@
+<div id="overlay" *ngIf="isLoading"></div>
+<app-cc-loading [isLoading]="isLoading"></app-cc-loading>
+<section class="card" *ngIf="!isLoading">
+  <form #customerForm="ngForm">
+    <div class="customerData">
+      <h4>Product</h4>
+      <div class="container">
+        <div class="flex1">
+          <div class="labelOnTop">
+            <label>{{customerMessages.firstName}}</label>
+            <input type="text" autofocus [ngModel]="customer?.firstName" name="firstName" #firstName="ngModel" placeholder="{{customerMessages.firstName}}" required>
+            <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
+              {{ customerMessages.noFirstName }}
+            </div>
+          </div>
+        </div>
+        <div class="flex1">
+          <app-cc-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="customerMessages.product" [selectedLabel]="selectedProductLabel" [items]="products"></app-cc-single-select>
+        </div>
+      </div>
+    </div>
+    <div class="customerButtons right">
+      <button type="button" class="cancel right capitalize" (click)="onCancel(customerForm)">{{keys.cancel}}</button>
+      <button type="button" class="ok" (click)="onSave(customerForm)">{{keys.save}}</button>
+    </div>
+  </form>
+</section>

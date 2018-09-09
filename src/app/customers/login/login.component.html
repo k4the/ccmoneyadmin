@@ -1,0 +1,16 @@
+<div class="login">
+  <form (submit)="onLogin(loginForm)" #loginForm="ngForm" class="card">
+      <input type="email" autofocus ngModel name="email" #email="ngModel" placeholder="Please enter your email" required email>
+      <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+        Please enter a valid email
+      </div>
+      <input type="password" ngModel name="password" #password="ngModel" placeholder="Please enter a password" required>
+      <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+        Please enter a password
+      </div>
+      <button type="submit" class="primary">Login</button>
+      <div [hidden]="!loginError" class="alert alert-danger">
+        There is a problem with the login details you have supplied.
+      </div>
+  </form>
+</div>

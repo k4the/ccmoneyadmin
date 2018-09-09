@@ -1,0 +1,17 @@
+<div id="overlay" *ngIf="isLoading"></div>
+<app-cc-loading [isLoading]="isLoading"></app-cc-loading>
+<div class="customerListContainer" *ngIf="!showDelete">
+  <table *ngIf="customers && customers.length > 0">
+    <tr>
+      <th>Email address</th>
+      <th class="small capitalize">{{ keys.delete }}</th>
+    </tr>
+    <tr *ngFor="let customer of customers">
+      <td>{{ customer.email }}</td>
+      <td class="small"><a class="customerItem link" *ngIf="isLoggedIn" (click)="openDeleteModal(customer)"><i class="fas fa-trash-alt"></i></a></td>
+    </tr>
+  </table>
+  <p *ngIf="customers.length === 0">No customers to display</p>
+</div>
+<app-customers-modal *ngIf="showDelete" (customersModalResult)="deleteUser($event)" [title]="title" [message]="message" [type]="type"
+  [id]="customerToDeleteId"></app-customers-modal>

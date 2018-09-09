@@ -7,6 +7,7 @@ export const Keys = {
   delete: 'delete',
   danger: 'danger',
   ok: 'ok',
+  save: 'save',
   warning: 'warning',
   cancel: 'cancel',
   currentCompany: 'currentCompany',
