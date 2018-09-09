@@ -13,5 +13,5 @@
   </table>
   <p *ngIf="customers.length === 0">No customers to display</p>
 </div>
-<app-customers-modal *ngIf="showDelete" (customersModalResult)="deleteUser($event)" [title]="title" [message]="message" [type]="type"
-  [id]="customerToDeleteId"></app-customers-modal>
+<app-cc-modal *ngIf="showDelete" (customersModalResult)="deleteCustomer($event)" [title]="title" [message]="message" [type]="type"
+  [id]="customerToDeleteId"></app-cc-modal>

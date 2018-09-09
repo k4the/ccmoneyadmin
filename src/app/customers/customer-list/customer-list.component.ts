@@ -1,3 +1,4 @@
+import { CustomerService } from './../customer.service';
 import { Keys } from './../../global.constants';
 import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -27,7 +28,8 @@ export class CustomerListComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private customerService: CustomerService
   ) {}
 
   ngOnInit() {
@@ -41,17 +43,17 @@ export class CustomerListComponent implements OnInit, OnDestroy {
   }
 
   getCustomers = () => {
-    // this.isLoading = true;
-    // this.authService.getCustomers().subscribe(
-    //   data => {
-    //     this.customers = [...data];
-    //     this.isLoading = false;
-    //   },
-    //   err => {
-    //     console.log(err);
-    //     this.isLoading = false;
-    //   }
-    // );
+    this.isLoading = true;
+    this.customerService.getCustomers().subscribe(
+      data => {
+        this.customers = [...data];
+        this.isLoading = false;
+      },
+      err => {
+        console.log(err);
+        this.isLoading = false;
+      }
+    );
   };
 
   openDeleteModal(customer: Customer): void {
@@ -66,22 +68,22 @@ export class CustomerListComponent implements OnInit, OnDestroy {
 
   deleteCustomer(item: any): void {
     this.closeDelete();
-    // if (item.result) {
-    //   this.isLoading = true;
-    //   this.authService.deleteCustomer(item.id).subscribe(
-    //     data => {
-    //       const updatedCustomers = this.customers.filter(
-    //         customer => customer.id !== item.id
-    //       );
-    //       this.customers = [...updatedCustomers];
-    //       this.isLoading = false;
-    //     },
-    //     err => {
-    //       console.log(err);
-    //       this.isLoading = false;
-    //     }
-    //   );
-    // }
+    if (item.result) {
+      this.isLoading = true;
+      this.customerService.deleteCustomer(item.id).subscribe(
+        data => {
+          const updatedCustomers = this.customers.filter(
+            customer => customer.id !== item.id
+          );
+          this.customers = [...updatedCustomers];
+          this.isLoading = false;
+        },
+        err => {
+          console.log(err);
+          this.isLoading = false;
+        }
+      );
+    }
     this.customerToDeleteId = null;
   }
 

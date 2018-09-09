@@ -5,8 +5,7 @@ const checkAuth = require('../shared/check-auth');
 
 router.get('', CustomersController.getCustomers);
 router.get('/:id', checkAuth, CustomersController.getCustomerById);
-router.post('/create', checkAuth, CustomersController.createCustomer);
-router.post('/login', checkAuth, CustomersController.createCustomer);
+router.post('', checkAuth, CustomersController.createCustomer);
 router.delete('/:id', checkAuth, CustomersController.deleteCustomer);
 router.put('/:id', checkAuth, CustomersController.modifyCustomer);
 

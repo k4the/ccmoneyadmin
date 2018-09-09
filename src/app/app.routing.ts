@@ -8,5 +8,6 @@ export const AppRoutes: Routes = [
   { path: 'products', loadChildren: './products/products.module#ProductsModule', data: { name: 'products' } },
   { path: 'pages', loadChildren: './pages/pages.module#PagesModule', data: { name: 'pages' } },
   { path: 'users', loadChildren: './auth/auth.module#AuthModule', data: { name: 'users' }  },
+  { path: 'customers', loadChildren: './customers/customer.module#CustomerModule', data: { name: 'customers' }  },
   { path: '**', component: PageNotFoundComponent }
 ];
