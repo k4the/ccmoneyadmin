@@ -1,78 +1,76 @@
 .companyHeader {
-  border: 1px solid lightgray;
-  padding: 12px 20px;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: row;
+    border: 1px solid lightgray;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
 }
 
 .companyItem.title {
-  flex: 2;
+    flex: 2;
 }
 
 .companyItem.link {
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  display: inline-block;
-  text-align: center;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
 }
 
 .fa-pencil-alt {
-  color: green;
+    color: green;
 }
 
 .fa-trash-alt {
-  color: red;
+    color: red;
 }
 
 .companyListContainer {
-  position: relative;
-
-  .container {
-    text-align: left;
-    padding: 0;
-  }
-
-  .flex1 {
-    padding: 10px;
-  }
+    position: relative;
+    .container {
+        text-align: left;
+        padding: 0;
+    }
+    .flex1 {
+        padding: 10px;
+    }
 }
 
 .companyListContainer .add {
-margin-bottom: 12px;
+    margin-bottom: 12px;
 }
 
 .companyListContainer table {
-  background: white;
+    background: white;
 }
 
-.companyListContainer table td, .companyListContainer table th {
-  padding: 12px 10px;
+.companyListContainer table td,
+.companyListContainer table th {
+    padding: 12px 10px;
 }
 
-.companyListContainer table td.small, .companyListContainer table th.small {
-  width: 10%;
-  text-align: center;
+.companyListContainer table td.small,
+.companyListContainer table th.small {
+    width: 10%;
+    text-align: center;
 }
 
 .companyListContainer table th.small.capitalize {
-  text-transform: capitalize;
+    text-transform: capitalize;
 }
 
 .companyListContainer table th.tableLink {
-  cursor: pointer;
-  position: relative;
+    cursor: pointer;
+    position: relative;
 }
 
 .companyListContainer table th.tableLink span {
-  display: inline-block;
+    display: inline-block;
 }
 
 .companyListContainer table th.tableLink span i {
-  position: absolute;
-  right: 10px;
-  top: 12px;
+    position: absolute;
+    right: 10px;
+    top: 12px;
 }
-
-

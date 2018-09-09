@@ -1,13 +1,13 @@
 <div id="overlay" *ngIf="isLoading"></div>
 <app-cc-loading [isLoading]="isLoading"></app-cc-loading>
-<section class="card" *ngIf="!isLoading">
+<section class="formCreate card nine90" *ngIf="!isLoading">
   <form #customerForm="ngForm">
     <h4>{{customerMessages.customer}}</h4>
     <div class="container">
       <div class="flex1">
         <div class="labelOnTop">
           <label>{{customerMessages.firstName}}</label>
-          <input type="text" autofocus [ngModel]="customer?.firstName" name="firstName" #firstName="ngModel" placeholder="{{customerMessages.firstName}}"
+          <input type="text" autofocus [ngModel]="customer?.firstName" name="firstName" #firstName="ngModel"
             required>
           <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
             {{ customerMessages.noFirstName }}
@@ -17,7 +17,7 @@
       <div class="flex1">
         <div class="labelOnTop">
           <label>{{customerMessages.lastName}}</label>
-          <input type="text" autofocus [ngModel]="customer?.lastName" name="lastName" #lastName="ngModel" placeholder="{{customerMessages.lastName}}"
+          <input type="text" [ngModel]="customer?.lastName" name="lastName" #lastName="ngModel"
             required>
           <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
             {{ customerMessages.noFirstName }}
@@ -27,13 +27,35 @@
     </div>
     <div class="container">
       <div class="flex1">
-        <app-cc-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="customerMessages.product" [selectedLabel]="selectedProductLabel"
-          [items]="products"></app-cc-single-select>
+        <div class="labelOnTop">
+          <label>{{customerMessages.email}}</label>
+          <input type="text" [ngModel]="customer?.email" name="email" #email="ngModel" required>
+          <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+            {{ customerMessages.noFirstName }}
+          </div>
+        </div>
+      </div>
+      <div class="flex1">
+        <div class="labelOnTop">
+          <label>{{customerMessages.password}}</label>
+          <input type="password" [ngModel]="customer?.password" name="password" #password="ngModel" required>
+          <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+            {{ customerMessages.noPassword }}
+          </div>
+        </div>
       </div>
     </div>
-    <div class="customerButtons right">
+    <div class="container">
+      <div class="half">
+        <div class="labelOnTop">
+          <app-cc-single-select (singleSelectedItems)="setSingleSelectedItems($event)" [label]="customerMessages.product" [selectedLabel]="selectedProductLabel"
+            [items]="products"></app-cc-single-select>
+        </div>
+      </div>
+    </div>
+    <div class="formButtons right">
       <button type="button" class="cancel right capitalize" (click)="onCancel(customerForm)">{{keys.cancel}}</button>
-      <button type="button" class="ok" (click)="onSave(customerForm)">{{keys.save}}</button>
+      <button type="button" class="ok capitalize" (click)="onSave(customerForm)">{{customerMessages.save}}</button>
     </div>
   </form>
 </section>

@@ -5,6 +5,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { Customer } from '../customer.model';
+import { CustomerMessages } from '../customer.constants';
 
 @Component({
   selector: 'app-customer-list',
@@ -23,6 +24,7 @@ export class CustomerListComponent implements OnInit, OnDestroy {
   customerToDeleteId: string = null;
   isLoading = false;
   searchText = '';
+  customerMessages = CustomerMessages;
 
   private authStatusSub: Subscription;
 
@@ -56,8 +58,12 @@ export class CustomerListComponent implements OnInit, OnDestroy {
     );
   };
 
+  addCustomer(): void {
+    this.router.navigate(['/customers/create']);
+  }
+
   openDeleteModal(customer: Customer): void {
-    if(this.customers.length > 1) {
+    if (this.customers.length > 1) {
       this.title = 'Delete customer';
       this.message = 'Are you sure you want to delete ' + customer.email;
       this.type = this.keys.danger;

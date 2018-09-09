@@ -8,6 +8,7 @@ export class CustomerMapper {
     const customer = {
       id: json._id,
       email: json.email,
+      password: json.password,
       firstName: json.firstName,
       lastName: json.lastName ? json.lastName : null,
       paying: json.paying ? json.paying : null,
@@ -20,6 +21,7 @@ export class CustomerMapper {
     return {
       _id: customer.id ? customer.id : null,
       email: customer.email,
+      password: customer.password,
       firstName: customer.firstName,
       lastName: customer.lastName ? customer.lastName : null,
       paying: customer.paying ? customer.paying : null,

@@ -80,4 +80,25 @@ export class ProductsService {
       return this.http.delete<{}>(productsUrl + id);
     }
   }
+
+  getEmptyProduct(): Product {
+    return {
+      id: null,
+      name: null,
+      fuelType: null,
+      totalYearlyCost: 0,
+      totalMonthlyCost: 0,
+      isGreen: false,
+      isTopPick: false,
+      cashback: 0,
+      earlyExitFee: 0,
+      message: null,
+      paymentMethod: null,
+      rateType: null,
+      fixedFor: null,
+      company: null,
+      gas: null,
+      electricity: null
+    };
+  }
 }

@@ -36,7 +36,8 @@ header {
   background: none;
 }
 
-.capitalise {
+.capitalise,
+.capitalize {
   text-transform: capitalize;
 }
 
@@ -231,6 +232,7 @@ label {
   flex-direction: column;
   margin: 8px 12px 8px 0;
   position: relative;
+  text-align: left;
 }
 
 .labelLeft {
@@ -238,11 +240,16 @@ label {
   margin-top: 0;
 }
 
+.formCreate.card.nine90 {
+  margin-top: 10px;
+}
+
 .labelLeft {
   padding-right: 10px;
 }
 
-.labelOnTop input[type=text] {
+.labelOnTop input[type=text],
+.labelOnTop input[type=password] {
   margin-top: 0;
 }
 
@@ -278,6 +285,22 @@ label {
 
 .right {
   text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+.half {
+  width: 50%;
+}
+
+.formButtons .cancel {
+  margin-right: 10px;
+}
+
+.formButtons {
+  padding: 15px 0 5px 0;
 }
 
 .card {

@@ -1,22 +1,22 @@
 import { Product } from "../products/product.model";
 
 export class Customer {
+  id?: string;
   email: string;
   password: string;
-  id?: string;
   firstName: string;
   lastName: string;
   paying: Paying;
   product: Product;
 
-  constructor(json: any) {
-    this.email = json.email;
-    this.password = json.password;
-    this.id = json.id ? json.id : null;
-    this.firstName = json.firstName;
-    this.lastName = json.lastName;
-    this.paying = json.paying ? new Paying(json.paying) : null;
-    this.product = json.product ? new Product(json.product) : null;
+  constructor(customer: Customer) {
+    this.id = customer.id ? customer.id : null;
+    this.email = customer.email ? customer.email : null;
+    this.password = customer.password ? customer.password : null;
+    this.firstName = customer.firstName ? customer.firstName : null;
+    this.lastName = customer.lastName ? customer.lastName : null;
+    this.paying = customer.paying ? new Paying(customer.paying) : null;
+    this.product = customer.product ? new Product(customer.product) : null;
   }
 }
 
@@ -25,10 +25,10 @@ export class Paying {
   couldBePaying: YearlyMonthly
   saving: YearlyMonthly;
 
-  constructor(json: any) {
-    this.couldBePaying = json.couldBePaying ? new YearlyMonthly(json.couldBePaying) : null;
-    this.currentlyPaying = json.currentlyPaying ? new YearlyMonthly(json.currentlyPaying) : null;
-    this.saving = json.saving ? new YearlyMonthly(json.saving) : null;
+  constructor(paying: Paying) {
+    this.couldBePaying = paying.couldBePaying ? new YearlyMonthly(paying.couldBePaying) : null;
+    this.currentlyPaying = paying.currentlyPaying ? new YearlyMonthly(paying.currentlyPaying) : null;
+    this.saving = paying.saving ? new YearlyMonthly(paying.saving) : null;
   }
 }
 
@@ -36,8 +36,8 @@ export class YearlyMonthly {
   yearly: number;
   monthly: number;
 
-  constructor(json: any) {
-    this.yearly = json.yearly;
-    this.monthly = json.monthly;
+  constructor(yearlyMonthly: YearlyMonthly) {
+    this.yearly = yearlyMonthly.yearly;
+    this.monthly = yearlyMonthly.monthly;
   }
 }

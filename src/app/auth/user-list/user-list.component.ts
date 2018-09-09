@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Auth } from '../auth.model';
 import { AuthService } from '../../auth/auth.service';
 import { User } from '../user.model';
+import { UserMessages } from '../users.constants';
 
 @Component({
   selector: 'app-user-list',
@@ -23,6 +24,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   userToDeleteId: string = null;
   isLoading = false;
   searchText = '';
+  userMessages = UserMessages;
 
   private authStatusSub: Subscription;
 
@@ -39,6 +41,10 @@ export class UserListComponent implements OnInit, OnDestroy {
       .subscribe(isAuthenticated => {
         this.isLoggedIn = isAuthenticated;
       });
+  }
+
+  addUser(): void {
+
   }
 
   getUsers = () => {

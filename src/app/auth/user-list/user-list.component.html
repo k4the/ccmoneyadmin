@@ -1,9 +1,17 @@
 <div id="overlay" *ngIf="isLoading"></div>
-<app-user-loading [isLoading]="isLoading"></app-user-loading>
+<app-cc-loading [isLoading]="isLoading"></app-cc-loading>
 <div class="userListContainer" *ngIf="!showDelete">
+  <div class="container bgContrast">
+    <div class="flex1">
+      <input type="text" [(ngModel)]="searchText" placeholder="Search" class="search">
+    </div>
+    <div class="flex1 right">
+      <button type="button" class="add" (click)="addUser()">{{userMessages.addUser}}</button>
+    </div>
+  </div>
   <table *ngIf="users && users.length > 0">
     <tr>
-      <th>Email address</th>
+      <th>{{userMessages.email}}</th>
       <th class="small capitalize">{{ keys.delete }}</th>
     </tr>
     <tr *ngFor="let user of users">
@@ -11,7 +19,7 @@
       <td class="small"><a class="userItem link" *ngIf="isLoggedIn" (click)="openDeleteModal(user)"><i class="fas fa-trash-alt"></i></a></td>
     </tr>
   </table>
-  <p *ngIf="users.length === 0">No users to display</p>
+  <p *ngIf="users.length === 0" class="noList">{{userMessages.noList}}</p>
 </div>
-<app-users-modal *ngIf="showDelete" (usersModalResult)="deleteUser($event)" [title]="title" [message]="message" [type]="type"
-  [id]="userToDeleteId"></app-users-modal>
+<app-cc-modal *ngIf="showDelete" (usersModalResult)="deleteUser($event)" [title]="title" [message]="message" [type]="type"
+  [id]="userToDeleteId"></app-cc-modal>

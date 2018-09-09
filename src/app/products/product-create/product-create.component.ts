@@ -52,6 +52,7 @@ export class ProductCreateComponent implements OnInit {
       } else {
         this.mode = this.keys.create;
         this.productId = null;
+        this.product = this.productsService.getEmptyProduct();
       }
       this.getCompanies();
     });
@@ -150,8 +151,6 @@ export class ProductCreateComponent implements OnInit {
         this.isLoading = false;
         if (this.mode === this.keys.edit) {
           this.getProductById();
-        } else {
-          this.product = new Product(null);
         }
       },
       err => {

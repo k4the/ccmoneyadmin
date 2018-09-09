@@ -190,4 +190,16 @@ export class CustomerService implements OnInit {
       this.logout();
     }, expiresInDuration * 1000);
   }
+
+  getEmptyCustomer(): Customer {
+    return  {
+      id: null,
+      email: null,
+      password: null,
+      firstName: null,
+      lastName: null,
+      paying: null,
+      product: null
+    };
+  }
 }

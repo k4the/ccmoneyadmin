@@ -42,29 +42,11 @@ export class CustomerCreateComponent implements OnInit {
       } else {
         this.mode = this.keys.create;
         this.customerId = null;
+        this.customer = this.customerService.getEmptyCustomer();
       }
       this.getProducts();
     });
   }
-
-  // ngOnInit() {
-  //   this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
-  //     authStatus => {
-  //       console.log(authStatus);
-  //       this.isLoading = false;
-  //       this.route.paramMap.subscribe((paramMap: ParamMap) => {
-  //         if (paramMap.has('customerId')) {
-  //           this.mode = this.keys.edit;
-  //           this.customerId = paramMap.get('customerId');
-  //         } else {
-  //           this.mode = this.keys.create;
-  //           this.customerId = null;
-  //         }
-  //         this.getProducts();
-  //       });
-  //     }
-  //   );
-  // }
 
   getCustomerById(): void {
     this.isLoading = true;
@@ -91,8 +73,6 @@ export class CustomerCreateComponent implements OnInit {
         this.isLoading = false;
         if (this.mode === this.keys.edit) {
           this.getCustomerById();
-        } else {
-          this.customer = new Customer(null);
         }
       },
       err => {
@@ -115,10 +95,10 @@ export class CustomerCreateComponent implements OnInit {
       return;
     }
     const customer: any = {
-      email: form.value.email,
-      password: form.value.password,
       firstName: form.value.firstName,
       lastName: form.value.lastName ? form.value.lastName : null,
+      email: form.value.email ? form.value.email : null,
+      password: form.value.password,
       paying: form.value.paying ? form.value.paying : null,
       product: form.value.product ? form.value.product : null
     };
