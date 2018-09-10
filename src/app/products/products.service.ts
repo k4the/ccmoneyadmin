@@ -97,8 +97,19 @@ export class ProductsService {
       rateType: null,
       fixedFor: null,
       company: null,
-      gas: null,
-      electricity: null
+      gas: this.getEmptyFuel(),
+      electricity: this.getEmptyFuel()
     };
+  }
+
+  getEmptyFuel(): Fuel {
+    return {
+      yearlyCost: null,
+      monthlyCost: null,
+      economy7: null,
+      unitRate: null,
+      discountRate: null,
+      standingCharge: null
+    }
   }
 }

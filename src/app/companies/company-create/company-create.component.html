@@ -50,9 +50,6 @@
             <div [hidden]="totalVotes.valid || totalVotes.pristine" class="alert alert-danger">
               {{ companyMessages.noPollRating }}
             </div>
-            <div [hidden]="great.value + ok.value + poor.value <= totalVotes.value" class="alert alert-danger">
-                {{ companyMessages.totalVotesError }}
-              </div>
           </div>
         </div>
       </div>
@@ -74,6 +71,9 @@
     </div>
     <div [hidden]="companyForm.valid || companyForm.pristine" class="alert alert-danger">
       {{ companyMessages.allFields }}
+    </div>
+    <div [hidden]="great.value + ok.value + poor.value <= totalVotes.value" class="alert alert-danger">
+      {{ companyMessages.totalVotesError }}
     </div>
     <div class="companyButtons right">
       <button type="button" class="cancel right capitalize" (click)="onCancel(companyForm)">{{companyLabels.cancel}}</button>
