@@ -4,7 +4,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 const customerSchema = mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
   password: {type: String, required: true},
   paying: {
     currentlyPaying: {
@@ -23,7 +23,7 @@ const customerSchema = mongoose.Schema({
   product: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Product',
-    required: false
+    required: true
   }
 });
 customerSchema.plugin(uniqueValidator);

@@ -6,7 +6,7 @@ import { Auth } from '../auth/auth.model';
 import { Subject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CustomerMapper } from './customer.mapper';
-import { Customer } from './customer.model';
+import { Customer, Paying } from './customer.model';
 
 const customersUrl = environment.apiUrl + '/customers/';
 const loginUrl = 'login';
@@ -16,7 +16,6 @@ const signupUrl = 'signup';
   providedIn: 'root'
 })
 export class CustomerService implements OnInit {
-
   ngOnInit(): void {
     this.loggedInCustomer = null;
   }
@@ -46,25 +45,6 @@ export class CustomerService implements OnInit {
       })
     );
   }
-
-  addCustomer(customer: Customer): Observable<any> {
-    if (customer) {
-      customer = this.customerMapper.mapCustomerToJson(customer);
-      const result = this.http.post<{ message: string; customerId: string }>(customersUrl, customer);
-      return result.pipe(
-        map(customerData => {
-          customer.id = customerData.customerId;
-        })
-      )
-    }
-  }
-
-  // updateCustomer(customerId: string, customer: Customer): Observable<any> {
-  //   if (customer) {
-  //     customer = this.customerMapper.mapToJson(customer);
-  //     return this.http.put(customersUrl + customerId, customer);
-  //   }
-  // }
 
   getCustomer(id: string): Observable<any> {
     if (id) {
@@ -110,15 +90,26 @@ export class CustomerService implements OnInit {
     return this.isAuthenticated;
   }
 
-  createCustomer(customer: Customer): void {
-    this.http.post(customersUrl + signupUrl, customer).subscribe(
-      response => {
-        this.router.navigate(['/']);
-      },
-      error => {
-        this.authStatusListener.next(false);
-      }
-    );
+  addCustomer(customer: Customer): Observable<any> {
+    if (customer) {
+      customer = this.customerMapper.mapCustomerToJson(customer);
+      const result = this.http.post<{ message: string; customerId: string }>(
+        customersUrl,
+        customer
+      );
+      return result.pipe(
+        map(customerData => {
+          customer.id = customerData.customerId;
+        })
+      );
+    }
+  }
+
+  updateCustomer(customerId: string, customer: Customer): Observable<any> {
+    if (customer) {
+      customer = this.customerMapper.mapCustomerToJson(customer);
+      return this.http.put(customersUrl + customerId, customer);
+    }
   }
 
   getLoggedInCustomer() {
@@ -127,10 +118,11 @@ export class CustomerService implements OnInit {
 
   login(auth: Auth): Observable<any> {
     if (auth) {
-      const result = this.http.post<{ token: string; expiresIn: number, customer: Customer }>(
-        customersUrl + loginUrl,
-        auth
-      );
+      const result = this.http.post<{
+        token: string;
+        expiresIn: number;
+        customer: Customer;
+      }>(customersUrl + loginUrl, auth);
       return result.pipe(
         map(response => {
           if (response.token) {
@@ -192,14 +184,31 @@ export class CustomerService implements OnInit {
   }
 
   getEmptyCustomer(): Customer {
-    return  {
+    return {
       id: null,
       email: null,
       password: null,
       firstName: null,
       lastName: null,
-      paying: null,
+      paying: this.getEmptyCurrentlyPaying(),
       product: null
+    };
+  }
+
+  getEmptyCurrentlyPaying(): Paying {
+    return {
+      currentlyPaying: {
+        yearly: 0,
+        monthly: 0
+      },
+      couldBePaying: {
+        yearly: 0,
+        monthly: 0
+      },
+      saving: {
+        yearly: 0,
+        monthly: 0
+      }
     };
   }
 }

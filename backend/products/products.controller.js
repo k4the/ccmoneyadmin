@@ -49,6 +49,7 @@ exports.addProduct = (req, res, next) => {
     message: req.sanitize(req.body.message),
     rateType: req.sanitize(req.body.rateType),
     fixedFor: req.sanitize(req.body.fixedFor),
+    endDate: req.sanitize(req.body.endDate),
     company: req.body.company,
     gas: {
       yearlyCost: req.sanitize(req.body.gas.yearlyCost),
@@ -106,6 +107,7 @@ exports.modifyProduct = (req, res, next) => {
       message: req.sanitize(req.body.message),
       rateType: req.sanitize(req.body.rateType),
       fixedFor: req.sanitize(req.body.fixedFor),
+      endDate: req.sanitize(req.body.endDate),
       company: req.body.company,
       gas: {
         yearlyCost: req.sanitize(req.body.gas.yearlyCost),

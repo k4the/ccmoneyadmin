@@ -15,6 +15,7 @@ export class Product {
   fixedFor: number;
   paymentMethod: string;
   message: string;
+  endDate: Date;
   company: Company;
   gas: Fuel;
   electricity: Fuel;
@@ -33,6 +34,7 @@ export class Product {
     this.fixedFor = product.fixedFor;
     this.paymentMethod = product.paymentMethod;
     this.message = product.message;
+    this.endDate = product.endDate;
     this.company = product.company ? new Company(product.company) : null;
     this.gas = product.gas ? new Fuel(product.gas) : null;
     this.electricity = product.electricity ? new Fuel(product.electricity) : null;

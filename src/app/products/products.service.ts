@@ -96,6 +96,7 @@ export class ProductsService {
       paymentMethod: null,
       rateType: null,
       fixedFor: null,
+      endDate: null,
       company: null,
       gas: this.getEmptyFuel(),
       electricity: this.getEmptyFuel()

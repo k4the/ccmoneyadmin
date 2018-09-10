@@ -235,6 +235,8 @@ export class ProductCreateComponent implements OnInit {
       paymentMethod: this.product.paymentMethod,
       rateType: this.product.rateType,
       fixedFor: form.value.fixedFor,
+      // endDate: form.value.endDate,
+      endDate: this.product.endDate ? this.product.endDate : null,
       company: this.product.company,
       gas: this.product.gas,
       electricity: this.product.electricity

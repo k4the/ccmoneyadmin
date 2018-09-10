@@ -3,26 +3,40 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 exports.getCustomers = (req, res, next) => {
-  Customer.find().then(documents => {
-    res.status(200).json({
-      message: 'Customer fetched successfully',
-      customers: documents
-    });
-  });
+  try {
+    Customer.find()
+      .populate('product')
+      .sort({ lastName: -1 })
+      .then(documents => {
+        res.status(200).json({
+          message: 'Customers fetched successfully',
+          customers: documents
+        });
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error });
+  }
 };
 
 exports.getCustomerById = (req, res, next) => {
-  Customer.findById(req.params.id).then(customer => {
-    if (customer) {
-      res.status(200).json(customer);
-      console.log(customer);
-    } else {
-      res.status(404).json({ message: 'Customer not found!' });
-    }
-  });
+  try {
+    Customer.findById(req.params.id)
+      .populate('product')
+      .then(customer => {
+        if (customer) {
+          res.status(200).json(customer);
+        } else {
+          res.status(404).json({ message: 'Customer not found!' });
+        }
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error });
+  }
 };
 
-exports.createCustomer = (req, res, next) => {
+exports.addCustomer = (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then(hash => {
     const customer = new Customer({
       firstName: req.sanitize(req.body.firstName),
@@ -43,7 +57,7 @@ exports.createCustomer = (req, res, next) => {
           yearly: req.sanitize(req.body.paying.saving.yearly)
         }
       },
-      company: req.body.company
+      product: req.body.product
     });
     customer
       .save()
@@ -143,7 +157,7 @@ exports.modifyCustomer = (req, res, next) => {
         yearly: req.sanitize(req.body.paying.saving.yearly)
       }
     },
-    company: req.body.company
+    product: req.body.product
   });
   Customer.updateOne({ _id: req.params.id }, customer).then(result => {
     if (result) {

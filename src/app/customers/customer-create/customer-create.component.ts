@@ -1,7 +1,8 @@
+import { YearlyMonthly } from './../customer.model';
 import { ProductsService } from '../../products/products.service';
 import { Keys } from '../../global.constants';
-import { CustomerMessages } from '../customer.constants';
-import { Customer } from '../customer.model';
+import { CustomerMessages, CustomerUrl } from '../customer.constants';
+import { Customer, Paying } from '../customer.model';
 import { CustomerService } from '../customer.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -55,8 +56,10 @@ export class CustomerCreateComponent implements OnInit {
       customerData => {
         this.customer = { ...customerData };
         this.isLoading = false;
-        this.selectedProduct = this.customer.product;
-        this.selectedProductLabel = this.customer.product.name;
+        if( this.customer.product) {
+          this.selectedProduct = this.customer.product;
+          this.selectedProductLabel = this.customer.product.name;
+        }
       },
       err => {
         console.log(err);
@@ -82,8 +85,10 @@ export class CustomerCreateComponent implements OnInit {
     );
   }
 
-  setSingleSelectedItems() {
-
+  setSingleSelectedItems(item: any) {
+    this.customer.product = item.data;
+    this.customer.paying.currentlyPaying.yearly = item.data.totalYearlyCost;
+    this.customer.paying.currentlyPaying.monthly = item.data.totalMonthlyCost;
   }
 
   onCancel(form: NgForm): void {
@@ -91,7 +96,7 @@ export class CustomerCreateComponent implements OnInit {
   }
 
   onSave(form: NgForm): void {
-    if (form.invalid ) {
+    if (form.invalid || !this.customer.product) {
       return;
     }
     const customer: any = {
@@ -99,9 +104,36 @@ export class CustomerCreateComponent implements OnInit {
       lastName: form.value.lastName ? form.value.lastName : null,
       email: form.value.email ? form.value.email : null,
       password: form.value.password,
-      paying: form.value.paying ? form.value.paying : null,
-      product: form.value.product ? form.value.product : null
+      paying: this.customer.paying,
+      product: this.customer.product
     };
-    this.customerService.createCustomer(customer);
+    let id: string = null;
+    this.mode === this.keys.edit ? (id = this.customerId) : (id = null);
+    this.isLoading = true;
+    if (this.mode === Keys.create) {
+      this.customer.id = null;
+      this.customerService.addCustomer(customer).subscribe(
+        () => {
+          this.isLoading = false;
+          this.router.navigate([CustomerUrl]);
+        },
+        err => {
+          console.log(err);
+          this.isLoading = false;
+        }
+      );
+    } else {
+      this.customerService.updateCustomer(this.customerId, customer).subscribe(
+        () => {
+          this.isLoading = false;
+          this.router.navigate([CustomerUrl]);
+        },
+        err => {
+          this.isLoading = false;
+          console.log(err);
+        }
+      );
+    }
+    form.resetForm();
   }
 }

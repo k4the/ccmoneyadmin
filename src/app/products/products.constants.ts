@@ -46,7 +46,9 @@ export const ProductLabels = {
   item: 'Item',
   price: 'Price',
   fuelType: 'Fuel type',
-  noProducts: 'No products added yet'
+  noProducts: 'No products added yet',
+  endDate: 'End date',
+  NA: 'N/A'
 };
 
 export const ProductProperties = {
