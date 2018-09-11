@@ -1,4 +1,5 @@
-import { Product } from "../products/product.model";
+import { Product } from '../products/product.model';
+import { YearlyMonthly } from './yearly-monthly.model';
 
 export class Customer {
   id?: string;
@@ -21,23 +22,13 @@ export class Customer {
 }
 
 export class Paying {
-  currentlyPaying: YearlyMonthly
-  couldBePaying: YearlyMonthly
+  currentlyPaying: YearlyMonthly;
+  couldBePaying: YearlyMonthly;
   saving: YearlyMonthly;
 
   constructor(paying: Paying) {
     this.couldBePaying = paying.couldBePaying ? new YearlyMonthly(paying.couldBePaying) : null;
     this.currentlyPaying = paying.currentlyPaying ? new YearlyMonthly(paying.currentlyPaying) : null;
     this.saving = paying.saving ? new YearlyMonthly(paying.saving) : null;
-  }
-}
-
-export class YearlyMonthly {
-  yearly: number;
-  monthly: number;
-
-  constructor(yearlyMonthly: YearlyMonthly) {
-    this.yearly = yearlyMonthly.yearly;
-    this.monthly = yearlyMonthly.monthly;
   }
 }

@@ -23,6 +23,8 @@ export const CustomerMessages = {
   NA: 'N/A'
 };
 
-export const CustomerUrl = '/customers';
-export const CustomerCreateUrl = '/customers/create';
-export const CustomerIdRouteParam = 'customerId';
+export const CustomerEndPoints = {
+  customers: '/customers',
+  customerId: 'customerId',
+  customerWithProducts: '/customers/products/'
+}

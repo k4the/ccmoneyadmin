@@ -1,3 +1,4 @@
+import { ProductMapper } from './../products/product.mapper';
 import { CcModalModule } from './../cc-modal/cc-modal.module';
 import { CcLoadingModule } from './../cc-loading/cc-loading.module';
 import { NgModule } from '@angular/core';
@@ -22,6 +23,6 @@ import { CustomerMapper } from './customer.mapper';
     CustomerCreateComponent,
     CustomerListComponent
   ],
-  providers: [CustomerMapper]
+  providers: [CustomerMapper, ProductMapper]
 })
 export class CustomerModule { }

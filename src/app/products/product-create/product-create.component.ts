@@ -221,6 +221,7 @@ export class ProductCreateComponent implements OnInit {
   }
 
   private setProduct(form: NgForm, id: string): Product {
+    //this.product.endDate = new Date("21 February, 2019");
     return {
       id: id,
       name: form.value.name,
@@ -234,12 +235,13 @@ export class ProductCreateComponent implements OnInit {
       message: form.value.message,
       paymentMethod: this.product.paymentMethod,
       rateType: this.product.rateType,
-      fixedFor: form.value.fixedFor,
+      fixedFor: form.value.fixedFor ? form.value.fixedFor : null,
       // endDate: form.value.endDate,
       endDate: this.product.endDate ? this.product.endDate : null,
       company: this.product.company,
-      gas: this.product.gas,
-      electricity: this.product.electricity
+      gas: this.product.gas ? this.product.gas : null,
+      electricity: this.product.electricity ? this.product.electricity : null,
+      saving: this.product.saving ? this.product.saving : null
     };
   }
 }

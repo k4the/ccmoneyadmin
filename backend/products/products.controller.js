@@ -65,6 +65,10 @@ exports.addProduct = (req, res, next) => {
       standingCharge: req.sanitize(req.body.electricity.standingCharge),
       unitRate: req.sanitize(req.body.electricity.unitRate),
       discountRate: req.sanitize(req.body.electricity.discountRate)
+    },
+    saving: {
+      yearly: req.sanitize(req.body.saving.yearly),
+      monthly: req.sanitize(req.body.saving.monthly)
     }
   });
   try {
@@ -123,6 +127,10 @@ exports.modifyProduct = (req, res, next) => {
         standingCharge: req.sanitize(req.body.electricity.standingCharge),
         unitRate: req.sanitize(req.body.electricity.unitRate),
         discountRate: req.sanitize(req.body.electricity.discountRate)
+      },
+      saving: {
+        yearly: req.sanitize(req.body.saving.yearly),
+        monthly: req.sanitize(req.body.saving.monthly)
       }
     });
     Product.updateOne({ _id: req.params.id }, product).then(result => {

@@ -7,6 +7,7 @@
     </div>
     <div class="flex1 right">
       <button type="button" class="add" (click)="addCustomer()">{{customerMessages.addCustomer}}</button>
+      <button type="button" class="danger" (click)="getCustomerByIdWithProducts()">Cust and Prods</button>
     </div>
   </div>
   <table *ngIf="customers && customers.length > 0">
@@ -29,5 +30,5 @@
   </table>
   <p *ngIf="customers.length === 0" class="noList">{{customerMessages.noList}}</p>
 </div>
-<app-cc-modal *ngIf="showDelete" (customersModalResult)="deleteCustomer($event)" [title]="title" [message]="message" [type]="type"
+<app-cc-modal *ngIf="showDelete" (ccModalResult)="deleteCustomer($event)" [title]="title" [message]="message" [type]="type"
   [id]="customerToDeleteId"></app-cc-modal>

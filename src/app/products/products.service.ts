@@ -99,7 +99,11 @@ export class ProductsService {
       endDate: null,
       company: null,
       gas: this.getEmptyFuel(),
-      electricity: this.getEmptyFuel()
+      electricity: this.getEmptyFuel(),
+      saving: {
+        yearly: 0,
+        monthly: 0
+      }
     };
   }
 

@@ -25,6 +25,7 @@ export class CustomerListComponent implements OnInit, OnDestroy {
   isLoading = false;
   searchText = '';
   customerMessages = CustomerMessages;
+  customerWithProducts: any = null;
 
   private authStatusSub: Subscription;
 
@@ -44,13 +45,48 @@ export class CustomerListComponent implements OnInit, OnDestroy {
       });
   }
 
+  getCustomerByIdWithProducts(): void {
+    const id = '5b976b0d66542216d4f7ab06';
+    this.isLoading = true;
+    this.customerService.getCustomerByIdWithProducts(id).subscribe(
+      customerData => {
+        this.customerWithProducts = { ...customerData };
+        if (
+          this.customerWithProducts.products &&
+          this.customerWithProducts.products.length
+        ) {
+          if (
+            this.customerWithProducts.customer.paying &&
+            this.customerWithProducts.customer.paying.currentlyPaying &&
+            this.customerWithProducts.customer.paying.currentlyPaying.yearly
+          ) {
+            for (
+              let i = 0;
+              i < this.customerWithProducts.products.length;
+              i++
+            ) {
+              this.customerWithProducts.products[i].saving.monthly = this.customerWithProducts.customer.paying.currentlyPaying.monthly - this.customerWithProducts.products[i].totalMonthlyCost;
+              this.customerWithProducts.products[i].saving.yearly = this.customerWithProducts.customer.paying.currentlyPaying.yearly - this.customerWithProducts.products[i].totalYearlyCost;
+            }
+          }
+        }
+        this.isLoading = false;
+        console.log('cust', this.customerWithProducts);
+      },
+      err => {
+        console.log(err);
+        this.isLoading = false;
+      }
+    );
+  }
+
   getCustomers = () => {
     this.isLoading = true;
     this.customerService.getCustomers().subscribe(
       data => {
         this.customers = [...data];
-        console.log(this.customers);
         this.isLoading = false;
+        console.log(this.customers);
       },
       err => {
         console.log(err);

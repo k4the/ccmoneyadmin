@@ -1,8 +1,9 @@
 import { Product } from './../products/product.model';
-import { Customer, Paying, YearlyMonthly } from './customer.model';
+import { Customer, Paying } from './customer.model';
 import { Fuel } from '../products/fuel.model';
 import { PollRating } from '../companies/poll-rating.model';
 import { Company } from '../companies/company.model';
+import { YearlyMonthly } from './yearly-monthly.model';
 
 export class CustomerMapper {
   constructor() {}
@@ -45,22 +46,7 @@ export class CustomerMapper {
     return {
       currentlyPaying: paying.currentlyPaying ? this.mapYearlyMonthlyToJson(paying.currentlyPaying) : null,
       couldBePaying: paying.couldBePaying ? this.mapYearlyMonthlyToJson(paying.couldBePaying) : null,
-      saving: paying.saving ? paying.saving : null
-    };
-  }
-
-  mapYearlyMonthlyFromJson(json: any): YearlyMonthly {
-    const yearlyMonthly = {
-      yearly: json.yearly,
-      monthly: json.monthly
-    };
-    return new YearlyMonthly(yearlyMonthly);
-  }
-
-  mapYearlyMonthlyToJson(yearlyMonthly: YearlyMonthly): any {
-    return {
-      yearly: yearlyMonthly.yearly ? yearlyMonthly.yearly : 0,
-      monthly: yearlyMonthly.monthly ? yearlyMonthly.monthly : 0
+      saving: paying.saving ? this.mapYearlyMonthlyToJson(paying.saving) : null
     };
   }
 
@@ -84,6 +70,7 @@ export class CustomerMapper {
       company: json.company ? this.mapCompanyFromJson(json.company) : null,
       gas: json.gas ? this.mapFuelFromJson(json.gas) : null,
       electricity: json.electricity ? this.mapFuelFromJson(json.electricity) : null,
+      saving: json.saving ? this.mapYearlyMonthlyFromJson(json.saving) : null
     };
     return new Product(product);
   }
@@ -108,6 +95,7 @@ export class CustomerMapper {
       company: product.company ? this.mapCompanyToJson(product.company) : null,
       gas: product.gas ? this.mapFuelToJson(product.gas) : null,
       electricity: product.electricity ? this.mapFuelToJson(product.electricity) : null,
+      saving: product.saving ? this.mapYearlyMonthlyToJson(product.saving) : null
     };
   }
 
@@ -189,6 +177,21 @@ export class CustomerMapper {
       unitRate: fuel.unitRate,
       discountRate: fuel.discountRate ? fuel.discountRate : null,
       standingCharge: fuel.standingCharge ? fuel.standingCharge : null
+    };
+  }
+
+  mapYearlyMonthlyFromJson(json: any): YearlyMonthly {
+    const yearlyMonthly = {
+      yearly: json.yearly,
+      monthly: json.monthly
+    };
+    return new YearlyMonthly(yearlyMonthly);
+  }
+
+  mapYearlyMonthlyToJson(yearlyMonthly: YearlyMonthly): any {
+    return {
+      yearly: yearlyMonthly.yearly ? yearlyMonthly.yearly : 0,
+      monthly: yearlyMonthly.monthly ? yearlyMonthly.monthly : 0
     };
   }
 }

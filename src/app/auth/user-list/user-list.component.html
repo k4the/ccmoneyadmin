@@ -21,5 +21,5 @@
   </table>
   <p *ngIf="users.length === 0" class="noList">{{userMessages.noList}}</p>
 </div>
-<app-cc-modal *ngIf="showDelete" (usersModalResult)="deleteUser($event)" [title]="title" [message]="message" [type]="type"
+<app-cc-modal *ngIf="showDelete" (ccModalResult)="deleteUser($event)" [title]="title" [message]="message" [type]="type"
   [id]="userToDeleteId"></app-cc-modal>

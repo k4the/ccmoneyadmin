@@ -1,6 +1,33 @@
 const Customer = require('./customer.model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const Product = require('../products/product.model');
+
+exports.getCustomerByIdWithProducts = (req, res, next) => {
+  try {
+    Customer.findById(req.params.id)
+      .populate('product')
+      .then(customer => {
+        if (customer) {
+          Product.find()
+            .populate('company')
+            .sort({ yearlyCost: -1 })
+            .then(products => {
+              res.status(200).json({
+                message: 'Customer with products fetched successfully',
+                customer: customer,
+                products: products
+              });
+            });
+        } else {
+          res.status(404).json({ message: 'Customer not found!' });
+        }
+      });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error });
+  }
+};
 
 exports.getCustomers = (req, res, next) => {
   try {
@@ -96,34 +123,36 @@ exports.login = (req, res, next) => {
       }
 
       const returnedCustomer = {
-          email: fetchedCustomer.email,
-          customerId: fetchedCustomer._id,
-          firstName: fetchedCustomer.firstName,
-          lastName: fetchedCustomer.lastName,
-          paying: {
-            currentlyPaying: {
-              monthly: fetchedCustomer.paying.currentlyPaying.monthly,
-              yearly: fetchedCustomer.paying.currentlyPaying.yearly
-            },
-            couldBePaying: {
-              monthly: fetchedCustomer.paying.couldBePaying.monthly,
-              yearly: fetchedCustomer.paying.couldBePaying.yearly
-            },
-            saving: {
-              monthly: fetchedCustomer.paying.saving.monthly,
-              yearly: fetchedCustomer.paying.saving.yearly
-            }
+        email: fetchedCustomer.email,
+        customerId: fetchedCustomer._id,
+        firstName: fetchedCustomer.firstName,
+        lastName: fetchedCustomer.lastName,
+        paying: {
+          currentlyPaying: {
+            monthly: fetchedCustomer.paying.currentlyPaying.monthly,
+            yearly: fetchedCustomer.paying.currentlyPaying.yearly
           },
-          product: fetchedCustomer.product
-        };
+          couldBePaying: {
+            monthly: fetchedCustomer.paying.couldBePaying.monthly,
+            yearly: fetchedCustomer.paying.couldBePaying.yearly
+          },
+          saving: {
+            monthly: fetchedCustomer.paying.saving.monthly,
+            yearly: fetchedCustomer.paying.saving.yearly
+          }
+        },
+        product: fetchedCustomer.product
+      };
 
-        const token = jwt.sign(
-          { email: fetchedCustomer.email, userId: fetchedCustomer._id },
-          process.env.JWT_KEY,
-          { expiresIn: '1h' }
-        );
-        res.status(200).json({ token: token, expiresIn: 3600, customer: returnedCustomer });
-      })
+      const token = jwt.sign(
+        { email: fetchedCustomer.email, userId: fetchedCustomer._id },
+        process.env.JWT_KEY,
+        { expiresIn: '1h' }
+      );
+      res
+        .status(200)
+        .json({ token: token, expiresIn: 3600, customer: returnedCustomer });
+    })
     .catch(err => {
       return res.status(401).json({
         message: 'Auth failed'

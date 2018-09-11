@@ -2,6 +2,7 @@ import { Product } from './product.model';
 import { PollRating } from './../companies/poll-rating.model';
 import { Fuel } from './fuel.model';
 import { Company } from '../companies/company.model';
+import { YearlyMonthly } from '../customers/yearly-monthly.model';
 
 export class ProductMapper {
   constructor() {}
@@ -26,6 +27,7 @@ export class ProductMapper {
       company: json.company ? this.mapCompanyFromJson(json.company) : null,
       gas: json.gas ? this.mapFuelFromJson(json.gas) : null,
       electricity: json.electricity ? this.mapFuelFromJson(json.electricity) : null,
+      saving: json.saving ? this.mapYearlyMonthlyFromJson(json.saving) : null
     };
     return new Product(product);
   }
@@ -50,6 +52,7 @@ export class ProductMapper {
       company: product.company ? this.mapCompanyToJson(product.company) : null,
       gas: product.gas ? this.mapFuelToJson(product.gas) : null,
       electricity: product.electricity ? this.mapFuelToJson(product.electricity) : null,
+      saving: product.saving ? this.mapYearlyMonthlyToJson(product.saving) : null
     };
   }
 
@@ -131,6 +134,21 @@ export class ProductMapper {
       unitRate: fuel.unitRate,
       discountRate: fuel.discountRate ? fuel.discountRate : null,
       standingCharge: fuel.standingCharge ? fuel.standingCharge : null
+    };
+  }
+
+  mapYearlyMonthlyFromJson(json: any): YearlyMonthly {
+    const yearlyMonthly = {
+      yearly: json.yearly,
+      monthly: json.monthly
+    };
+    return new YearlyMonthly(yearlyMonthly);
+  }
+
+  mapYearlyMonthlyToJson(yearlyMonthly: YearlyMonthly): any {
+    return {
+      yearly: yearlyMonthly.yearly ? yearlyMonthly.yearly : 0,
+      monthly: yearlyMonthly.monthly ? yearlyMonthly.monthly : 0
     };
   }
 }

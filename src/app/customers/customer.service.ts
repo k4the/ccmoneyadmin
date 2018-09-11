@@ -7,6 +7,8 @@ import { Subject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CustomerMapper } from './customer.mapper';
 import { Customer, Paying } from './customer.model';
+import { ProductMapper } from '../products/product.mapper';
+import { CustomerEndPoints } from './customer.constants';
 
 const customersUrl = environment.apiUrl + '/customers/';
 const loginUrl = 'login';
@@ -30,8 +32,39 @@ export class CustomerService implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private customerMapper: CustomerMapper
+    private customerMapper: CustomerMapper,
+    private productMapper: ProductMapper
   ) {}
+
+  getCustomerByIdWithProducts(id: string): Observable<any> {
+    const item: any = {
+      customer: null,
+      products: []
+    };
+    if (id) {
+      const url: string = environment.apiUrl + CustomerEndPoints.customerWithProducts + id;
+      const result = this.http.get<{
+        message: string;
+        customer: any;
+        products: Array<any>;
+      }>(url);
+      return result.pipe(
+        map(data => {
+          if (data.products && data.products.length) {
+            for (let i = 0; i < data.products.length; i++) {
+              item.products.push(
+                this.productMapper.mapProductFromJson(data.products[i])
+              );
+            }
+          }
+          item.customer = this.customerMapper.mapCustomerFromJson(
+            data.customer
+          );
+          return item;
+        })
+      );
+    }
+  }
 
   getCustomers(): Observable<Customer[]> {
     const results = this.http.get<{ message: string; customers: Array<any> }>(
@@ -160,29 +193,6 @@ export class CustomerService implements OnInit {
     localStorage.setItem('expiration', expirationDate.toISOString());
   }
 
-  private clearAuthData(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expiration');
-  }
-
-  private getAuthData(): any {
-    const token = localStorage.getItem('token');
-    const expiration = localStorage.getItem('expiration');
-    if (!token || !expiration) {
-      return;
-    }
-    return {
-      token: token,
-      expirationDate: new Date(expiration)
-    };
-  }
-
-  private setAuthTimer(expiresInDuration: number): void {
-    this.tokenTimer = setTimeout(() => {
-      this.logout();
-    }, expiresInDuration * 1000);
-  }
-
   getEmptyCustomer(): Customer {
     return {
       id: null,
@@ -210,5 +220,28 @@ export class CustomerService implements OnInit {
         monthly: 0
       }
     };
+  }
+
+  private clearAuthData(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiration');
+  }
+
+  private getAuthData(): any {
+    const token = localStorage.getItem('token');
+    const expiration = localStorage.getItem('expiration');
+    if (!token || !expiration) {
+      return;
+    }
+    return {
+      token: token,
+      expirationDate: new Date(expiration)
+    };
+  }
+
+  private setAuthTimer(expiresInDuration: number): void {
+    this.tokenTimer = setTimeout(() => {
+      this.logout();
+    }, expiresInDuration * 1000);
   }
 }

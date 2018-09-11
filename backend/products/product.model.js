@@ -35,6 +35,10 @@ const productSchema = mongoose.Schema({
     standingCharge: { type: Number, required: false, default: 0 },
     unitRate: { type: Number, required: false, default: 0 },
     discountRate: { type: Number, default: null, default: 0 }
+  },
+  saving: {
+    monthly: { type: Number, default: 0 },
+    yearly: { type: Number, default: 0 }
   }
 });
 module.exports = mongoose.model('Product', productSchema);
