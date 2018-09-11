@@ -18,6 +18,7 @@ export class CcImageFilterComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    this.imageFilterSelected = this.imageFilter.isActive;
     this.displayImageFilter = {
       isOn: this.imageFilterSelected,
       type: this.type

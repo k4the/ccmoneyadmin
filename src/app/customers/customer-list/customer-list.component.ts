@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import { Customer } from '../customer.model';
 import { CustomerMessages } from '../customer.constants';
+import { PageNames } from '../../pages/pages.constants';
 
 @Component({
   selector: 'app-customer-list',
@@ -26,6 +27,7 @@ export class CustomerListComponent implements OnInit, OnDestroy {
   searchText = '';
   customerMessages = CustomerMessages;
   customerWithProducts: any = null;
+  pageNames: any = PageNames;
 
   private authStatusSub: Subscription;
 
@@ -48,7 +50,7 @@ export class CustomerListComponent implements OnInit, OnDestroy {
   getCustomerByIdWithProducts(): void {
     const id = '5b976b0d66542216d4f7ab06';
     this.isLoading = true;
-    this.customerService.getCustomerByIdWithProducts(id).subscribe(
+    this.customerService.getCustomerByIdWithProducts(id, this.pageNames.results).subscribe(
       customerData => {
         this.customerWithProducts = { ...customerData };
         if (

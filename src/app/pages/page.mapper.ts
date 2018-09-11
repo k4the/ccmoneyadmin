@@ -10,16 +10,14 @@ export class PageMapper {
       name: json.name ? json.name : null,
       heading: json.heading ? json.heading : null,
       subHeading: json.subHeading ? json.subHeading : null,
-      hasPersonalProjection: json.hasPersonalProjection
-        ? json.hasPersonalProjection
-        : false,
+      hasPersonalProjection: json.hasPersonalProjection ? json.hasPersonalProjection : false,
       personalProjectionMessage: json.personalProjectionMessage
         ? json.personalProjectionMessage
         : null,
       fullRangeMessage: json.fullRangeMessage ? json.fullRangeMessage : null,
-      imageFilters: json.imageFilters
-        ? this.getMenuFilters(json.imageFilters)
-        : []
+      imageFilterBigCompany: json.imageFilterBigCompany ? this.mapImageFilterFromJson(json.imageFilterBigCompany) : null,
+    imageFilterCurrentCompany: json.imageFilterCurrentCompany ? this.mapImageFilterFromJson(json.imageFilterCurrentCompany) : null,
+    imageFilterNone: json.imageFilterNone ? this.mapImageFilterFromJson(json.imageFilterNone) : null
     };
     return new Page(page);
   }
@@ -37,33 +35,34 @@ export class PageMapper {
         ? page.personalProjectionMessage
         : null,
       fullRangeMessage: page.fullRangeMessage ? page.fullRangeMessage : null,
-      menuFilter: page.imageFilters
-        ? this.getMenuFilters(page.imageFilters)
-        : []
+      imageFilterBigCompany: page.imageFilterBigCompany ? this.mapImageFilterToJson(page.imageFilterBigCompany) : null,
+      imageFilterCurrentCompany: page.imageFilterCurrentCompany ? this.mapImageFilterToJson(page.imageFilterCurrentCompany) : null,
+      imageFilterNone: page.imageFilterNone ? this.mapImageFilterToJson(page.imageFilterNone) : null
     };
   }
 
-  private getMenuFilters(imageFilters: Array<any>): Array<any> {
-    var sanitizedImageFilters = [];
-    if (imageFilters && imageFilters.length) {
-      sanitizedImageFilters.push({
-        currentCompany: this.getMenuFilter(imageFilters[0])
-      });
-      sanitizedImageFilters.push({
-        bigCompany: this.getMenuFilter(imageFilters[1])
-      });
-      sanitizedImageFilters.push({ none: this.getMenuFilter(imageFilters[2]) });
-    }
-    return sanitizedImageFilters;
+  mapImageFilterFromJson(json: any): ImageFilter {
+    return {
+      heading: json.heading ? json.heading : null,
+      subHeading: json.subHeading ? json.subHeading : null,
+      filter: json.filter ? json.filter : null,
+      message: json.message ? json.message : null,
+      showSubHeading: json.showSubHeading
+        ? json.showSubHeading
+        : false,
+      isActive: json.isActive ? json.isActive : false
+    };
   }
 
-  private getMenuFilter(imageFilter: any): ImageFilter {
+  mapImageFilterToJson(imageFilter: ImageFilter): any {
     return {
       heading: imageFilter.heading ? imageFilter.heading : null,
       subHeading: imageFilter.subHeading ? imageFilter.subHeading : null,
-      filter: imageFilter.filter ? imageFilter.filter : false,
+      filter: imageFilter.filter ? imageFilter.filter : null,
       message: imageFilter.message ? imageFilter.message : null,
-      showSubHeading: imageFilter.showSubHeading ? imageFilter.showSubHeading : false,
+      showSubHeading: imageFilter.showSubHeading
+        ? imageFilter.showSubHeading
+        : false,
       isActive: imageFilter.isActive ? imageFilter.isActive : false
     };
   }

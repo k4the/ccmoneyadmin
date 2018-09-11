@@ -18,10 +18,6 @@ const signupUrl = 'signup';
   providedIn: 'root'
 })
 export class CustomerService implements OnInit {
-  ngOnInit(): void {
-    this.loggedInCustomer = null;
-  }
-
   loggedInCustomer: Customer;
 
   private token: string = null;
@@ -29,6 +25,9 @@ export class CustomerService implements OnInit {
   private authStatusListener = new Subject<boolean>();
   private tokenTimer: any;
 
+  ngOnInit(): void {
+    this.loggedInCustomer = null;
+  }
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -36,17 +35,19 @@ export class CustomerService implements OnInit {
     private productMapper: ProductMapper
   ) {}
 
-  getCustomerByIdWithProducts(id: string): Observable<any> {
+  getCustomerByIdWithProducts(id: string, page: string): Observable<any> {
     const item: any = {
       customer: null,
-      products: []
+      products: [],
+      page: null
     };
     if (id) {
-      const url: string = environment.apiUrl + CustomerEndPoints.customerWithProducts + id;
+      const url: string = environment.apiUrl + CustomerEndPoints.customerWithProducts + id + '/' + page;
       const result = this.http.get<{
-        message: string;
-        customer: any;
-        products: Array<any>;
+        message: string,
+        customer: any,
+        products: Array<any>,
+        page: any
       }>(url);
       return result.pipe(
         map(data => {
@@ -60,6 +61,7 @@ export class CustomerService implements OnInit {
           item.customer = this.customerMapper.mapCustomerFromJson(
             data.customer
           );
+          item.page = data.page;
           return item;
         })
       );

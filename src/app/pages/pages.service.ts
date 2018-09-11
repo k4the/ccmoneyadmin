@@ -25,7 +25,7 @@ export class PagesService {
           return this.pageMapper.mapPageFromJson(page);
         });
       })
-    )
+    );
   }
 
   addPage(page: Page): Observable<any> {
@@ -36,25 +36,25 @@ export class PagesService {
         map(pageData => {
           page.id = pageData.pageId;
         })
-      )
+      );
     }
   }
 
-  updatePage(pageId: string, page: Page): Observable<any> {
+  updatePage(id: string, page: Page): Observable<any> {
     if (page) {
       page = this.pageMapper.mapPageToJson(page);
-      return this.http.put(pagesUrl + pageId, page);
+      return this.http.put(pagesUrl + id, page);
     }
   }
 
-  getPage(id: string): Observable<any> {
-    if (id) {
-      const result = this.http.get<{}>(pagesUrl + id);
+  getPage(name: string): Observable<any> {
+    if (name) {
+      const result = this.http.get<{}>(pagesUrl + name);
       return result.pipe(
         map(pageData => {
           return this.pageMapper.mapPageFromJson(pageData);
         })
-      )
+      );
     }
   }
 

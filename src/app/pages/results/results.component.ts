@@ -18,7 +18,7 @@ export class ResultsComponent implements OnInit {
   resultsLabels = ResultsLabels;
   results: Page = null;
   keys = Keys;
-  currentCompany: ImageFilter = {
+  imageFilterCurrentCompany: ImageFilter = {
     heading: 'Stay with your current supplier',
     subHeading: 'Save up to',
     message:
@@ -27,7 +27,7 @@ export class ResultsComponent implements OnInit {
     showSubHeading: false,
     isActive: true
   };
-  bigCompany: ImageFilter = {
+  imageFilterBigCompany: ImageFilter = {
     heading: 'Switch to a big name supplier',
     subHeading: 'Save up to',
     message:
@@ -36,7 +36,7 @@ export class ResultsComponent implements OnInit {
     showSubHeading: false,
     isActive: true
   };
-  none: ImageFilter = {
+  imageFilterNone: ImageFilter = {
     heading: 'Choose from our full range',
     subHeading: 'Save up to',
     message:
@@ -45,24 +45,42 @@ export class ResultsComponent implements OnInit {
     showSubHeading: false,
     isActive: true
   };
+  mode: string = this.keys.create;
 
   constructor(private router: Router, private pagesService: PagesService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.pagesService.deletePage('5b97a8c9a6918028c831b4ca').subscribe();
+
+    this.isLoading = true;
+    this.pagesService.getPage(PageNames.results).subscribe(
+      page => {
+        this.isLoading = false;
+        if (page) {
+          this.results = { ...page };
+          this.mode = this.keys.edit;
+        }
+      },
+      err => {
+        console.log(err);
+        this.isLoading = false;
+      }
+    );
+  }
 
   setImageFilter(item: any): void {
     if (item) {
       switch (item.type) {
         case this.keys.bigCompany:
-          this.bigCompany.isActive = item.isOn;
+          this.imageFilterBigCompany.isActive = item.isOn;
           break;
 
         case this.keys.currentCompany:
-          this.bigCompany.isActive = item.isOn;
+          this.imageFilterCurrentCompany.isActive = item.isOn;
           break;
 
         case this.keys.none:
-          this.none.isActive = item.isOn;
+          this.imageFilterNone.isActive = item.isOn;
           break;
       }
     }
@@ -77,25 +95,50 @@ export class ResultsComponent implements OnInit {
       return;
     }
 
+    let id: string = null;
+
+    if (this.mode === this.keys.edit) {
+      id = this.results.id;
+    }
+
     const results: Page = {
+      id: id,
       name: PageNames.results,
       heading: form.value.heading,
-      subHeading: form.value.subHeading,
+      subHeading: form.value.subHeading ? form.value.subHeading : null,
       hasPersonalProjection: false,
-      personalProjectionMessage: form.value.personalProjectionMessage,
-      fullRangeMessage: form.value.fullRangeMessage,
-      imageFilters: []
+      personalProjectionMessage: form.value.personalProjectionMessage
+        ? form.value.personalProjectionMessage
+        : null,
+      fullRangeMessage: form.value.fullRangeMessage
+        ? form.value.fullRangeMessage
+        : null,
+      imageFilterCurrentCompany: this.imageFilterCurrentCompany,
+      imageFilterBigCompany: this.imageFilterBigCompany,
+      imageFilterNone: this.imageFilterNone
     };
-
-    this.pagesService.addPage(results).subscribe(
-      () => {
-        this.isLoading = false;
-        this.router.navigate(['/']);
-      },
-      err => {
-        console.log(err);
-        this.isLoading = false;
-      }
-    );
+    if (this.mode === this.keys.create) {
+      this.pagesService.addPage(results).subscribe(
+        () => {
+          this.isLoading = false;
+          this.router.navigate(['/']);
+        },
+        err => {
+          console.log(err);
+          this.isLoading = false;
+        }
+      );
+    } else {
+        this.pagesService.updatePage(this.results.id, results).subscribe(
+        () => {
+          this.isLoading = false;
+          this.router.navigate(['/']);
+        },
+        err => {
+          console.log(err);
+          this.isLoading = false;
+        }
+      );
+    }
   }
 }

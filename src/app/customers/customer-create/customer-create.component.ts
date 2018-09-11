@@ -54,7 +54,7 @@ export class CustomerCreateComponent implements OnInit {
       customerData => {
         this.customer = { ...customerData };
         this.isLoading = false;
-        if( this.customer.product) {
+        if (this.customer.product) {
           this.selectedProduct = this.customer.product;
           this.selectedProductLabel = this.customer.product.name;
         }

@@ -2,6 +2,7 @@ const Customer = require('./customer.model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Product = require('../products/product.model');
+const Page = require('../pages/page.model');
 
 exports.getCustomerByIdWithProducts = (req, res, next) => {
   try {
@@ -13,11 +14,15 @@ exports.getCustomerByIdWithProducts = (req, res, next) => {
             .populate('company')
             .sort({ yearlyCost: -1 })
             .then(products => {
-              res.status(200).json({
-                message: 'Customer with products fetched successfully',
-                customer: customer,
-                products: products
-              });
+              Page.findOne({name: req.params.page})
+              .then(page => {
+                res.status(200).json({
+                  message: 'Customer with products fetched successfully',
+                  customer: customer,
+                  products: products,
+                  page: page
+                });
+              })
             });
         } else {
           res.status(404).json({ message: 'Customer not found!' });

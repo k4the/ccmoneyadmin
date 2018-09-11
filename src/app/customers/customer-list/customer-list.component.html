@@ -6,8 +6,8 @@
       <input type="text" [(ngModel)]="searchText" placeholder="Search" class="search">
     </div>
     <div class="flex1 right">
+        <button type="button" class="add" (click)="getCustomerByIdWithProducts()">click</button>
       <button type="button" class="add" (click)="addCustomer()">{{customerMessages.addCustomer}}</button>
-      <button type="button" class="danger" (click)="getCustomerByIdWithProducts()">Cust and Prods</button>
     </div>
   </div>
   <table *ngIf="customers && customers.length > 0">
