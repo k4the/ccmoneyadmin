@@ -1,7 +1,9 @@
-import { CcLoadingModule } from './cc-loading/cc-loading.module';
-import { CcSingleSelectModule } from './cc-single-select/cc-single-select.module';
-import { CcSelectModule } from './cc-select/cc-select.module';
-import { CcModalModule } from './cc-modal/cc-modal.module';
+// import { CcLoadingModule } from './cc-loading/cc-loading.module';
+// import { CcSingleSelectModule } from './cc-single-select/cc-single-select.module';
+// import { CcSelectModule } from './cc-select/cc-select.module';
+// import { CcModalModule } from './cc-modal/cc-modal.module';
+// import { CcToggleModule } from './cc-toggle/cc-toggle.module';
+// import { CcImageFilterModule } from './cc-image-filter/cc-image-filter.module';
 import { UserMapper } from './auth/user.mapper';
 import { CompanyMapper } from './companies/company.mapper';
 import { ProductMapper } from './products/product.mapper';
@@ -14,12 +16,12 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { CcToggleModule } from './cc-toggle/cc-toggle.module';
+
 import { RouterModule } from '@angular/router';
 import { AppRoutes } from './app.routing';
 import { AuthGuard } from './auth/auth.guard';
 import { PageMapper } from './pages/page.mapper';
-import { CcImageFilterModule } from './cc-image-filter/cc-image-filter.module';
+
 import { CustomerMapper } from './customers/customer.mapper';
 
 @NgModule({
@@ -34,12 +36,12 @@ import { CustomerMapper } from './customers/customer.mapper';
     BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes),
     HttpClientModule,
-    CcModalModule,
-    CcSelectModule,
-    CcSingleSelectModule,
-    CcToggleModule,
-    CcLoadingModule,
-    CcImageFilterModule
+    // CcModalModule,
+    // CcSelectModule,
+    // CcSingleSelectModule,
+    // CcToggleModule,
+    // CcLoadingModule,
+    // CcImageFilterModule
   ],
   exports: [
     RouterModule
