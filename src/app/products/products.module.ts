@@ -1,3 +1,4 @@
+import { CompanyMapper } from './../companies/company.mapper';
 import { CcLoadingModule } from './../cc-loading/cc-loading.module';
 import { CcToggleModule } from './../cc-toggle/cc-toggle.module';
 import { CcSingleSelectModule } from './../cc-single-select/cc-single-select.module';
@@ -32,6 +33,6 @@ import { CcSelectModule } from '../cc-select/cc-select.module';
     FuelComponent,
     ProductsFilterPipe
   ],
-  providers: [ProductMapper]
+  providers: [ProductMapper, CompanyMapper]
 })
 export class ProductsModule { }

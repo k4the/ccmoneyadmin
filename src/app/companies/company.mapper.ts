@@ -4,7 +4,7 @@ import { Company } from './company.model';
 export class CompanyMapper {
   constructor() {}
 
-  mapFromJson(json: any): Company {
+  mapCompanyFromJson(json: any): Company {
     const company = {
       id: json._id,
       name: json.name,
@@ -18,7 +18,7 @@ export class CompanyMapper {
     return new Company(company);
   }
 
-  mapToJson(company: Company): any {
+  mapCompanyToJson(company: Company): any {
     return {
       _id: company.id ? company.id : null,
       name: company.name,

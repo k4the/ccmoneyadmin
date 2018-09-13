@@ -23,27 +23,27 @@ export class CompaniesService {
     return results.pipe(
       map(companyData => {
         return companyData.companies.map(company => {
-          return this.companyMapper.mapFromJson(company);
+          return this.companyMapper.mapCompanyFromJson(company);
         });
       })
-    )
+    );
   }
 
   addCompany(company: Company): Observable<any> {
     if (company) {
-      company = this.companyMapper.mapToJson(company);
+      company = this.companyMapper.mapCompanyToJson(company);
       const result = this.http.post<{ message: string; companyId: string }>(companiesUrl, company);
       return result.pipe(
         map(companyData => {
           company.id = companyData.companyId;
         })
-      )
+      );
     }
   }
 
   updateCompany(companyId: string, company: Company): Observable<any> {
     if (company) {
-      company = this.companyMapper.mapToJson(company);
+      company = this.companyMapper.mapCompanyToJson(company);
       return this.http.put(companiesUrl + companyId, company);
     }
   }
@@ -53,9 +53,9 @@ export class CompaniesService {
       const result = this.http.get<{}>(companiesUrl + id);
       return result.pipe(
         map(companyData => {
-          return this.companyMapper.mapFromJson(companyData);
+          return this.companyMapper.mapCompanyFromJson(companyData);
         })
-      )
+      );
     }
   }
 
@@ -66,13 +66,10 @@ export class CompaniesService {
   }
 
   getCalculatedPollRating(pollRating: PollRating): PollRating {
-    let greatPercentage = (((pollRating.great * 2) + pollRating.ok) / (pollRating.totalVotes * 2)) * 100;
-    console.log('greatPercentage', greatPercentage);
-    let okPercentage = (pollRating.ok / pollRating.totalVotes) * 100;
-    console.log('okPercentage', okPercentage);
-    let poorPercentage = (pollRating.poor / pollRating.totalVotes) * 100;
-    console.log('pooPercentage', poorPercentage);
-    let calculatedPollRating = {
+    const greatPercentage = (((pollRating.great * 2) + pollRating.ok) / (pollRating.totalVotes * 2)) * 100;
+    const okPercentage = (pollRating.ok / pollRating.totalVotes) * 100;
+    const poorPercentage = (pollRating.poor / pollRating.totalVotes) * 100;
+    const calculatedPollRating = {
       great: pollRating.great,
       ok: pollRating.ok,
       poor: pollRating.poor,
@@ -83,7 +80,6 @@ export class CompaniesService {
       starClass: null
     };
     calculatedPollRating.starClass = this.getStarRating(calculatedPollRating);
-    console.log(calculatedPollRating)
     return calculatedPollRating;
   }
 

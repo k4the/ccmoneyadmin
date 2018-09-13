@@ -83,7 +83,7 @@ export class CompanyCreateComponent implements OnInit {
     this.regionsError = false;
     let company: Company = null;
     let pollRating: PollRating = null;
-    let id: string = null;
+    const id: string = null;
     pollRating = {
       great: form.value.great,
       ok: form.value.ok,
