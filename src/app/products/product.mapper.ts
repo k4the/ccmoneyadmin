@@ -4,7 +4,7 @@ import { Fuel } from './fuel.model';
 import { YearlyMonthly } from '../customers/yearly-monthly.model';
 import { Injectable } from '@angular/core';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class ProductMapper {
   constructor(
     private companyMapper: CompanyMapper

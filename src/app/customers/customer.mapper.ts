@@ -2,7 +2,7 @@ import { ProductMapper } from './../products/product.mapper';
 import { Customer, Paying } from './customer.model';
 import { Injectable } from '@angular/core';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class CustomerMapper {
   constructor(
     private productMapper: ProductMapper
